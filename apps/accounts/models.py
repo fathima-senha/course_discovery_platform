@@ -38,5 +38,6 @@ class User(AbstractUser):
     def is_provider(self):
         return self.role == self.Role.PROVIDER
     
+    @property
     def is_admin(self):
         return self.role == self.Role.ADMIN
