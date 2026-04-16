@@ -41,3 +41,18 @@ class User(AbstractUser):
     @property
     def is_admin(self):
         return self.role == self.Role.ADMIN
+    
+    
+class StudentProfile(models.Model):
+ 
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="student_profile",
+        limit_choices_to={"role": User.Role.STUDENT},
+    )
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to="avatars/students/", blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True)
+    website = models.URLField(blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
