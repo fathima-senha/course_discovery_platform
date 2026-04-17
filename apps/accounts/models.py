@@ -4,7 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    
+    """
+    Custom user model with role-based access.
+    Extends AbstractUser so Django's auth system works out of the box.
+    """
     class Role(models.TextChoices):
         
         STUDENT = "student", _("Student")  
@@ -44,7 +47,12 @@ class User(AbstractUser):
     
     
 class StudentProfile(models.Model):
- 
+    
+    """
+    One-to-one extension of User for students.
+    Stores personal preferences and profile info.
+    """
+    
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -65,6 +73,10 @@ class StudentProfile(models.Model):
         return f"Student:{self.user.email}"
     
 class ProviderProfile(models.Model):
+    """
+    One-to-one extension of User for course providers (institutes/companies).
+    """
+    
     user=models.OneToOneField(
         User,
         on_delete=models.CASCADE,

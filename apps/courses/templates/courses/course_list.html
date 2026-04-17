@@ -1,0 +1,19 @@
+<h1>Courses</h1>
+
+{% for course in courses %}
+<div>
+    <h3>
+        <a href="{% url 'course-detail' course.slug %}">
+            {{ course.title }}
+        </a>
+    </h3>
+
+    <p>{{ course.short_description }}</p>
+
+    <p>Price: {{ course.effective_price }}</p>
+
+    <p>Level: {{ course.level }}</p>
+
+    <hr>
+</div>
+{% endfor %}
