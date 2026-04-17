@@ -56,3 +56,32 @@ class StudentProfile(models.Model):
     location = models.CharField(max_length=100, blank=True)
     website = models.URLField(blank=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    class meta:
+        db_table = "student_profile"
+        verbose_name = "Student Profile"
+        
+    def __str__(self):
+        return f"Student:{self.user.email}"
+    
+class ProviderProfile(models.Model):
+    user=models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="provider_profile",
+        limit_choices_to={"role": User.Role.PROVIDER},
+    )
+    company_name = models.CharField(max_length=200)
+    website = models.URLField(blank=True)
+    description = models.TextField(blank=True)
+    logo = models.ImageField(upload_to="logos/providers/", blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
+    verified_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = "provider_profile"
+        verbose_name = "Provider Profile"
+        
+    def __str__(self):
+        return self.company_name
