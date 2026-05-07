@@ -41,15 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # third party
-    'rest_framework',
-    'django_filters',
-
+    
     #  apps
     'apps.accounts',
     'apps.courses',
     'apps.interactions',
     'apps.payments',
+    'apps.adminpanel'
 ]
 
 MIDDLEWARE = [
@@ -136,10 +134,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Media files (user uploads)
+import os
+MEDIA_URL  = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Login redirect
+LOGIN_URL = '/login/'
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-}

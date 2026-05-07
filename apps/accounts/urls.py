@@ -1,29 +1,27 @@
 from django.urls import path
-from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
+    LandingPageView,
     RegisterView,
     LoginView,
     LogoutView,
-    ChangePasswordView,
+    DashboardRedirectView,
     StudentProfileView,
-    PublicStudentProfileView,
     ProviderProfileView,
-    PublicProviderProfileView,
+    ChangePasswordView,
 )
 
 urlpatterns = [
+    # Landing
+    path('',                    LandingPageView.as_view(),      name='landing'),
+
     # Auth
-    path("register/",           RegisterView.as_view(),         name="register"),
-    path("login/",              LoginView.as_view(),            name="login"),
-    path("logout/",             LogoutView.as_view(),           name="logout"),
-    path("token/refresh/",      TokenRefreshView.as_view(),     name="token_refresh"),
-    path("change-password/",    ChangePasswordView.as_view(),   name="change_password"),
+    path('register/',           RegisterView.as_view(),         name='register'),
+    path('login/',              LoginView.as_view(),            name='login'),
+    path('logout/',             LogoutView.as_view(),           name='logout'),
+    path('dashboard/',          DashboardRedirectView.as_view(),name='dashboard_redirect'),
+    path('change-password/',    ChangePasswordView.as_view(),   name='change_password'),
 
-    # Student profile
-    path("student/profile/",            StudentProfileView.as_view(),       name="student_profile"),
-    path("student/<int:pk>/",           PublicStudentProfileView.as_view(), name="public_student_profile"),
-
-    # Provider profile
-    path("provider/profile/",           ProviderProfileView.as_view(),      name="provider_profile"),
-    path("provider/<int:pk>/",          PublicProviderProfileView.as_view(),name="public_provider_profile"),
+    # Profiles
+    path('student/profile/',    StudentProfileView.as_view(),   name='student_profile'),
+    path('provider/profile/',   ProviderProfileView.as_view(),  name='provider_profile'),
 ]
