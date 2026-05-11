@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#1a1b22",
+                    "surface-variant": "#e2e1eb",
+                    "on-tertiary-fixed-variant": "#812900",
+                    "on-secondary-fixed-variant": "#334479",
+                    "on-secondary-fixed": "#01174b",
+                    "primary": "#002b80",
+                    "on-tertiary-container": "#ffa17e",
+                    "surface-container-highest": "#e2e1eb",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#3d4e83",
+                    "primary-fixed": "#dbe1ff",
+                    "tertiary-container": "#852b00",
+                    "primary-container": "#003fb1",
+                    "surface-dim": "#d9d9e3",
+                    "on-background": "#1a1b22",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#5f1c00",
+                    "surface-tint": "#2a56c7",
+                    "inverse-primary": "#b5c4ff",
+                    "secondary": "#4b5c92",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#dbe1ff",
+                    "outline-variant": "#c4c6d6",
+                    "tertiary-fixed": "#ffdbcf",
+                    "on-primary-fixed-variant": "#003dab",
+                    "on-error": "#ffffff",
+                    "surface": "#faf8ff",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "surface-container-high": "#e8e7f1",
+                    "inverse-on-surface": "#f0f0fa",
+                    "error": "#ba1a1a",
+                    "outline": "#747685",
+                    "on-primary-container": "#a1b6ff",
+                    "surface-bright": "#faf8ff",
+                    "on-surface-variant": "#434653",
+                    "surface-container": "#ededf7",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2f3038",
+                    "on-tertiary-fixed": "#380d00",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "secondary-container": "#b1c2ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#00174c",
+                    "on-error-container": "#93000a",
+                    "background": "#faf8ff",
+                    "surface-container-low": "#f3f3fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-gutter": "2.5rem",
+                    "section-padding-y": "6rem",
+                    "card-padding": "2rem",
+                    "inline-gap": "0.75rem",
+                    "container-max": "1536px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .course-card-shadow {
+            box-shadow: 0 4px 20px rgba(25, 27, 35, 0.04);
+        }
+        .course-card-shadow:hover {
+            box-shadow: 0 12px 32px rgba(25, 27, 35, 0.08);
+            transform: translateY(-4px);
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #003fb1;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background">
+<!-- TopNavBar -->
+<header class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 shadow-sm shadow-slate-900/5">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1536px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-bold tracking-tighter text-blue-800 dark:text-blue-100" href="#">CourseHub</a>
+<nav class="hidden md:flex items-center gap-6 font-['Plus_Jakarta_Sans'] text-sm font-semibold tracking-tight">
+<a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1" href="#">Browse Courses</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Mentors</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Pricing</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200" href="#">Business</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 font-semibold text-sm hover:bg-slate-50 px-4 py-2 rounded-lg transition-colors duration-200">Log In</button>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-150">Join for Free</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1536px] mx-auto px-8 py-12 flex gap-10">
+<!-- Sidebar Filters -->
+<aside class="w-[280px] flex-shrink-0">
+<div class="sticky top-28 space-y-8">
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Search</h3>
+<div class="relative">
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search courses..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-3.5 text-outline text-xl" data-icon="search">search</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Category</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Web Dev</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Data Science</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Design</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Marketing</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Business</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Level</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Beginner</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Intermediate</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Advanced</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Price Range</h3>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer custom-range" max="10000" min="0" step="100" type="range"/>
+<div class="flex justify-between mt-2 text-sm text-outline font-medium">
+<span>$0</span>
+<span>$10,000</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Min Rating</h3>
+<div class="flex gap-1">
+<button class="material-symbols-outlined text-tertiary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</button>
+<button class="material-symbols-outlined text-tertiary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</button>
+<button class="material-symbols-outlined text-tertiary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</button>
+<button class="material-symbols-outlined text-tertiary-container" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</button>
+<button class="material-symbols-outlined text-outline" data-icon="star">star</button>
+<span class="ml-2 text-sm font-medium text-on-surface-variant">&amp; Up</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-md text-lg mb-4 text-on-surface">Duration</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary" name="duration" type="radio"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Under 5hrs</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary" name="duration" type="radio"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">5-20hrs</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary" name="duration" type="radio"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">20hrs+</span>
+</label>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<section class="flex-grow">
+<!-- Content Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<p class="font-headline-md text-2xl text-on-surface">Showing 124 courses</p>
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant text-sm font-medium">Sort by:</span>
+<select class="bg-surface-container-low border border-outline-variant rounded-lg px-4 py-2 text-sm font-semibold outline-none focus:ring-2 focus:ring-primary">
+<option>Newest</option>
+<option>Price Low-High</option>
+<option selected="">Top Rated</option>
+<option>Most Enrolled</option>
+</select>
+</div>
+</div>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Course Card 1 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Web Development course" class="w-full h-full object-cover" data-alt="Modern workspace with laptop showing code editor, desk plant, and coffee cup in bright natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj3P87SOQJwnLw3ad9Z6XeR3mDHht8fky-HyolR2GYcFLeGNOnLKwwFCCr652CMTIfqzBuwJ3rDCOmw732RI-RP4xZJoj4poHVPTu4TX4uCNVJhPr_8puT1tf5NtyMVuDn3Ah-sAZQyFgdroPHbo2TpwpCgoqytmOBYC44zVNu1ugEkDRLCQdh8xbVNeiGFUVkXDEe2s--KU30mPdjOL6gMdxGxu5aw2kx4IDKmHyjZ9OJPYG36QXNyyfLQUJzm3VP8X5q6hxtkAWG"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Web Dev</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">CourseHub Academy</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.9</span>
+<span class="text-xs text-outline font-medium">(2.4k)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">Advanced React Patterns &amp; Performance Optimization</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">12 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Intermediate</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-outline text-xs line-through font-medium">$199.99</span>
+<span class="text-xl font-extrabold text-on-surface">$84.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Data Science course" class="w-full h-full object-cover" data-alt="Digital dashboard with colorful graphs and statistical data visualizations on a clean dark interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC87aSQXBRyVqv2inj2Uw4Ej_LJ-LL1547Q3gHWU-_24gWOsbQO03rKVtGsEJdVRHz1P-kbvcyvNIj_lgpsJyNq75ZY6XeBNbNPAfgnfIZ5hcC2CmFQHeKstjVl8FxSxRhwd-AXZi-u0VE9gAwGo126ueNftreaF_dzqe7FlX6W5Ljt5FNnrJAaqzbTUD_AJTQbzQF3238jh94mRMzLSf7TjlqdI9kRaKww7RR-RaAx0ZfwECg4ynyeWZYC7-itrkLh2FrYGKh2KCHb"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Data Science</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">DataMasters Lab</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.8</span>
+<span class="text-xs text-outline font-medium">(1.8k)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">Data Visualization with Python: Matplotlib &amp; Seaborn</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">18 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Beginner</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-outline text-xs line-through font-medium">$149.99</span>
+<span class="text-xl font-extrabold text-on-surface">$59.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Design course" class="w-full h-full object-cover" data-alt="Designer using a tablet stylus to create colorful abstract digital art on a high-resolution display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4UNM3_REF8zqT_IvrGsIbX02LsA6I5q4lBBjfN_bdLilKxOPOd98h-iHQ_ywVkOYnRKmrtnBemS0_YhEoeIYFBXNr27cG79wFFAGc3Gm1PnRJ3wBxYiPnA7HVoez4QhsRZQmh842HOjR6s3QaAk-Ehbk-O0I1kcQtm1bym_uOgllYWu78P3FGVUgwpb1LEVVtfrNT2hA0IiWbx8ggpPlSV9NRZrmpNxdeLSXIuih9GL4tlsrFlLgt2lo07on1YlI0PgQwqNaP1rDW"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Design</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Pixel Perfect</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">5.0</span>
+<span class="text-xs text-outline font-medium">(950)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">UI/UX Design Systems: Scaling for Enterprise Products</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">24 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Advanced</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-extrabold text-on-surface">$129.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+<!-- Repeat with more courses (simulated for grid display) -->
+<!-- Course Card 4 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Marketing course" class="w-full h-full object-cover" data-alt="Digital marketing team collaborating around a large screen displaying search engine optimization analytics" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC678Qdn-P4VJKlQ7eCq3aaEwWUS9DjDHiKHcKHWyL5ahA2xdhW5zOCPC4ztjDtRPcnM6n7eZfup7ChMBPqw3rdNXv52-3uVWXMsrpVlFpaOSv-BeWV1TXc2Hmm2LtJk6KthCtz8qhDkMmN8Gzap1l5SQPNdCqm0NydkrgJ9Ksp6P1Bm21VP9DvJbN6NeYUQDt8jYP3bjqmFxccG_jfwBqHdcespec5Mhh33JWvlbYcwpAQTuiN3tePlVvvcBqQqgDngP-hhz99B6AI"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Marketing</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Growth Hub</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.7</span>
+<span class="text-xs text-outline font-medium">(3.1k)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">The Complete Digital Marketing Masterclass 2024</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">32 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Beginner</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-outline text-xs line-through font-medium">$89.99</span>
+<span class="text-xl font-extrabold text-on-surface">$19.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+<!-- Course Card 5 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Business course" class="w-full h-full object-cover" data-alt="Professional business meeting in a high-rise office boardroom with city view at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyD-uzKLeFMbBVGaF5gs18bYxq0LwHEJeBHfTtKyZEIdNzggv8uHeA3eP0_G5dJOK0uvL86tQLkzvPHVkrFn-_PQglj7hBMHyyacpWOlYg9R2IC9UvGjKeyh_2qBa6EoOVq6EgP9uWbcE0xd6iL2O82NCLqmWk4AVR8pLakldKbPeF0XVhF3ZrsnsifXW4vBrpjW9IkHTXbVKzgqzvehpM5brbjgDhxcVkB-ENhtzxDcWCndD7rYQ98jWP3AR9orbq_RM27VTeG0wh"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Business</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Executive Coaching</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.9</span>
+<span class="text-xs text-outline font-medium">(1.2k)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">Strategic Leadership: Navigating Modern Business Challenges</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">10 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Advanced</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xl font-extrabold text-on-surface">$249.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+<!-- Course Card 6 -->
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Coding course" class="w-full h-full object-cover" data-alt="Lines of colorful code on a dark theme software development IDE with glowing syntax highlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQJHahuyxOZf90FvTDhNG6QtI1zDF_-9b0F1SW5683PTGJsplNwM25_l45wnqR4ZUIikO_ACoKRUWxd8xvahXnjcxDzr9MQ37ZD-ptzHwmNUO21iYi-_8gHKfQaEy0Vu2jFDXA7kBmkQBKvCv-OzQ-ssoJSLN3OcENetURQjwsy6zw3JzWIbNCOO-7TV6W_B2JiSk_uJ6cHWVpFyO98KT9O05moPq5h_Izqe6r_jcGwxLpVcjkXVlVJFsTkxwMkR55IlmHzUgod7Jw"/>
+<div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Web Dev</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex items-center justify-between mb-3">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">Dev Guru</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold text-on-surface">4.6</span>
+<span class="text-xs text-outline font-medium">(4.5k)</span>
+</div>
+</div>
+<h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">Full-Stack JavaScript: From Beginner to Industry Ready</h4>
+<div class="flex items-center gap-4 mb-6">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-sm font-medium">45 hours</span>
+</div>
+<div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">Intermediate</div>
+</div>
+<div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-outline text-xs line-through font-medium">$179.99</span>
+<span class="text-xl font-extrabold text-on-surface">$44.99</span>
+</div>
+<button class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">Enroll</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary-container text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-16 max-w-[1536px] mx-auto">
+<div class="mb-8 md:mb-0 text-center md:text-left">
+<p class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">CourseHub</p>
+<p class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400">© 2024 CourseHub Inc. Academic Excellence &amp; Professional Growth.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Terms of Service</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Help Center</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Affiliates</a>
+<a class="font-['Plus_Jakarta_Sans'] text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 transition-colors" href="#">Careers</a>
+</div>
+</div>
+</footer>
+</body></html>

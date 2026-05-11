@@ -65,7 +65,7 @@ class StudentProfile(models.Model):
     website = models.URLField(blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     
-    class meta:
+    class Meta:
         db_table = "student_profile"
         verbose_name = "Student Profile"
         

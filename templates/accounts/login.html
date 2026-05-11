@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CourseHub - Authentication</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "surface-container": "#ededf7",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#4b5c92",
+                        "on-tertiary-fixed-variant": "#812900",
+                        "on-tertiary-fixed": "#380d00",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e8e7f1",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#d9d9e3",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#a1b6ff",
+                        "surface-tint": "#2a56c7",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-primary": "#b5c4ff",
+                        "outline": "#747685",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#002b80",
+                        "on-secondary-fixed": "#01174b",
+                        "on-tertiary-container": "#ffa17e",
+                        "tertiary": "#5f1c00",
+                        "secondary-fixed": "#dbe1ff",
+                        "inverse-on-surface": "#f0f0fa",
+                        "surface-container-highest": "#e2e1eb",
+                        "surface": "#faf8ff",
+                        "on-secondary-fixed-variant": "#334479",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f3f3fd",
+                        "inverse-surface": "#2f3038",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#3d4e83",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#b1c2ff",
+                        "surface-variant": "#e2e1eb",
+                        "on-background": "#1a1b22",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#434653",
+                        "primary-container": "#003fb1",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "on-primary-fixed-variant": "#003dab",
+                        "tertiary-fixed": "#ffdbcf",
+                        "outline-variant": "#c4c6d6",
+                        "on-surface": "#1a1b22",
+                        "on-primary-fixed": "#00174c",
+                        "tertiary-container": "#852b00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding-y": "6rem",
+                        "grid-gutter": "2.5rem",
+                        "inline-gap": "0.75rem",
+                        "container-max": "1536px",
+                        "card-padding": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Inter"],
+                        "label-bold": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .custom-shadow { box-shadow: 0 4px 20px rgba(25, 27, 35, 0.04); }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+<main class="min-h-screen flex">
+<!-- Left Side: Authentication Card -->
+<section class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-white">
+<div class="w-full max-w-[480px]">
+<div class="mb-10">
+<h1 class="font-headline-md text-primary-container text-2xl font-black tracking-tight mb-2">CourseHub</h1>
+<p class="text-on-surface-variant font-body-md">Professional Growth Reimagined.</p>
+</div>
+<div class="bg-white rounded-xl custom-shadow border border-surface-container overflow-hidden">
+<!-- Tab Headers -->
+<div class="flex border-b border-surface-container">
+<button class="flex-1 py-4 text-label-bold font-label-bold text-primary-container border-b-2 border-primary-container transition-all" id="login-tab-btn" onclick="switchTab('login')">
+                            Login
+                        </button>
+<button class="flex-1 py-4 text-label-bold font-label-bold text-outline transition-all" id="register-tab-btn" onclick="switchTab('register')">
+                            Register
+                        </button>
+</div>
+<!-- Login Tab Content -->
+<div class="tab-content active p-8" id="login-tab">
+<form method="POST" action="{% url 'login' %}" class="space-y-6">
+    {% csrf_token %}
+<div>
+<label class="block text-label-bold font-label-bold text-on-surface mb-2">Email Address</label>
+<input
+    type="email"
+    name="email"
+    placeholder="name@gmail.com"
+    required
+    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all placeholder:text-outline-variant"/></div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="text-label-bold font-label-bold text-on-surface">Password</label>
+<a class="text-label-bold font-label-bold text-primary-container hover:underline" href="#">Forgot password?</a>
+</div>
+<input
+    type="password"
+    name="password"
+    placeholder="••••••••"
+    required
+    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all placeholder:text-outline-variant"
+/></div>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="text-red-500 text-sm">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<button class="w-full bg-primary-container text-white font-label-bold py-4 rounded-lg active:scale-95 transition-transform shadow-sm">
+                                Login
+                            </button>
+<div class="relative py-2">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-surface-container-high"></div></div>
+<div class="relative flex justify-center text-caption font-caption"><span class="bg-white px-4 text-outline uppercase tracking-widest">or</span></div>
+</div>
+<button class="w-full border border-outline-variant text-on-surface font-label-bold py-3.5 rounded-lg active:scale-95 transition-transform flex items-center justify-center gap-3 hover:bg-surface-container-low transition-colors">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"></path>
+</svg>
+                                Sign in with Google
+                            </button>
+</form>
+</div>
+<!-- Register Tab Content -->
+<div class="tab-content p-8" id="register-tab">
+<form method="POST" action="{% url 'register' %}" class="space-y-5">
+    {% csrf_token %}
+<div>
+<label class="block text-label-bold font-label-bold text-on-surface mb-2">Full Name</label>
+<input
+    type="text"
+    name="username"
+    value="{{ register_form.username.value|default:'' }}"
+    placeholder="John Doe"
+    required
+    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all"
+/>
+</div>
+<div>
+<label class="block text-label-bold font-label-bold text-on-surface mb-2">Email Address</label>
+<input
+    type="email"
+    name="email"
+    value="{{ register_form.email.value|default:'' }}"
+    placeholder="name@gmail.com"
+    required
+    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all"/></div>
+<div>
+<label class="block text-label-bold font-label-bold text-on-surface mb-2">Password</label>
+<input
+    type="password"
+    name="password1"
+    placeholder="Min. 8 characters"
+    required
+    class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all"/></div>
+<div>
+
+<div>
+    <label class="block text-label-bold font-label-bold text-on-surface mb-2">
+        Confirm Password
+    </label>
+
+    <input
+        type="password"
+        name="password2"
+        placeholder="Confirm password"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary-container focus:border-transparent outline-none transition-all"
+    />
+</div><br><br>
+
+<label class="block text-label-bold font-label-bold text-on-surface mb-3">Join as</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative cursor-pointer group">
+<input checked="" class="peer sr-only" name="role" type="radio" value="student"/>
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col items-center gap-2 group-hover:border-primary-container transition-all peer-checked:border-primary-container peer-checked:bg-surface-container-low">
+<span class="material-symbols-outlined text-primary-container" data-icon="school">school</span>
+<span class="text-caption font-label-bold">Student</span>
+</div>
+</label>
+<label class="relative cursor-pointer group">
+<input class="peer sr-only" name="role" type="radio" value="provider"/>
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col items-center gap-2 group-hover:border-primary-container transition-all peer-checked:border-primary-container peer-checked:bg-surface-container-low">
+<span class="material-symbols-outlined text-primary-container" data-icon="work">work</span>
+<span class="text-caption font-label-bold">Provider</span>
+</div>
+</label>
+</div>
+</div>
+
+{% if register_form.errors %}
+    <div class="text-red-500 text-sm space-y-1">
+        {% for field in register_form %}
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+
+        {% for error in register_form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<button class="w-full bg-primary-container text-white font-label-bold py-4 rounded-lg active:scale-95 transition-transform shadow-sm mt-2">
+                                Register
+                            </button>
+</form>
+</div>
+</div>
+<div class="mt-8 text-center">
+<p class="text-outline text-caption font-body-md">
+                        By continuing, you agree to CourseHub's <br/>
+<a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Right Side: Visual Content -->
+<section class="hidden lg:block w-1/2 relative bg-surface-container-highest overflow-hidden">
+<!-- Background Atmospheric Glow -->
+<div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary-container/10 blur-[120px] rounded-full"></div>
+<div class="h-full w-full flex flex-col items-center justify-center relative z-10 p-12">
+<div class="max-w-[600px] text-center mb-12">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Master the skills that move you forward.</h2>
+<p class="text-body-lg text-on-surface-variant">Join a community of over 50,000 professionals advancing their careers with expert-led courses.</p>
+</div>
+<div class="relative w-full aspect-[16/10] max-w-[720px] rounded-2xl overflow-hidden custom-shadow transform hover:scale-[1.02] transition-transform duration-500">
+<img alt="Collaboration in modern workspace" class="w-full h-full object-cover" data-alt="Modern collaborative workspace with young professionals working on laptops in a brightly lit architectural office with large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvo3wAX4YaZEgGWdlpg5TqGmP3GmSrqr1GPBcLLkIXb-4GLzpoVbIr0Lp0ZMtE5PV8VTaY2yOj4wvm-y0oYI18np4A6dZ0-GR5HCykKAIdrNtFsESz0j3FH9Sb7uEYRJF2YJ0J5cCO4NlM4BZKYKN4wh7QsrsjSmoxs4Zm0YGrpOau7_WeqepJgn3C7yK2cj8QqVjD_vm_jlTc-UOASrFkLVU3EJh4xuuHa5uKTdCP6M83WVGTzIq739PAjv-Xep4pIEte8OZrGL4a"/>
+<!-- Floating Stat Cards (Glassmorphism) -->
+<div class="absolute top-8 left-8 bg-white/70 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-xl flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+</div>
+<div>
+<p class="text-[10px] font-caption text-outline uppercase tracking-wider">Growth Factor</p>
+<p class="text-label-bold font-headline-md text-primary">+84% Skill Gain</p>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 bg-white/70 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-xl flex items-center gap-4">
+<div class="flex -space-x-3">
+<img alt="User 1" class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCon9PNsEKJLzVeXnwX5crEA0_vCCE6-q8SJfkHL0_5QTlDpVh3btf36MBDonHbxMm1aJoDyRnI3piVqhvZEpfV6mAP8g8zbJWsDr9-T5gDVB3LSvKserqxs6vgOmyo2qdTOaIoU4Mxw-2jAT79tr7dqmWg9FEVmVhyMp-xRZlxQYEzC4ZMxJUYAeHRzRoo1uKY_aX91wbcG1-mzIjwJHC5euolyWRHa-C81OHc0PCMq3TSU_DMFgU0avWBIXJt4aa3h2q7BjNqfRX"/>
+<img alt="User 2" class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJxsWAD7cVb1dm9Sm60Xl3mqhQ1VYGLwWssZiVfnwTyHOQR2IHXGAPjPLg8L4mY3ovN9ijyxuxLwmacKKFuCKtjdIqpaLiGtEayRNhjdBegX7-gQw0SRaFMYhepsZ3Z9O9vSq9TxfPsXfT_kJ6xL7y1CxXfu5NUyTaeKmdooQCieAsIBUy_B5V_ZX2YxapFs2DmhLmd2byHDeoyjq1P5c2mRwYcx_LPvBRE2tC3YMedTxWnPwESEPrc6KXrLf673TRqf-qS16Y-6Z"/>
+<img alt="User 3" class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFRO-v4s5EN-C4f2rW1zxuyjKdY13pKURKKRAitdrX_kc91N16bbKNvenPnUm0sRg-VfnavL3ByhT05WpyqpaXPyN-acbRc4fS570NcfCMvZlrHrjLTeoqfB0IyBf41Ws0HA8XWhpugJMATizPFXC_S92zNWi3dPLR_E-bo81kSG9o4hvD7VjRYHDd_WgWoRmusTILYxoj_L1LmMbBIVoRDkveHIDcn5uda2jwSrL1giDacQ2_o9gc_32_8zrAnxgCxCC5yL9zxaSu"/>
+</div>
+<p class="text-label-bold font-label-bold text-on-surface">500+ Mentors</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+    function switchTab(tab) {
+        const loginBtn = document.getElementById('login-tab-btn');
+        const registerBtn = document.getElementById('register-tab-btn');
+        const loginContent = document.getElementById('login-tab');
+        const registerContent = document.getElementById('register-tab');
+
+        if (tab === 'login') {
+            loginBtn.classList.add('text-primary-container', 'border-primary-container', 'border-b-2');
+            loginBtn.classList.remove('text-outline');
+
+            registerBtn.classList.remove('text-primary-container', 'border-primary-container', 'border-b-2');
+            registerBtn.classList.add('text-outline');
+
+            loginContent.classList.add('active');
+            registerContent.classList.remove('active');
+
+        } else {
+            registerBtn.classList.add('text-primary-container', 'border-primary-container', 'border-b-2');
+            registerBtn.classList.remove('text-outline');
+
+            loginBtn.classList.remove('text-primary-container', 'border-primary-container', 'border-b-2');
+            loginBtn.classList.add('text-outline');
+
+            registerContent.classList.add('active');
+            loginContent.classList.remove('active');
+        }
+    }
+
+    // Detect URL parameter
+    window.onload = function () {
+
+        const backendTab = "{{ active_tab|default:'login' }}";
+
+        const params = new URLSearchParams(window.location.search);
+        const urlTab = params.get('tab');
+
+        const finalTab = urlTab || backendTab;
+
+        switchTab(finalTab);
+    }
+</script>
+</body></html>

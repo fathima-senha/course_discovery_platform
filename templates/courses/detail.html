@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e2e1eb",
+                      "on-tertiary-fixed-variant": "#812900",
+                      "secondary": "#4b5c92",
+                      "tertiary-fixed-dim": "#ffb59a",
+                      "surface-container": "#ededf7",
+                      "surface-dim": "#d9d9e3",
+                      "secondary-fixed": "#dbe1ff",
+                      "outline": "#747685",
+                      "on-tertiary-container": "#ffa17e",
+                      "inverse-surface": "#2f3038",
+                      "on-primary-container": "#a1b6ff",
+                      "background": "#faf8ff",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#dbe1ff",
+                      "primary-container": "#003fb1",
+                      "on-surface": "#1a1b22",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#380d00",
+                      "inverse-on-surface": "#f0f0fa",
+                      "tertiary": "#5f1c00",
+                      "primary": "#002b80",
+                      "on-secondary-fixed": "#01174b",
+                      "surface-container-low": "#f3f3fd",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#ffdbcf",
+                      "inverse-primary": "#b5c4ff",
+                      "on-error": "#ffffff",
+                      "outline-variant": "#c4c6d6",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#852b00",
+                      "on-secondary-container": "#3d4e83",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#00174c",
+                      "on-surface-variant": "#434653",
+                      "on-secondary-fixed-variant": "#334479",
+                      "surface-container-high": "#e8e7f1",
+                      "surface-bright": "#faf8ff",
+                      "surface": "#faf8ff",
+                      "on-background": "#1a1b22",
+                      "surface-tint": "#2a56c7",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "surface-variant": "#e2e1eb",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#003dab",
+                      "secondary-container": "#b1c2ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "grid-gutter": "2.5rem",
+                      "container-max": "1536px",
+                      "section-padding-y": "6rem",
+                      "card-padding": "2rem",
+                      "inline-gap": "0.75rem"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-xl": ["Plus Jakarta Sans"],
+                      "caption": ["Inter"],
+                      "label-bold": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                      "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 border-b border-slate-100 bg-white/70 backdrop-blur-md shadow-[0_4px_20px_rgba(25,27,35,0.04)]">
+<div class="max-w-[1536px] mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-12">
+<span class="text-xl font-black tracking-tight text-blue-700">CourseHub</span>
+<nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+<a class="text-blue-700 font-bold border-b-2 border-blue-700 pb-1" href="#">Courses</a>
+<a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="#">Mentors</a>
+<a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="#">Professional Growth</a>
+<a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="#">For Business</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-600 font-medium hover:text-blue-700">Log In</button>
+<button class="bg-primary-container text-on-primary text-white px-6 py-2.5 rounded-lg font-bold hover:bg-primary transition-all active:scale-95">Join for Free</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-24 max-w-[1536px] mx-auto px-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-slate-500 font-label-bold text-caption uppercase tracking-wider mb-6">
+<span>Home</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Web Development</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">React</span>
+</nav>
+<!-- Course Header -->
+<section class="mb-12 max-w-4xl">
+<h1 class="font-display-xl text-headline-lg text-on-surface mb-6 leading-tight">Advanced React Patterns &amp; Performance</h1>
+<div class="flex flex-wrap items-center gap-6 text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="text-amber-500 font-bold">4.9</span>
+<div class="flex text-amber-500">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-slate-500 font-body-md">(2,450 reviews)</span>
+</div>
+<div class="flex items-center gap-1 font-body-md">
+<span class="material-symbols-outlined text-slate-400">group</span>
+<span>15,000 students enrolled</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-6 mt-4 text-slate-500 text-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">update</span>
+<span>Last updated 10/2023</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span>Language: English</span>
+</div>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-10 gap-12">
+<!-- Left Column (7/10) -->
+<div class="lg:col-span-7 space-y-16">
+<!-- Description -->
+<section>
+<h2 class="font-headline-md text-headline-md mb-6">Course Description</h2>
+<div class="font-body-lg text-on-surface-variant space-y-4">
+<p>Master the complexities of React by diving deep into advanced patterns that professional developers use to build scalable, high-performance applications. This course isn't just about syntax; it's about architectural decisions, render optimization, and the inner workings of the React reconciler.</p>
+<p>We explore everything from compound components and render props to advanced hook patterns and the latest Concurrent features. You will learn how to identify performance bottlenecks and implement sophisticated state management strategies without over-engineering your codebase.</p>
+</div>
+</section>
+<!-- Learning Outcomes Bento -->
+<section class="bg-surface-container-low rounded-xl p-8 border border-outline-variant">
+<h2 class="font-headline-md text-headline-md mb-8">What you will learn</h2>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Implement advanced patterns like Compound Components and HOCs.</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Optimize component re-renders using useMemo and useCallback effectively.</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Master the React Profiler to identify and fix performance jank.</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Deep dive into custom hooks for complex logic reuse.</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Understanding Fiber and the React reconciliation process.</span>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md">Architecting large-scale React applications with confidence.</span>
+</div>
+</div>
+</section>
+<!-- Requirements -->
+<section>
+<h2 class="font-headline-md text-headline-md mb-6">Requirements</h2>
+<ul class="space-y-3">
+<li class="flex items-center gap-3">
+<div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+<span class="font-body-md">Advanced knowledge of modern JavaScript (ES6+ features).</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+<span class="font-body-md">Solid understanding of React basics (Props, State, Lifecycle).</span>
+</li>
+</ul>
+</section>
+<!-- Provider Info -->
+<section>
+<div class="bg-white border border-outline-variant rounded-xl p-8 shadow-[0_4px_20px_rgba(25,27,35,0.04)] flex flex-col md:flex-row gap-8 items-start">
+<div class="w-24 h-24 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img alt="DevGuru Academy Logo" class="w-full h-full object-cover" data-alt="Modern minimalist tech company logo with abstract geometric shapes in deep blue and white, clean corporate identity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYw5eJfKhJ0odr-csfhZ4P1NzpcTT-z_tpQZqod8e61x7o7MJOB6_qMOdIiZhnc5vK0Ltuv-lIEVPZAN0gNZvXUJhIRvw13NRvTWcbyp1xKYUHYeaXZVhboM0O0BVv5gsMy_s9nStyAJSeuvefVp2Vo0PUbxUXDgZ2nNl1rE18M2riizZBAFYu2HCzApmG83cvD4cW2WVcdk4lrIJcfeCvQ11xTlc3ntpibMWwLxlpmQazF509uLP3LCf8KxcNmjZkI8-si4c1E9oB"/>
+</div>
+<div>
+<span class="font-label-bold text-caption text-primary uppercase tracking-widest mb-2 block">Course Provider</span>
+<h3 class="font-headline-md text-headline-md mb-3">DevGuru Academy</h3>
+<p class="font-body-md text-on-surface-variant mb-4">A leading organization specializing in high-fidelity technical education for senior engineers. We pride ourselves on curriculum that goes beyond the documentation.</p>
+<div class="flex gap-6 text-sm font-label-bold">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-blue-600 text-[18px]">verified</span> 4.8 Instructor Rating</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-blue-600 text-[18px]">play_circle</span> 42 Courses</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews -->
+<section>
+<h2 class="font-headline-md text-headline-md mb-8">Student Feedback</h2>
+<div class="grid md:grid-cols-10 gap-12 items-center mb-12">
+<div class="md:col-span-3 text-center">
+<div class="text-[64px] font-black text-primary leading-none mb-2">4.9</div>
+<div class="flex justify-center text-amber-500 mb-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="font-label-bold text-primary">Course Rating</div>
+</div>
+<div class="md:col-span-7 space-y-3">
+<!-- Progress Bar Row -->
+<div class="flex items-center gap-4">
+<div class="flex-1 bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[92%]"></div>
+</div>
+<div class="flex text-amber-500 w-24">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-sm font-bold w-8 text-right">92%</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1 bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[6%]"></div>
+</div>
+<div class="flex text-amber-500 w-24">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+</div>
+<span class="text-sm font-bold w-8 text-right">6%</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex-1 bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[2%]"></div>
+</div>
+<div class="flex text-amber-500 w-24">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+</div>
+<span class="text-sm font-bold w-8 text-right">2%</span>
+</div>
+</div>
+</div>
+<!-- Review Cards -->
+<div class="space-y-6">
+<div class="p-8 border-t border-outline-variant">
+<div class="flex gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">JD</div>
+<div>
+<div class="font-bold">Jonathan D.</div>
+<div class="flex text-amber-500 scale-75 -ml-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<p class="font-body-md text-on-surface-variant">The section on the React reconciler alone is worth the price. I've been a React dev for 4 years and this challenged everything I thought I knew about optimization.</p>
+</div>
+<div class="p-8 border-t border-outline-variant">
+<div class="flex gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center font-bold text-on-tertiary-fixed">SL</div>
+<div>
+<div class="font-bold">Sarah L.</div>
+<div class="flex text-amber-500 scale-75 -ml-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<p class="font-body-md text-on-surface-variant">Clean, professional, and straight to the point. No fluff. The exercises on compound components helped me refactor our internal library immediately.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column Sidebar (3/10) -->
+<div class="lg:col-span-3">
+<div class="sticky top-28 bg-white border border-outline-variant rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(25,27,35,0.1)]">
+<div class="aspect-video relative">
+<img alt="Advanced React Patterns Thumbnail" class="w-full h-full object-cover" data-alt="Cinematic shot of high-end computer workstation with clean code visible on dual monitors, blue ambient lighting, professional developer environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqmld5bZRrjG3V5MAHCJfkiCqFbCgcWY6xo_NDIIG9oUwl-FaHU06AIiKi84xH8FhyEnrzWjf_WI-dwQ6QhxFep_NtWTlGHKIXNO_50ehAsLNc86YFDB51bjGDKqiOr9WqaV22J_tgZ5EjaeSRxvO2Q1hssQH6AWzjXmECWPiTJVbjAr2SWQcCPbtNXe5Q63qv3ee3bwpgM1FsRgEZmddMYzRlwfRnYBGXrtcwbq-RjE7LuB-q_l-2JAmNJ3sFJSyYICrgpDSQdNij"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center group cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-8">
+<div class="flex items-baseline gap-3 mb-6">
+<span class="text-headline-md font-display-xl text-on-surface">$84.99</span>
+<span class="text-slate-400 line-through font-body-md">$199.99</span>
+</div>
+<div class="space-y-4">
+<button class="w-full bg-primary-container text-white py-4 rounded-lg font-label-bold text-lg hover:bg-primary transition-all active:scale-95">Enroll Now</button>
+<button class="w-full border border-outline-variant py-3 rounded-lg font-label-bold flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-error">favorite</span>
+                                Add to Wishlist
+                            </button>
+</div>
+<div class="mt-8">
+<h4 class="font-label-bold text-caption uppercase tracking-widest text-slate-500 mb-4">Course Includes</h4>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">videocam</span>
+                                    12 hours on-demand video
+                                </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">article</span>
+                                    4 articles
+                                </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">workspace_premium</span>
+                                    Certificate of completion
+                                </li>
+<li class="flex items-center gap-3 text-sm font-medium">
+<span class="material-symbols-outlined text-primary text-[20px]">all_inclusive</span>
+                                    Full lifetime access
+                                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 border-t border-slate-200 bg-slate-50">
+<div class="max-w-[1536px] mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="max-w-xs">
+<span class="text-lg font-bold text-slate-900 block mb-4">CourseHub</span>
+<p class="font-['Plus_Jakarta_Sans'] text-sm text-slate-500 leading-relaxed">© 2024 CourseHub. Empowering professional growth through high-fidelity education.</p>
+</div>
+<div class="flex flex-wrap gap-x-16 gap-y-8">
+<div class="space-y-4">
+<h5 class="font-label-bold text-caption text-slate-900">Platform</h5>
+<nav class="flex flex-col gap-3">
+<a class="text-sm text-slate-500 hover:text-blue-700 hover:underline transition-all" href="#">About Us</a>
+<a class="text-sm text-slate-500 hover:text-blue-700 hover:underline transition-all" href="#">Careers</a>
+<a class="text-sm text-slate-500 hover:text-blue-700 hover:underline transition-all" href="#">Help Center</a>
+</nav>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-bold text-caption text-slate-900">Legal</h5>
+<nav class="flex flex-col gap-3">
+<a class="text-sm text-slate-500 hover:text-blue-700 hover:underline transition-all" href="#">Privacy Policy</a>
+<a class="text-sm text-slate-500 hover:text-blue-700 hover:underline transition-all" href="#">Terms of Service</a>
+</nav>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

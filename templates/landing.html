@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html class="light" lang="en"><head>
@@ -95,9 +96,12 @@
 <a class="text-[#003fb1] dark:text-blue-400 border-b-2 border-[#003fb1] pb-1 hover:text-[#1a56db] dark:hover:text-blue-300 transition-all duration-300 active:scale-95 transform" href="#">Browse</a>
 <a class="text-[#191b23] dark:text-slate-300 hover:text-[#1a56db] dark:hover:text-blue-300 transition-all duration-300 active:scale-95 transform" href="#">Providers</a>
 <a class="text-[#191b23] dark:text-slate-300 hover:text-[#1a56db] dark:hover:text-blue-300 transition-all duration-300 active:scale-95 transform" href="#">About</a>
-<a class="text-[#191b23] dark:text-slate-300 hover:text-[#1a56db] dark:hover:text-blue-300 transition-all duration-300 active:scale-95 transform" href="#">Login</a>
-<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg active:scale-95 transform transition-transform font-semibold">Get Started</button>
-</div>
+<a class="text-[#191b23] dark:text-slate-300 hover:text-[#1a56db] dark:hover:text-blue-300 transition-all duration-300 active:scale-95 transform" href="{% url 'login' %}">Login</a>
+<a href="{% url 'login' %}?tab=register" 
+   class="bg-primary text-on-primary px-6 py-2.5 rounded-lg active:scale-95 transform transition-transform font-semibold inline-block">
+    Get Started
+</a>
+</a></div>
 <!-- Mobile Menu Toggle -->
 <div class="md:hidden">
 <span class="material-symbols-outlined text-on-surface" data-icon="menu">menu</span>

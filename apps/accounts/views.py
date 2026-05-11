@@ -23,8 +23,8 @@ class LandingPageView(View):
     If already logged in, redirect to their dashboard.
     """
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('dashboard_redirect')
+        # if request.user.is_authenticated:
+        #     return redirect('dashboard_redirect')
         return render(request, 'landing.html')
 
 
@@ -33,20 +33,33 @@ class RegisterView(View):
     GET  /register/  — shows the registration form
     POST /register/  — handles form submission
     """
+    
     def get(self, request):
         if request.user.is_authenticated:
             return redirect('dashboard_redirect')
-        form = RegisterForm()
-        return render(request, 'accounts/register.html', {'form': form})
+        
+        register_form = RegisterForm()
+        login_form = LoginForm()
+        
+        return render(request, 'accounts/login.html', {
+            'register_form': register_form,
+            'login_form': login_form,
+            'active_tab': 'register'
+        })
 
     def post(self, request):
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+        register_form = RegisterForm(request.POST)
+        login_form = LoginForm()
+        if register_form.is_valid():
+            user = register_form.save()
             login(request, user)
             messages.success(request, 'Account created successfully!')
             return redirect('dashboard_redirect')
-        return render(request, 'accounts/register.html', {'form': form})
+        return render(request, 'accounts/login.html', {
+            'register_form': register_form,
+            'login_form': login_form,
+            'active_tab': 'register'
+        })
 
 
 class LoginView(View):
@@ -55,23 +68,33 @@ class LoginView(View):
     POST /login/   — handles login
     """
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('dashboard_redirect')
-        form = LoginForm()
-        return render(request, 'accounts/login.html', {'form': form})
+        login_form = LoginForm()
+        register_form = RegisterForm()
+        # if request.user.is_authenticated:
+        #     return redirect('dashboard_redirect')
+        return render(request, 'accounts/login.html', {
+            'login_form': login_form,
+            'register_form': register_form,
+            'active_tab': 'login'
+        })
 
     def post(self, request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email    = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+        login_form = LoginForm(request.POST)
+        register_form = RegisterForm()
+        if login_form.is_valid():
+            email = login_form.cleaned_data['email']
+            password = login_form.cleaned_data['password']
             user     = authenticate(request, email=email, password=password)
             if user:
                 login(request, user)
                 messages.success(request, f'Welcome back, {user.username}!')
                 return redirect('dashboard_redirect')
             messages.error(request, 'Invalid email or password.')
-        return render(request, 'accounts/login.html', {'form': form})
+        return render(request, 'accounts/login.html', {
+            'login_form': login_form,
+            'register_form': register_form,
+            'active_tab': 'login'
+        })
 
 
 class LogoutView(View):
@@ -84,26 +107,48 @@ class LogoutView(View):
         return redirect('landing')
 
 
+# class DashboardRedirectView(View):
+#     """
+#     GET /dashboard/
+#     Reads the user role and redirects to the correct dashboard.
+#     student  → /student/dashboard/
+#     provider → /provider/dashboard/
+#     admin    → /admin-panel/dashboard/
+#     """
+#     def get(self, request):
+#         print(request.user.role)
+#         if not request.user.is_authenticated:
+#             return redirect('login')
+#         role = request.user.role
+#         if role == 'student':
+#             return redirect('student_dashboard')
+#         elif role == 'provider':
+#             return redirect('provider_dashboard')
+#         elif role == 'admin':
+#             return redirect('admin_dashboard')
+#         return redirect('landing')
+
 class DashboardRedirectView(View):
-    """
-    GET /dashboard/
-    Reads the user role and redirects to the correct dashboard.
-    student  → /student/dashboard/
-    provider → /provider/dashboard/
-    admin    → /admin-panel/dashboard/
-    """
+
     def get(self, request):
+
+        print(request.user.role)
+
         if not request.user.is_authenticated:
             return redirect('login')
-        role = request.user.role
-        if role == 'student':
-            return redirect('student_dashboard')
-        elif role == 'provider':
-            return redirect('provider_dashboard')
-        elif role == 'admin':
-            return redirect('admin_dashboard')
-        return redirect('landing')
 
+        role = request.user.role
+
+        if role == 'student':
+            return redirect('student_profile')
+
+        elif role == 'provider':
+            return redirect('provider_profile')
+
+        elif role == 'admin':
+            return redirect('/admin/')
+
+        return redirect('landing')
 
 @method_decorator(login_required, name='dispatch')
 class StudentProfileView(View):
