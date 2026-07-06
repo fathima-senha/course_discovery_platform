@@ -1,0 +1,51 @@
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-slate-950 dark:bg-black border-r border-slate-800 shadow-2xl flex flex-col py-8 space-y-1">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-white tracking-tight">EduAdmin</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Management Portal</p>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold active:scale-95 transition-transform"  href="{% url 'admin_dashboard' %}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-headline-md text-[14px]">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-headline-md text-[14px]">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-headline-md text-[14px]">Providers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-headline-md text-[14px]">Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span class="font-headline-md text-[14px]">Reviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-headline-md text-[14px]">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-headline-md text-[14px]">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+<span class="font-headline-md text-[14px]">Tags</span>
+</a>
+<div class="pt-8 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-headline-md text-[14px]">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
