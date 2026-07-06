@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Courses | CourseHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#380d00",
+                      "on-error": "#ffffff",
+                      "primary-container": "#003fb1",
+                      "on-secondary-fixed": "#01174b",
+                      "surface-bright": "#faf8ff",
+                      "surface-container": "#ededf7",
+                      "primary": "#002b80",
+                      "secondary-container": "#b1c2ff",
+                      "inverse-surface": "#2f3038",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-container-high": "#e8e7f1",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#852b00",
+                      "on-surface": "#1a1b22",
+                      "on-primary-container": "#a1b6ff",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "on-surface-variant": "#434653",
+                      "on-background": "#1a1b22",
+                      "surface-variant": "#e2e1eb",
+                      "secondary": "#4b5c92",
+                      "on-primary-fixed-variant": "#003dab",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f3f3fd",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#5f1c00",
+                      "primary-fixed": "#dbe1ff",
+                      "on-tertiary-fixed-variant": "#812900",
+                      "on-secondary-fixed-variant": "#334479",
+                      "surface-tint": "#2a56c7",
+                      "background": "#faf8ff",
+                      "secondary-fixed": "#dbe1ff",
+                      "outline": "#747685",
+                      "surface-container-highest": "#e2e1eb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#3d4e83",
+                      "inverse-on-surface": "#f0f0fa",
+                      "inverse-primary": "#b5c4ff",
+                      "tertiary-fixed-dim": "#ffb59a",
+                      "surface-dim": "#d9d9e3",
+                      "on-primary-fixed": "#00174c",
+                      "outline-variant": "#c4c6d6",
+                      "on-tertiary-container": "#ffa17e",
+                      "surface": "#faf8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "card-padding": "2rem",
+                      "container-max": "1536px",
+                      "inline-gap": "0.75rem",
+                      "grid-gutter": "2.5rem",
+                      "section-padding-y": "6rem"
+              },
+              "fontFamily": {
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "display-xl": ["Plus Jakarta Sans"],
+                      "caption": ["Inter"],
+                      "label-bold": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                      "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #1a1b22;
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased overflow-x-hidden">
+<!-- SideNavBar -->
+{% comment %} <aside class="fixed left-0 top-0 h-screen w-64 border-r border-slate-200 bg-white z-50 flex flex-col py-6 px-4 gap-2 h-full">
+<div class="flex items-center gap-3 px-4 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div class="flex flex-col">
+<span class="text-lg font-black text-blue-800 tracking-tight">CourseHub</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Professional Growth</span>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-slate-500 hover:bg-slate-100 hover:text-blue-700 px-4 py-3 rounded-lg transition-all duration-150 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-bold text-label-bold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-blue-50 text-blue-700 rounded-lg px-4 py-3 transition-all duration-150 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-bold text-label-bold">My Courses</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 hover:bg-slate-100 hover:text-blue-700 px-4 py-3 rounded-lg transition-all duration-150 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-bold text-label-bold">Wishlist</span>
+</a>
+<a class="flex items-center gap-3 text-slate-500 hover:bg-slate-100 hover:text-blue-700 px-4 py-3 rounded-lg transition-all duration-150 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-bold text-label-bold">Profile</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-slate-100">
+<a class="flex items-center gap-3 text-slate-500 hover:bg-slate-100 hover:text-error px-4 py-3 rounded-lg transition-all duration-150 active:scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-bold text-label-bold">Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/student_sidebar.html' %}
+
+<!-- TopAppBar (Floating style as per brand anchors) -->
+<header class="fixed top-0 right-0 left-64 h-16 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/50 shadow-sm shadow-slate-900/5 flex justify-between items-center px-8 font-['Plus_Jakarta_Sans'] text-sm antialiased">
+<h1 class="text-xl font-bold tracking-tight text-blue-800">My Courses</h1>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100/50 border-none rounded-full text-xs focus:ring-2 focus:ring-primary w-64 transition-all" placeholder="Search your courses..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95 transform"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="text-slate-600 hover:bg-slate-50 p-2 rounded-full transition-colors active:scale-95 transform"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
+<img alt="Student avatar" data-alt="close up headshot of a professional young man with a slight smile in soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc8OxXdrRHxA7B-gemLHl6zLKIPwxNfLOHYY4HGvEDyyuSWk98jZkKPfVAC5kbs7qWFJ5EAN6xfwP9jyappzRXtrnPsqoPEv7Jm1JZtMi1BiScAZeTUARRdU74cCpUi8zj4E35P623QS-3EjrNy1aDrs3GBn4rwSMqL97dDe2aaeAIRoAgG9mzn0xc8xj0a1NBRqjkp0tCU6mqk43V_zI6L7Kxy09EB4mA63PKj8NFmVPeaXgVl2HQYBlTm4ATGGkrGLNnYTloGiIq"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-16 pb-12 px-12 min-h-screen">
+<div class="max-w-screen-container-max mx-auto">
+<!-- Category Tabs -->
+<div class="flex items-center gap-2 mb-10 overflow-x-auto pb-2">
+<button class="px-6 py-2.5 rounded-full bg-primary text-white font-label-bold text-label-bold shadow-md shadow-primary/20 transition-all">All</button>
+<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">In Progress</button>
+<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">Completed</button>
+<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">Dropped</button>
+</div>
+<!-- Course Grid (Full-width Cards) -->
+<div class="flex flex-col gap-6">
+<!-- Course Card 1 -->
+<div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
+<div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
+<img alt="Advanced Data Structures" class="w-full h-full object-cover" data-alt="professional workspace with laptop and notebooks on a white desk with clean aesthetic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPjAEIrbAQNROHArdDmnm6QChPslFIdYjdtZS2K8b-QX4g5ZYRiNSYIlSlur-FClJUwVlY5-ga45anwFJZUu2XxNGH2mbLz70cQC9eL5LNNnK9lwSE8g9lp5xh6Yqz3C42WvJVWZieQ3rObi4jkbG9G7KGmapQz990AtgkACpPcd1wTfo7HFCwL5P10XFWewJpIjkIQFEubNEqqy0SvLwZ5v_xbiu47R6tj8I8V7VVfQUp9oELQGn2TjVeUHUYwSISzDIIN3uYiqkA"/>
+<div class="absolute top-3 left-3">
+<span class="bg-primary-container text-white text-[10px] font-bold px-2 py-1 rounded tracking-wider uppercase">In Progress</span>
+</div>
+</div>
+<div class="flex-1 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Advanced Data Structures &amp; Algorithms</h3>
+<span class="text-caption font-caption text-slate-400">Enrolled: Oct 12, 2023</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 font-medium">Provider: TechAcademy Global</p>
+<div class="mb-6">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-primary">Progress: 65%</span>
+<span class="text-xs text-slate-400">24 / 38 Lessons</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-primary text-white rounded-lg font-label-bold text-label-bold active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span>
+                                    Resume
+                                </button>
+<button class="px-6 py-2 text-slate-500 border border-slate-200 rounded-lg font-label-bold text-label-bold hover:bg-slate-50 transition-all">
+                                    Unenroll
+                                </button>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-[12px] font-medium">4h 20m left</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
+<div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
+<img alt="UI/UX Mastery" class="w-full h-full object-cover" data-alt="clean close-up of computer code on a screen with soft bokeh of desk lights in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwBAionoir1tALo8nhKZ_FjC1Fij5UXMwfbimkdhW2tcyUBG7H4skyaP27AC-rJ9gTP9bbWR26QlBnHg0wQDPxXBc6xW7i3vnXYDPe8DksGKb4LG9i3XgBEQDbuat07dZBTNsFxmvpVkaGrU_kPYm_fxkJUAr7Jyy1VCYAHQQNJMrramsR1CgLBrV_GyVUkXfZdGw67MTKCNMm04AHELkjo3Ed8j-zAga-f26xISRAmzYDol3wd62QOcXJVfL2xN_-CivzoQYvzAXv"/>
+<div class="absolute top-3 left-3">
+<span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-1 rounded tracking-wider uppercase">Completed</span>
+</div>
+</div>
+<div class="flex-1 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">UI/UX Mastery: From Zero to Pro</h3>
+<span class="text-caption font-caption text-slate-400">Enrolled: Aug 05, 2023</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 font-medium">Provider: Creative Design Institute</p>
+<div class="mb-6">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-emerald-600">Progress: 100%</span>
+<span class="text-xs text-slate-400">52 / 52 Lessons</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-600 rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-primary text-white rounded-lg font-label-bold text-label-bold active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                                    Review
+                                </button>
+<button class="px-6 py-2 text-primary font-label-bold text-label-bold hover:bg-primary-fixed rounded-lg transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="workspace_premium">workspace_premium</span>
+                                    Certificate
+                                </button>
+</div>
+<div class="flex items-center gap-1 text-emerald-600">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span class="text-[12px] font-bold">Finished on Sep 22</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
+<div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
+<img alt="Business Management" class="w-full h-full object-cover" data-alt="professional group of people collaborating in a modern office with glass walls and natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb0SLrvcixrwb1ZieX7XNPntU9cXaD94G5gaMii5x8BzSyfRA7fNfqX3mTbSYu6sBXon4aArzrji4Phq7GrjqcKpLubUWlpTGO4ourFtVGLNqvpkkwiX4-3Hypqy_I7GYEgdMnR8B8MQ-54IcOv7xdsfyX5R1D6BrvALIVl77PQq661jNGkxCrAlQUYN1cOnf0w0J-JSMk0AjegVxKVCrNJYApMeJPFX7NmQas8SERvBzejm75Z2oeOj4UVgIIFeeeHluN_TLz24Cw"/>
+<div class="absolute top-3 left-3">
+<span class="bg-primary-container text-white text-[10px] font-bold px-2 py-1 rounded tracking-wider uppercase">In Progress</span>
+</div>
+</div>
+<div class="flex-1 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Strategic Business Management 2024</h3>
+<span class="text-caption font-caption text-slate-400">Enrolled: Nov 15, 2023</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 font-medium">Provider: Harvard Business Scholars</p>
+<div class="mb-6">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-primary">Progress: 12%</span>
+<span class="text-xs text-slate-400">3 / 25 Lessons</span>
+</div>
+<div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 12%;"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-50">
+<div class="flex items-center gap-4">
+<button class="px-6 py-2 bg-primary text-white rounded-lg font-label-bold text-label-bold active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span>
+                                    Resume
+                                </button>
+<button class="px-6 py-2 text-slate-500 border border-slate-200 rounded-lg font-label-bold text-label-bold hover:bg-slate-50 transition-all">
+                                    Unenroll
+                                </button>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-lg" data-icon="schedule">schedule</span>
+<span class="text-[12px] font-medium">18h 45m left</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Section (Hidden by default, shown for 'Dropped' tab for demo) -->
+<div class="mt-16 py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center text-center px-6">
+<div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+<span class="material-symbols-outlined text-5xl text-slate-300" data-icon="folder_open">folder_open</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-slate-800 mb-2">Looking for something specific?</h3>
+<p class="text-slate-500 max-w-md mx-auto mb-8 font-body-md">You haven't dropped any courses yet. That's the spirit of continuous learning! Your academic journey is looking very consistent.</p>
+<button class="px-8 py-3 bg-white border border-slate-200 rounded-xl font-label-bold text-label-bold text-primary hover:shadow-md transition-all active:scale-95">
+                    Explore New Courses
+                </button>
+</div>
+<!-- Suggestion Banner -->
+<div class="mt-12 bg-on-secondary-fixed text-white rounded-2xl p-10 flex flex-col lg:flex-row items-center gap-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/10 rounded-full -ml-10 -mb-10 blur-2xl"></div>
+<div class="flex-1 relative z-10">
+<span class="inline-block px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4">Recommended For You</span>
+<h2 class="text-3xl font-bold leading-tight mb-4 font-headline-md">Expand your skill set with AI Foundations</h2>
+<p class="text-blue-100/70 max-w-lg font-body-md mb-6">Based on your interest in Algorithms, this professional certificate will help you master the basics of Machine Learning.</p>
+<button class="bg-primary-container text-white px-8 py-3 rounded-lg font-label-bold text-label-bold hover:bg-blue-600 transition-all active:scale-95 shadow-xl shadow-blue-950/40">Enroll Now</button>
+</div>
+<div class="w-full lg:w-1/3 relative z-10">
+<div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4">
+<img alt="AI Course" class="w-full h-40 object-cover rounded-lg mb-4" data-alt="abstract 3D rendering representing artificial intelligence with glowing neural network connections in deep blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2JdSHTyptvqtrPBbvEjtOCRozDOAJY8-VzFgcJd022i-7q6ZtaWydnrOIqw7Act_MsvwQRHXzBEOBbOEmK4zkl9UWlfZPR81fzQi6fCCsVl3oWLpPNJnh5Y6Avn16nvsr7_STg0meKU1Mopor2_LAm53QsLw-N0JFxA5jEdB3rtxefnHwqzsorm79zP7Gzx5hh54ZJs1gFD5VMLM6wfBHa-eGztnasGXSVZf9O4eOhPfd1gx7WIZORQCbKPHpzInjzYTtwrOsT3TB"/>
+<div class="flex justify-between items-center">
+<span class="text-xs font-bold">Artificial Intelligence Essentials</span>
+<span class="text-xs text-blue-300 font-bold">$49.99</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Contextual FAB (Hidden on details/settings as per rules, but shown here for course discovery) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>

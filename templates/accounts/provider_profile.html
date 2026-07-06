@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#003fb1",
+                    "on-primary-container": "#a1b6ff",
+                    "on-secondary-container": "#3d4e83",
+                    "outline": "#747685",
+                    "inverse-on-surface": "#f0f0fa",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "surface": "#faf8ff",
+                    "surface-container-highest": "#e2e1eb",
+                    "surface-container-high": "#e8e7f1",
+                    "on-tertiary-container": "#ffa17e",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#ededf7",
+                    "on-error": "#ffffff",
+                    "surface-tint": "#2a56c7",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#812900",
+                    "secondary-container": "#b1c2ff",
+                    "surface-dim": "#d9d9e3",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#002b80",
+                    "on-secondary-fixed-variant": "#334479",
+                    "on-primary-fixed": "#00174c",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#01174b",
+                    "primary-fixed": "#dbe1ff",
+                    "on-background": "#1a1b22",
+                    "inverse-primary": "#b5c4ff",
+                    "tertiary-container": "#852b00",
+                    "tertiary": "#5f1c00",
+                    "surface-bright": "#faf8ff",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "on-surface-variant": "#434653",
+                    "outline-variant": "#c4c6d6",
+                    "on-surface": "#1a1b22",
+                    "inverse-surface": "#2f3038",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#003dab",
+                    "on-tertiary-fixed": "#380d00",
+                    "surface-variant": "#e2e1eb",
+                    "surface-container-low": "#f3f3fd",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "secondary": "#4b5c92",
+                    "background": "#faf8ff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbcf"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1536px",
+                    "card-padding": "2rem",
+                    "section-padding-y": "6rem",
+                    "inline-gap": "0.75rem",
+                    "grid-gutter": "2.5rem"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- SideNavBar Component -->
+{% comment %} <nav class="fixed left-0 top-0 flex flex-col py-6 h-screen w-64 border-r rounded-none bg-white border-slate-100 shadow-sm z-50">
+<div class="px-8 mb-10">
+<h1 class="text-lg font-bold text-blue-800 font-headline-md">EduPro Provider</h1>
+<p class="text-[11px] uppercase tracking-widest text-slate-400 font-label-bold">Instructor Management</p>
+</div>
+<div class="flex flex-col gap-1 px-4">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-colors font-['Plus_Jakarta_Sans'] text-sm tracking-tight active:scale-[0.98]" href="{% url 'provider_dashboard' %}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- My Courses -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-colors font-['Plus_Jakarta_Sans'] text-sm tracking-tight active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>My Courses</span>
+</a>
+<!-- Create Course -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-50 transition-colors font-['Plus_Jakarta_Sans'] text-sm tracking-tight active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Create Course</span>
+</a>
+<!-- Profile (ACTIVE) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-blue-700 font-bold border-r-4 border-blue-700 bg-blue-50/50 transition-colors font-['Plus_Jakarta_Sans'] text-sm tracking-tight active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined active-icon" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span>Profile</span>
+</a>
+</div>
+<div class="mt-auto px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:text-error hover:bg-slate-50 transition-colors font-['Plus_Jakarta_Sans'] text-sm tracking-tight active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</nav> {% endcomment %}
+
+{% include 'includes/provider_sidebar.html' %}
+
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center px-8 h-16 w-full sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/60 shadow-[0_2px_15px_rgba(25,27,35,0.04)] ml-64 w-[calc(100%-16rem)]">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-black text-blue-900 font-headline-md">Company Profile</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-low border-none rounded-full px-6 py-2 text-sm w-64 focus:ring-2 focus:ring-primary-container transition-all outline-none" placeholder="Search resources..." type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-50 text-slate-600 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">Acme Learning Ltd</p>
+<p class="text-[10px] text-slate-500">Premium Provider</p>
+</div>
+<img alt="Provider profile avatar" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="professional corporate logo for a modern educational institution with blue and white geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuY4q-ecQ2OyEtvsqI-S3tLZ9-Hd6vAYA1NASEW-823LaBvH2L4MmI0dGg00ZWTZH97qA0yAXKERS-zzXR4hKeJw_yUdfSQ_cpCinTrt6LH0tF4eiX--lejPdGr8risKlZUp3y320siXPbm35orGtJ6sXR9iwrw9SlltVBYbSuEo0iTlvs3yjvT4eihHprBLx6_QxSoFzoJTWiM3YT3p3lrHR_5i0EGspTgNeAOPOe1OZdlsmRI4GRpILy5Kl7eGT92Xw5Ai3NCoXQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-12 min-h-screen">
+<div class="max-w-container-max mx-auto">
+<div class="flex flex-col lg:flex-row gap-grid-gutter">
+<!-- Left Column: Branding & Verification -->
+<aside class="w-full lg:w-1/3 flex flex-col gap-6">
+<div class="bg-white p-card-padding rounded-xl shadow-[0_2px_15px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex flex-col items-center text-center">
+<div class="relative group mb-6">
+<div class="w-40 h-40 rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center group-hover:border-primary-container transition-colors">
+<img alt="Company Logo" class="w-full h-full object-cover" data-alt="minimalist modern corporate building architecture with soft blue sky and glass reflections professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPMZQerYgDZSY7ibLwDbqFK7MuAv1ZFI33RTNVxx9fOg45HtNm7m_4VGXorbFpyVkByZd3X7s9VmIGCqjzIwJDpTLxGleQQPIU6kLnLY_7wWalBGqdvRNG2iSmSRXRhzR8zWbB1HMnFyypoLOnUTKRvaRMmhAXc71X7w4XvhO_hLmsh9SiOeH7GlxN1PYE5SX46k7x2KWbOe2H4GlYPqvm41qMSAV2HIyA5tAN1AKZavpgjcHntW5qvqZsXrR2A5PGBoqc2rrxYNKF"/>
+</div>
+<button class="absolute bottom-[-12px] left-1/2 -translate-x-1/2 bg-primary-container text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">upload</span>
+                                    Upload Logo
+                                </button>
+</div>
+<div class="mt-8 mb-6 flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full border border-emerald-100">
+<span class="material-symbols-outlined text-lg fill-current" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-xs uppercase tracking-wider">Verified Provider</span>
+</div>
+<div class="w-full space-y-4 pt-6 border-t border-slate-50">
+<div class="text-left">
+<label class="font-label-bold text-[10px] text-slate-400 uppercase block mb-1">Company Name</label>
+<p class="font-headline-md text-lg text-on-surface">Acme Learning Ltd</p>
+</div>
+<div class="text-left">
+<label class="font-label-bold text-[10px] text-slate-400 uppercase block mb-1">Contact Email</label>
+<p class="font-body-md text-slate-600">contact@acmelearning.com</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary-container/5 p-6 rounded-xl border border-primary-container/10">
+<h4 class="font-headline-md text-sm text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">info</span>
+                            Verification Info
+                        </h4>
+<p class="text-sm text-slate-600 leading-relaxed">
+                            Your provider status is currently active. Changes to your primary email address will require re-verification.
+                        </p>
+</div>
+</aside>
+<!-- Right Column: Profile Form -->
+<div class="w-full lg:w-2/3 flex flex-col gap-8">
+<section class="bg-white p-card-padding rounded-xl shadow-[0_2px_15px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="mb-8">
+<h3 class="font-headline-md text-xl text-blue-900">General Information</h3>
+<p class="text-slate-500 font-body-md">Update your public-facing organizational details.</p>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="company_name">Company Name</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="company_name" type="text" value="Acme Learning Ltd"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="website_url">Website URL</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="website_url" placeholder="https://www.example.com" type="url"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="description">Description</label>
+<textarea class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="description" placeholder="Describe your organization's mission and educational focus..." rows="5"></textarea>
+</div>
+<div class="flex justify-end pt-4">
+<button class="bg-primary-container text-white px-8 py-3 rounded-lg font-bold text-sm shadow-md active:scale-95 transition-all hover:bg-primary" type="submit">
+                                    Save Changes
+                                </button>
+</div>
+</form>
+</section>
+<!-- Security Section -->
+<section class="bg-white p-card-padding rounded-xl shadow-[0_2px_15px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="mb-8 flex items-center gap-4">
+<div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+</div>
+<div>
+<h3 class="font-headline-md text-xl text-blue-900">Security</h3>
+<p class="text-slate-500 font-body-md">Manage your account credentials.</p>
+</div>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="current_password">Current Password</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="current_password" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="new_password">New Password</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="new_password" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-bold text-sm text-on-surface" for="confirm_password">Confirm Password</label>
+<input class="w-full border-slate-200 rounded-lg focus:border-primary-container focus:ring-0 transition-colors px-4 py-3 bg-slate-50/30 font-body-md" id="confirm_password" type="password"/>
+</div>
+</div>
+<div class="flex justify-end pt-4">
+<button class="border-2 border-primary-container text-primary-container px-8 py-3 rounded-lg font-bold text-sm hover:bg-primary-container hover:text-white active:scale-95 transition-all" type="submit">
+                                    Update Password
+                                </button>
+</div>
+</form>
+</section>
+</div>
+</div>
+</div>
+</main>
+<!-- Background Decorative Elements -->
+<div class="fixed top-[10%] right-[-5%] w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[5%] left-[20%] w-[400px] h-[400px] bg-secondary-container/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+</body></html>

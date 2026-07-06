@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
-
+from .managers import UserManager
 
 class User(AbstractUser):
     """
@@ -19,11 +19,13 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
         
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
+    
+    objects = UserManager()
 
     class Meta:
         db_table = "auth_user"
@@ -66,7 +68,6 @@ class StudentProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        db_table = "student_profile"
         verbose_name = "Student Profile"
         
     def __str__(self):

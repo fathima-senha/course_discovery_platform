@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#812900",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "on-primary-container": "#a1b6ff",
+                    "tertiary-container": "#852b00",
+                    "surface-container-highest": "#e2e1eb",
+                    "on-background": "#1a1b22",
+                    "surface-variant": "#e2e1eb",
+                    "surface-container-low": "#f3f3fd",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2f3038",
+                    "primary": "#002b80",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#380d00",
+                    "secondary": "#4b5c92",
+                    "primary-container": "#003fb1",
+                    "inverse-on-surface": "#f0f0fa",
+                    "surface": "#faf8ff",
+                    "on-secondary-container": "#3d4e83",
+                    "primary-fixed": "#dbe1ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed-variant": "#334479",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d9d9e3",
+                    "on-secondary": "#ffffff",
+                    "outline": "#747685",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#b1c2ff",
+                    "tertiary": "#5f1c00",
+                    "on-secondary-fixed": "#01174b",
+                    "surface-container-high": "#e8e7f1",
+                    "on-primary-fixed": "#00174c",
+                    "background": "#faf8ff",
+                    "on-surface-variant": "#434653",
+                    "on-tertiary-container": "#ffa17e",
+                    "surface-tint": "#2a56c7",
+                    "secondary-fixed": "#dbe1ff",
+                    "surface-container": "#ededf7",
+                    "on-primary-fixed-variant": "#003dab",
+                    "inverse-primary": "#b5c4ff",
+                    "outline-variant": "#c4c6d6",
+                    "on-surface": "#1a1b22",
+                    "tertiary-fixed": "#ffdbcf",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "surface-bright": "#faf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding-y": "6rem",
+                    "inline-gap": "0.75rem",
+                    "grid-gutter": "2.5rem",
+                    "container-max": "1536px",
+                    "card-padding": "2rem"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "caption": ["Inter"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #1a1b22;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background">
+<!-- Sidebar Navigation -->
+{% comment %} <aside class="fixed left-0 top-0 h-screen w-72 border-r border-slate-200/50 bg-white/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] z-50 flex flex-col py-8 px-4 font-['Plus_Jakarta_Sans'] antialiased text-sm tracking-tight">
+<div class="flex items-center gap-3 px-4 mb-10">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-lg font-extrabold text-[#003fb1] tracking-tighter">EduPro Console</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Institutional Admin</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#003fb1] font-bold border-r-2 border-[#003fb1] bg-blue-50/50 transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-medium hover:bg-slate-50 hover:text-[#003fb1] transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-medium hover:bg-slate-50 hover:text-[#003fb1] transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Students</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-medium hover:bg-slate-50 hover:text-[#003fb1] transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-medium hover:bg-slate-50 hover:text-[#003fb1] transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-slate-100 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary-container text-white rounded-xl font-bold active:scale-95 transition-all mb-6">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                Create Course
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 font-medium hover:bg-slate-50 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error font-medium hover:bg-error-container/20 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/provider_sidebar.html' %}
+
+<!-- Main Content Area -->
+<main class="ml-72 min-h-screen">
+<!-- Top Navigation -->
+<header class="w-full h-16 border-b border-slate-200/50 bg-white/70 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-8">
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-slate-400" placeholder="Search courses, students, or analytics..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+</div>
+<div class="h-8 w-px bg-slate-200"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-background">Dr. Julian Vance</p>
+<p class="text-[10px] text-slate-500">Course Provider</p>
+</div>
+<img alt="Provider" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="Professional portrait of a male educator in a modern office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9DPb5ROl6ZZKZ-JCeRp0l7dE_6fl2Red-JYOv9OenZT20Zq11Vjjklnf8GYMtymGkhaErpcs1eNt5_-kgNbxRlGNkTZgAZnlE-2YVZb0rs6pYRHi7RUI8EXDs7g7kDgfcEsV8GnHoRMg-zEbM86b4vX16bj02j4hiqkdDRvpmVODTvL1iLXZqnLfJVwMj-eL6l7a0RwhAaII9_ePRc0Yx69p6bwq_jjYnF6NYqx4wywl692_KE_sTZBcqgLnSrBoQvENshneAlihL"/>
+</div>
+</div>
+</header>
+<section class="p-8 space-y-grid-gutter max-w-[1536px] mx-auto">
+<!-- Welcome Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background">Dashboard Overview</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Track your institutional performance and student engagement.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2.5 rounded-xl font-label-bold flex items-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+<div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+</div>
+<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+12%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Courses</p>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">24</h3>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<span class="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded">Stable</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Published</p>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">18</h3>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+8.4%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Enrollments</p>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">1,284</h3>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+22%</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Revenue</p>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">$42,950</h3>
+</div>
+</div>
+<!-- Main Grid: Courses Table & Recent Activity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-grid-gutter">
+<!-- My Courses Table (Span 2) -->
+<div class="lg:col-span-2 bg-white rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 overflow-hidden flex flex-col">
+<div class="p-6 border-b border-slate-100 flex items-center justify-between">
+<h3 class="font-headline-md text-xl">My Courses</h3>
+<a class="text-primary text-sm font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50 text-slate-500 text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Title</th>
+<th class="px-6 py-4">Level</th>
+<th class="px-6 py-4">Price</th>
+<th class="px-6 py-4">Enrollments</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-slate-200 overflow-hidden shrink-0">
+<img alt="Course" class="w-full h-full object-cover" data-alt="Abstract coding background with bright lines of code on a dark screen and subtle bokeh" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_LE47nS_w8v4DRJwf8zAUdlsr5pfv7HD4EWRWDnf0ofibdHg1zw9ozz-U8F85RgX63vUBYGkxZ3CsV4Vot3pFHRGv3GOZAj0C4gTSQQSjkRQz0mfCn8daPO9SkdRkd7aMgOfeEhFJP_4o4Ec2O_407Syo3cYQej_VH-F320242hA6-ApHPuxfc_pMfpVCzNzM9wvHd1M-FFgYm-_iIbgH2qkaEoT-vLBRTKipnq4rNjm7ooWB924crjfuiLDMVga6Lmh4ZSu91P17"/>
+</div>
+<span class="font-bold text-sm text-on-background line-clamp-1">Advanced React Patterns</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-primary font-bold">Expert</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$89.99</td>
+<td class="px-6 py-4 text-sm text-slate-500">452 students</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                            Published
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-error transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-slate-200 overflow-hidden shrink-0">
+<img alt="Course" class="w-full h-full object-cover" data-alt="Minimalist design workspace with high-end tech gear and neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqTZrmcXAIcfyB6VXP-NyD-2V1E0RX385uYqN1f2V3a7UVAEqBsztpRHhpxpNgR6f7z3Hyj_Hcuh_TfXXsIfnoG-thQw5ck_jepyYiIA4MS9lXcFJNT4AChgRHl9eOV0yDvqnHMyB21sLdIYWcOP3nNstQkKET7n70fGS7J_915Gy-jJW8z3IbcS9NRVQoWgW4UkhCRzJQdDw_YNBG0KgneaISwPfUVUUBTBbkBvGiGGZyijqbwIX5QaSIUP7ElO6nKHhboTzGM3rS"/>
+</div>
+<span class="font-bold text-sm text-on-background line-clamp-1">UI/UX Strategy 2024</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 rounded-full bg-slate-100 text-slate-600 font-bold">Intermediate</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$124.50</td>
+<td class="px-6 py-4 text-sm text-slate-500">830 students</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                            Published
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-error transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-8 rounded bg-slate-200 overflow-hidden shrink-0">
+<img alt="Course" class="w-full h-full object-cover" data-alt="Modern digital interface with colorful data visualizations and analytical charts" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB59SALGVoU2JfCyt9P_I8RgCN4fNRtMpgKhRgkn1iS4UZgEL81WkyBAfx7YQeYcOq5IG_d9msdkWrS5ZENpevZz_lDZ8Znvqd0daneLBYOR3CNHN5GmqMRm4G5BkjCFU4p6PP3nt__u3jN26R0Dk8ToWnYwobMA2_8LLk_-a5U5R94bOWqRy2EmEO2Lq0IjAIeNuVHmPaxzQ_AYCtLeQWe0UjN3JxjfmCcgrUaAIInH0xMTGPIvANhoxWDtPVLUMX3dFcig1Lgf0u4"/>
+</div>
+<span class="font-bold text-sm text-on-background line-clamp-1">Mastering Data Science</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-primary font-bold">Expert</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$199.00</td>
+<td class="px-6 py-4 text-sm text-slate-500">0 students</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-xs font-bold text-slate-400">
+<span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                                            Draft
+                                        </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+</button>
+<button class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-error transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Recent Enrollments -->
+<div class="bg-white rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 flex flex-col">
+<div class="p-6 border-b border-slate-100">
+<h3 class="font-headline-md text-xl">Recent Enrollments</h3>
+</div>
+<div class="flex-1 p-6 space-y-6">
+<div class="flex items-center gap-4">
+<img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a smiling young woman student in a brightly lit library setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNXi9ujOYL7DJRyQKO4BAAd-gqVkOuWMvUDvBpe3ltgmh3EgJ2VjH90-nYlHmA7ZyzcKBJ1ITMFMV6gnW-aRKQaBgFgp0SgSGpAp7yyxtxXNfaIm_6eWWF7ha3YQcdjvPd-lJqp-8Y-1-msxJOl29ktmwkPmyuWIJ_-Hr-sYj4UVuQ6G9LeD8agw9ze84AKFSNwhPBUb5ZLLI8v70R0SRwcbodepV9c5Tc0jEPvfQWyvk510Seui76Sen9hgPQEXfDcSIGOxjFXg7G"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-background truncate">Elena Rodriguez</p>
+<p class="text-xs text-slate-500 truncate">Advanced React Patterns</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-sm font-bold text-emerald-600">+$89.99</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold">2 mins ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a professional young man in a clean casual business style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxuJiy3zBSZvnXzkSCio3PR9gifQXgx1692xJLMKjInTDUSTU0sWnjNNqMwPsXIvPHBsoXdGrLTzHphOfiAYR_fCXkjOkmqH39wYcbgv5unM3q9YDI2ISIccUxyxKMr8Jl6xzLB0vgJ-9Jiaj1Y9cwlH07TNeRALvwMVuqjauXphL8DJ0hjaHJj3ivZvgzsqIWcOsfw1QmcA1qoL92qjDmPCFIMUqW8WtCFsDCRbWkm_FVrQ5TwDrLhGSqbEW4lR8XgilYjZWFazS-"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-background truncate">Marcus Chen</p>
+<p class="text-xs text-slate-500 truncate">UI/UX Strategy 2024</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-sm font-bold text-emerald-600">+$124.50</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold">1 hour ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a serious but approachable professional woman in a creative studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkeBRN3v3pf3PxmA23p32A0MQepHMaWDIF73OvzszGFhTdb4TOFBPRSpiS9wJqr5_ciOnGccVIoH80IE7up4JccuNCFjxk-Cay_z719CnaqZqw8uM_CEjHe3wm_EtA86e9WlSt8YYowzspJNytK6DcgCevv9aIsbiM071j-CeDgzr5kT71uaiE4DVhM04LHjRmGUTyaFANLeoIHO6t8xaHiOa3-vmNmMnwDmZNrodeH_j1ddoNonX4576QFiv-gEjp9KVsd3tFafOK"/>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-background truncate">Sarah Jenkins</p>
+<p class="text-xs text-slate-500 truncate">Advanced React Patterns</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-sm font-bold text-emerald-600">+$89.99</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold">3 hours ago</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">
+                                JD
+                            </div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-on-background truncate">John Doe</p>
+<p class="text-xs text-slate-500 truncate">Advanced React Patterns</p>
+</div>
+<div class="text-right shrink-0">
+<p class="text-sm font-bold text-emerald-600">+$89.99</p>
+<p class="text-[10px] text-slate-400 uppercase font-bold">Yesterday</p>
+</div>
+</div>
+</div>
+<button class="w-full py-4 border-t border-slate-100 text-sm font-bold text-primary hover:bg-slate-50 transition-colors">
+                        View All Activity
+                    </button>
+</div>
+</div>
+<!-- Performance Chart Area (Bento Placeholder) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-3 bg-white rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 p-8 flex flex-col justify-between overflow-hidden relative">
+<div class="z-10">
+<h3 class="font-headline-md text-lg mb-2">Revenue Growth</h3>
+<p class="text-sm text-slate-500">Your earnings increased by 22% this month.</p>
+</div>
+<!-- Decorative Chart Background -->
+<div class="absolute bottom-0 left-0 w-full h-32 opacity-20 pointer-events-none">
+<svg class="w-full h-full fill-none stroke-primary stroke-[4px]" stroke-linecap="round" viewbox="0 0 800 150">
+<path d="M0,120 Q100,100 200,130 T400,90 T600,110 T800,40"></path>
+</svg>
+</div>
+<div class="mt-16 flex items-end gap-2 text-primary">
+<span class="text-4xl font-extrabold">$4,280</span>
+<span class="text-sm font-bold pb-2">this week</span>
+</div>
+</div>
+<div class="bg-primary-container text-white rounded-xl p-8 flex flex-col justify-center items-center text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="rocket_launch">rocket_launch</span>
+<h4 class="font-bold text-lg mb-2">Boost Your Reach</h4>
+<p class="text-xs opacity-80 mb-6">Promote your courses to 50k+ new students in our network.</p>
+<button class="w-full py-2.5 bg-white text-primary font-bold rounded-lg text-sm hover:bg-blue-50 transition-colors">
+                        Upgrade Pro
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB for quick action -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+</button>
+</body></html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduAdmin | CourseHub Management Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#faf8ff",
+                    "primary": "#002b80",
+                    "on-secondary-fixed": "#01174b",
+                    "on-primary-fixed-variant": "#003dab",
+                    "on-primary-container": "#a1b6ff",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-container-high": "#e8e7f1",
+                    "on-tertiary-fixed": "#380d00",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1b22",
+                    "surface-bright": "#faf8ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-container-low": "#f3f3fd",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "inverse-on-surface": "#f0f0fa",
+                    "on-primary-fixed": "#00174c",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#b1c2ff",
+                    "tertiary": "#5f1c00",
+                    "surface-variant": "#e2e1eb",
+                    "surface-container-highest": "#e2e1eb",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#2f3038",
+                    "on-surface-variant": "#434653",
+                    "outline-variant": "#c4c6d6",
+                    "outline": "#747685",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b5c4ff",
+                    "surface-container": "#ededf7",
+                    "on-secondary-container": "#3d4e83",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "background": "#faf8ff",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#852b00",
+                    "secondary": "#4b5c92",
+                    "primary-container": "#003fb1",
+                    "on-secondary-fixed-variant": "#334479",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1b22",
+                    "on-tertiary-container": "#ffa17e",
+                    "surface-dim": "#d9d9e3",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#2a56c7",
+                    "on-tertiary-fixed-variant": "#812900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding-y": "6rem",
+                    "grid-gutter": "2.5rem",
+                    "container-max": "1536px",
+                    "inline-gap": "0.75rem",
+                    "card-padding": "2rem"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "caption": ["Inter"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "label-bold": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                    "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-slate-950 dark:bg-black border-r border-slate-800 shadow-2xl flex flex-col py-8 space-y-1">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-white tracking-tight">EduAdmin</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Management Portal</p>
+</div>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold active:scale-95 transition-transform"  href="{% url 'admin_dashboard' %}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-headline-md text-[14px]">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-headline-md text-[14px]">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-headline-md text-[14px]">Providers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-headline-md text-[14px]">Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span class="font-headline-md text-[14px]">Reviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-headline-md text-[14px]">Payments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span class="font-headline-md text-[14px]">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+<span class="font-headline-md text-[14px]">Tags</span>
+</a>
+<div class="pt-8 mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-headline-md text-[14px]">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="pl-64 min-h-screen">
+<!-- Top Navigation -->
+<header class="sticky top-0 w-full z-40 bg-white/70 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
+<div class="flex items-center justify-between px-8 py-3 max-w-[1536px] mx-auto">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-transparent focus:border-primary-container focus:ring-0 rounded-lg text-sm transition-all border-b-2" placeholder="Search analytics, users, or courses..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-slate-200 pr-6">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-lg transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900 leading-tight">
+    {{ request.user.get_full_name|default:request.user.email }}
+</p>
+<p class="text-[10px] text-slate-500 font-bold uppercase">
+    {{ request.user.get_role_display }}
+</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">
+    {{ request.user.email|first|upper }}
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-[1536px] mx-auto space-y-8">
+<!-- Dashboard Header -->
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-md text-slate-900">Dashboard Overview</h2>
+<p class="font-body-md text-on-surface-variant">Welcome back. Here is what's happening with CourseHub today.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant font-label-bold rounded-lg hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="file_download">file_download</span>
+                        Export Report
+                    </button>
+                    
+{% comment %} <button class="flex items-center gap-2 px-4 py-2 bg-primary-container text-white font-label-bold rounded-lg hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                        Create Course
+                    </button> {% endcomment %}
+</div>
+</div>
+<!-- Stats Row: 6 cards in 3 columns pattern -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Total Users</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">
+    {{ stats.total_users }}
+</h3>
+<p class="text-xs text-green-600 font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +14% from last month
+                        </p>
+</div>
+<div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="group">group</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Total Students</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">{{ stats.total_students }}</h3>
+<p class="text-xs text-green-600 font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +8% growth
+                        </p>
+</div>
+<div class="w-14 h-14 bg-secondary-fixed rounded-xl flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl" data-icon="person">person</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Total Providers</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">{{ stats.total_providers }}</h3>
+<p class="text-xs text-slate-400 font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="horizontal_rule">horizontal_rule</span>
+                            Stable
+                        </p>
+</div>
+<div class="w-14 h-14 bg-tertiary-fixed rounded-xl flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl" data-icon="school">school</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Total Courses</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">{{ stats.total_courses }}</h3>
+<p class="text-xs text-green-600 font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            12 new this week
+                        </p>
+</div>
+<div class="w-14 h-14 bg-surface-container-high rounded-xl flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-3xl" data-icon="menu_book">menu_book</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Total Revenue</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">₹{{ stats.total_revenue }}</h3>
+<p class="text-xs text-green-600 font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+                            +22% increase
+                        </p>
+</div>
+<div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center text-green-700">
+<span class="material-symbols-outlined text-3xl" data-icon="payments">payments</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 flex items-center justify-between hover:-translate-y-1 transition-all">
+<div>
+<p class="text-[12px] font-bold text-slate-500 uppercase tracking-widest mb-1">Pending Reviews</p>
+<h3 class="font-display-xl text-[32px] text-slate-900">{{ stats.pending_reviews }}</h3>
+<p class="text-xs text-error font-bold flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+                            Action required
+                        </p>
+</div>
+<div class="w-14 h-14 bg-error-container rounded-xl flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl" data-icon="rate_review">rate_review</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Analytics Section -->
+<div class="xl:col-span-2 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Monthly Enrollments Chart Placeholder -->
+{% comment %} <div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex items-center justify-between mb-6">
+<h4 class="font-headline-md text-base text-slate-900">Monthly Enrollments</h4>
+<select class="text-xs bg-surface-container-low border-none rounded p-1 font-bold text-slate-600 outline-none">
+<option>Last 6 Months</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="h-64 flex items-end gap-3 px-2">
+<div class="flex-1 bg-primary-fixed-dim rounded-t-lg h-[40%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">1.2k</div>
+</div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-lg h-[65%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">1.8k</div>
+</div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-lg h-[55%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">1.5k</div>
+</div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-lg h-[80%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">2.4k</div>
+</div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t-lg h-[70%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">2.1k</div>
+</div>
+<div class="flex-1 bg-primary-container rounded-t-lg h-[95%] group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">2.8k</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div> {% endcomment %}
+
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100">
+
+    <div class="flex items-center justify-between mb-6">
+        <h4 class="font-headline-md text-base text-slate-900">
+            Monthly Enrollments
+        </h4>
+
+        <span class="text-xs font-semibold text-slate-500">
+            Last 6 Months
+        </span>
+    </div>
+
+    <div class="h-64 flex items-end gap-3 px-2">
+
+        {% for item in monthly_enrollments %}
+
+        <div
+            class="flex-1 rounded-t-lg relative group
+            {% if forloop.last %}
+                bg-blue-600
+            {% else %}
+                bg-blue-300
+            {% endif %}"
+
+            style="height:
+            {% if item.count == 0 %}
+                8%
+            {% else %}
+                {% widthratio item.count 1 20 %}%
+            {% endif %};">
+
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2
+                        bg-slate-900 text-white text-[10px]
+                        px-2 py-1 rounded opacity-0
+                        group-hover:opacity-100
+                        transition-opacity">
+
+                {{ item.count }}
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="flex justify-between mt-4 px-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+
+        {% for item in monthly_enrollments %}
+            <span>{{ item.month }}</span>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- Revenue by Category Pie Placeholder -->
+<div class="bg-white p-6 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100">
+<h4 class="font-headline-md text-base text-slate-900 mb-6">Revenue by Category</h4>
+<div class="relative h-64 flex items-center justify-center">
+<div class="w-48 h-48 rounded-full border-[16px] border-primary-container relative">
+<div class="absolute inset-0 w-full h-full rounded-full border-[16px] border-tertiary-container border-t-transparent border-r-transparent -rotate-45"></div>
+<div class="absolute inset-0 w-full h-full rounded-full border-[16px] border-secondary-container border-b-transparent border-l-transparent rotate-90"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-black text-slate-900">₹{{ stats.total_revenue }}</span>
+<span class="text-[10px] text-slate-500 font-bold uppercase">Total</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="flex items-center gap-2 text-xs font-medium text-slate-600">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Technology (45%)
+                                </div>
+<div class="flex items-center gap-2 text-xs font-medium text-slate-600">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span> Business (30%)
+                                </div>
+<div class="flex items-center gap-2 text-xs font-medium text-slate-600">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Design (15%)
+                                </div>
+<div class="flex items-center gap-2 text-xs font-medium text-slate-600">
+<span class="w-2 h-2 rounded-full bg-slate-200"></span> Other (10%)
+                                </div>
+</div>
+</div>
+</div>
+<!-- Quick Actions Bento -->
+<div class="bg-white p-8 rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100">
+<h4 class="font-headline-md text-base text-slate-900 mb-6">Administrative Quick Actions</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<button class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary-fixed/30 transition-all group active:scale-95">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<span class="font-label-bold text-slate-700">
+    Verify Providers ({{ stats.unverified_providers }})
+</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary-fixed/30 transition-all group active:scale-95">
+<div class="w-12 h-12 bg-secondary-fixed rounded-full flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+</div>
+<span class="font-label-bold text-slate-700">Moderate Reviews</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary-fixed/30 transition-all group active:scale-95">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="unpublished">unpublished</span>
+</div>
+<span class="font-label-bold text-slate-700 text-center">Unpublished Courses</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-slate-100 hover:border-primary/30 hover:bg-primary-fixed/30 transition-all group active:scale-95">
+<div class="w-12 h-12 bg-error-container rounded-full flex items-center justify-center text-error group-hover:bg-error group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="flag">flag</span>
+</div>
+<span class="font-label-bold text-slate-700">Flagged Reviews</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 overflow-hidden flex flex-col h-fit">
+<div class="p-6 border-b border-slate-100 bg-surface-container-lowest">
+<h4 class="font-headline-md text-base text-slate-900">Recent Activity</h4>
+<p class="text-xs text-slate-500 font-medium">Real-time system logs</p>
+</div>
+<div class="flex-1">
+<!-- Activity Item 1 -->
+{% comment %} {% for enrollment in recent_enrollments %}
+<div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+    <div class="flex gap-4">
+
+        <div class="shrink-0">
+            {% if enrollment.student.user.profile_image %}
+                <img
+                    class="w-10 h-10 rounded-full"
+                    src="{{ enrollment.student.user.profile_image.url }}"
+                    alt="Profile">
+            {% else %}
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-blue-600">
+                        person
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+
+        <div>
+            <p class="text-sm text-slate-900">
+                <span class="font-bold">
+                    {{ enrollment.student.user.get_full_name }}
+                </span>
+                enrolled in
+                <span class="text-primary font-semibold">
+                    {{ enrollment.course.title }}
+                </span>
+            </p>
+
+            <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-[12px]">
+                    schedule
+                </span>
+
+                {{ enrollment.enrolled_at|timesince }} ago
+            </p>
+        </div>
+
+    </div>
+</div>
+{% empty %}
+<div class="p-6 text-center text-slate-500">
+    No recent enrollments.
+</div>
+{% endfor %}
+<!-- Activity Item 2 -->
+<div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+<div class="flex gap-4">
+<div class="shrink-0 w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="person_add">person_add</span>
+</div>
+<div>
+<p class="text-sm text-slate-900">
+<span class="font-bold">Sarah Jenkins</span> registered as a new Student.
+                                    </p>
+<p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="schedule">schedule</span>
+                                        15 minutes ago
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+<div class="flex gap-4">
+<div class="shrink-0">
+<img alt="Provider Profile" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR5jgpq8QCu0yJIYwzzoamRlKrSfiMkQ6WJRnJSAy9slci9ApzhaoKftKAPG8pdZ480cta_dR8KvXtskelKgJdPXmhr2qJzYFiCR3OukgOIsP4KjXQl3gFCdU1QYOfVbWxIs-SBl0_osDtTxXIr7Nw99KXWxRqYAPgsiSdh-iZjtatp1v0bWZJq06ifRW0uQ7uh8OGjhYtyg0w6-otmvbxf6NGuFjsUNysUW3Kvzg_lrwUSVx0wdesh47wgY0wJJMFRTjMRLoHtXSx"/>
+</div>
+<div>
+<p class="text-sm text-slate-900">
+<span class="font-bold">Dr. Elena Rodriguez</span> submitted a new course <span class="text-primary font-semibold">Quantum Physics 101</span>
+</p>
+<p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="schedule">schedule</span>
+                                        42 minutes ago
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+<div class="flex gap-4">
+<div class="shrink-0">
+<img alt="Student Profile" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgdeImkECCp4AjQ4CySWgdoKTCbNQ98XzL7dUMD7xVqDExqbFzrQnfobGkn7xVIxyEPIM1FHqEO0ciJPDMiowGONgDghgCmNmRob8CNrlaDDFjB22pLmx5cqeqGd3euJSM4sugtGmFGNdRC-Z7y1MAH7GiGA7f6TSQylXnhuBBdNQbmB5h0K54q8XuQnM7y1pDE4uVIdFoihrUjH8VhljaXorDAQpG78i3_p6j2FQ2BKgRSVB3DBwVtlNhk_X-AD5P5LtSLJp5UikG"/>
+</div>
+<div>
+<p class="text-sm text-slate-900">
+<span class="font-bold">James Wilson</span> completed <span class="text-primary font-semibold">Project Management Professional</span>
+</p>
+<p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="schedule">schedule</span>
+                                        1 hour ago
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Activity Item 5 -->
+<div class="p-6 hover:bg-slate-50 transition-colors">
+<div class="flex gap-4">
+<div class="shrink-0 w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-xl" data-icon="report">report</span>
+</div>
+<div>
+<p class="text-sm text-slate-900">
+<span class="font-bold">New Review Flagged</span> in "Python for Data Science".
+                                    </p>
+<p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="schedule">schedule</span>
+                                        3 hours ago
+                                    </p>
+</div>
+</div>
+</div>
+</div> {% endcomment %}
+
+<div class="flex-1">
+
+{% for activity in activities %}
+
+    {% if activity.type == "enrollment" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0">
+
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+
+                    <span class="material-symbols-outlined text-blue-600">
+                        person
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+                        {{ activity.object.student.user.get_full_name|default:activity.object.student.user.email }}
+                    </span>
+
+                    enrolled in
+
+                    <span class="text-primary font-semibold">
+                        {{ activity.object.course.title }}
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.enrolled_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "user" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-green-700">
+                    person_add
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.get_full_name|default:activity.object.email }}
+
+                    </span>
+
+                    registered as a new
+
+                    {{ activity.object.get_role_display }}
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "course" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-purple-700">
+                    school
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.provider.company_name }}
+
+                    </span>
+
+                    submitted a new course
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "completion" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-emerald-700">
+                    task_alt
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.student.user.get_full_name|default:activity.object.student.user.email }}
+
+                    </span>
+
+                    completed
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.course.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.completed_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "review" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-red-700">
+                    flag
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+                        Review Flagged
+                    </span>
+
+                    in
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.course.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+{% empty %}
+
+<div class="p-8 text-center text-slate-500">
+
+    No recent activity.
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<button class="w-full py-4 text-sm font-bold text-primary hover:bg-slate-50 transition-all border-t border-slate-100">
+                        View All Activity
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Search (Contextual) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+</body></html>

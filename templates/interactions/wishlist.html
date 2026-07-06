@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Wishlist | CourseHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#852b00",
+                      "tertiary": "#5f1c00",
+                      "surface-bright": "#faf8ff",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "on-primary-fixed": "#00174c",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed-variant": "#334479",
+                      "primary-fixed": "#dbe1ff",
+                      "on-background": "#1a1b22",
+                      "inverse-primary": "#b5c4ff",
+                      "on-secondary-fixed": "#01174b",
+                      "surface-variant": "#e2e1eb",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-container-low": "#f3f3fd",
+                      "tertiary-fixed-dim": "#ffb59a",
+                      "secondary": "#4b5c92",
+                      "background": "#faf8ff",
+                      "error-container": "#ffdad6",
+                      "on-surface-variant": "#434653",
+                      "outline-variant": "#c4c6d6",
+                      "on-surface": "#1a1b22",
+                      "inverse-surface": "#2f3038",
+                      "on-primary-fixed-variant": "#003dab",
+                      "on-tertiary-fixed": "#380d00",
+                      "secondary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e2e1eb",
+                      "surface-container-high": "#e8e7f1",
+                      "secondary-fixed-dim": "#b4c5ff",
+                      "surface": "#faf8ff",
+                      "on-primary-container": "#a1b6ff",
+                      "primary-container": "#003fb1",
+                      "outline": "#747685",
+                      "inverse-on-surface": "#f0f0fa",
+                      "on-secondary-container": "#3d4e83",
+                      "secondary-container": "#b1c2ff",
+                      "on-tertiary-fixed-variant": "#812900",
+                      "surface-dim": "#d9d9e3",
+                      "surface-container-lowest": "#ffffff",
+                      "primary": "#002b80",
+                      "on-tertiary-container": "#ffa17e",
+                      "surface-container": "#ededf7",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#2a56c7",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1536px",
+                      "card-padding": "2rem",
+                      "section-padding-y": "6rem",
+                      "inline-gap": "0.75rem",
+                      "grid-gutter": "2.5rem"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-lg": ["Inter"],
+                      "caption": ["Inter"],
+                      "label-bold": ["Inter"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "display-xl": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                      "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #faf8ff; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+
+{% comment %} <aside class="fixed left-0 top-0 h-full w-64 border-r border-slate-200 bg-slate-50 flex flex-col py-6 space-y-2 z-40">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-bold text-slate-900 font-headline-md">Student Portal</h1>
+<p class="text-xs text-slate-500 uppercase tracking-widest font-label-bold">Professional Growth</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary" data-icon="school">school</span>
+<span class="font-medium text-sm">My Courses</span>
+</a>
+<a class="flex items-center px-6 py-3 bg-[#003fb1]/5 text-[#003fb1] font-bold border-r-4 border-[#003fb1] transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-medium text-sm">Wishlist</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary" data-icon="person">person</span>
+<span class="font-medium text-sm">Profile</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<a class="flex items-center px-6 py-3 text-slate-500 hover:bg-slate-100 hover:translate-x-1 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-error" data-icon="logout">logout</span>
+<span class="font-medium text-sm">Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/student_sidebar.html' %}
+
+<main class="ml-64 min-h-screen">
+<header class="sticky top-0 z-30 bg-white/70 backdrop-blur-lg border-b border-slate-200/50 h-16 flex items-center px-8 justify-between">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-extrabold tracking-tighter text-[#003fb1] font-headline-lg">CourseHub</span>
+</div>
+<div class="flex items-center space-x-6">
+<nav class="hidden md:flex space-x-8 text-sm font-['Plus_Jakarta_Sans'] tracking-tight">
+<a class="text-slate-600 hover:text-[#003fb1] transition-colors" href="#">Explore</a>
+<a class="text-slate-600 hover:text-[#003fb1] transition-colors" href="#">Community</a>
+<a class="text-slate-600 hover:text-[#003fb1] transition-colors" href="#">Help</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden border-2 border-white shadow-sm">
+<img alt="Student Profile" class="w-full h-full object-cover" data-alt="professional portrait of a young male student in a minimal environment with soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9hdoBdd93kgfW9-KYor9aUyvd9s74xTMTM7HsWsRR_-C7o3_nzb-v3n3zraV2nAKddxM7iBmVd8Lu-E-3yR3l-tVKLwdso2S4tbaELt2c64ODl4P-LJWfnlb9bMN6gPZRhvSIGF0GWSTIrrSok8pEP2m1bwTw3rhpc5QBKMe-NerVVgmVhY6YWNbnkksJLZ3PqBicPBiKGTwOYsBt8mU-C6IOXL2Ql-pWGUTP6co1J6twO0TVQwN1XNQHgILrnJ_AKpdOnTuCwJT4"/>
+</div>
+</div>
+</div>
+</header>
+<section class="max-w-[1536px] mx-auto px-12 py-12">
+<div class="mb-10">
+<h2 class="text-headline-lg font-headline-lg text-on-surface">My Wishlist</h2>
+<p class="text-body-lg text-on-surface-variant mt-2">Manage your saved courses and prepare for your next career milestone.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-grid-gutter">
+<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+<div class="aspect-video relative overflow-hidden">
+<img alt="UI Design Course" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern workstation with a large monitor displaying high-fidelity UI design layouts, soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwOZaWdkLEayEsEvnbJLstvqOS-iX6f5XmoAssezRKIalZr3eOHcuQ_lUuK6Tt25A_YSPggj_7l0paZu23UNIi018Nc6Y8UQ9msajTxQrjJYtdl7oIt98ggclMTF57lsMoP14OTOHz-G1rF9bU8Al-QNKYy0c-V1vuV365rj7-HiPDjSEIe-tq9aLhsf2l210DR1S_TI839NZgPk1fj1m8_4P-I9Sa8IrAyeztgSPclGdXop1oY2J08yZQyVMo1nxdc1pqddVZ_uGe"/>
+<div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-caption font-label-bold">Bestseller</div>
+</div>
+<div class="p-card-padding">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1">Advanced UI Design Systems</h3>
+<p class="text-body-md text-on-surface-variant mb-4">Design Academy Premium</p>
+<div class="flex items-center mb-6">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="ml-2 text-sm text-on-surface-variant">(1,240 reviews)</span>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 pt-6">
+<span class="text-2xl font-bold text-on-surface">$89.99</span>
+<div class="flex items-center gap-3">
+<button class="p-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-all active:scale-95" title="Remove from wishlist">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="bg-[#003fb1] text-white px-6 py-2 rounded-lg font-label-bold hover:bg-primary transition-all active:scale-95">Enroll Now</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Python Programming" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a computer screen with python code lines, dark room with colorful neon ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCnDoKk2WcZf9oW7DN6CGPC5xkrWIAVCYteEGFh31Gu_IT2up0NyDDZvHTtj2fVx40PFhTLglUMMPtt0y5AuZSnaEdmxxP3ODYXW-MlWtdb-KTl3ZQvcgZcwd_SXRq4lktD7pAKKgW4Mc7QoKbmRuKOzKuE2UAwpab3ueY1R-89PqMXMzW3MMECAmdgEvXOCEhvRKN9otvo2SRe1_GoUCAKbAUepaaKol9AC35uUdD2arGzhiJNdDkligz-wB4HJNRPI2INs5FpaDZ"/>
+<div class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-caption font-label-bold">New Release</div>
+</div>
+<div class="p-card-padding">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1">Python for Data Science 2024</h3>
+<p class="text-body-md text-on-surface-variant mb-4">TechInstitute Experts</p>
+<div class="flex items-center mb-6">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star_half" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="ml-2 text-sm text-on-surface-variant">(856 reviews)</span>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 pt-6">
+<span class="text-2xl font-bold text-on-surface">$124.50</span>
+<div class="flex items-center gap-3">
+<button class="p-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-all active:scale-95" title="Remove from wishlist">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="bg-[#003fb1] text-white px-6 py-2 rounded-lg font-label-bold hover:bg-primary transition-all active:scale-95">Enroll Now</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+<div class="aspect-video relative overflow-hidden">
+<img alt="Public Speaking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Successful speaker on stage addressing a blurred audience in a professional conference hall with warm stage lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxf_SrElFWtZLJ7Wtd_uRtOzZd2LRsnatVeKlNGhOaCIACd8ctBmbGSvIrUh2gQbX2WdLKbuQGCaEAeEu9TZ-Wiuk5uHKtAN0ZQOHUhcZj630Cz5DhGgpiOF0dPbNWc1jz07BwMCdBFBIRrTmYBcMmG9WzGQfNi2Ql4VtWZIcnXW6_5YajY5uxlhcR7LFmzR74OPYe81eU28ercDXk3sjziEQIkpKxEaAvoGkuFnZ-Fqc5Z6Apimkc1vtvZslBNiK2WshPYWsE5VH7"/>
+</div>
+<div class="p-card-padding">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1">Mastering Public Speaking</h3>
+<p class="text-body-md text-on-surface-variant mb-4">Leadership Hub</p>
+<div class="flex items-center mb-6">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+<span class="ml-2 text-sm text-on-surface-variant">(432 reviews)</span>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 pt-6">
+<span class="text-2xl font-bold text-on-surface">$45.00</span>
+<div class="flex items-center gap-3">
+<button class="p-2 text-error border border-error/20 rounded-lg hover:bg-error/5 transition-all active:scale-95" title="Remove from wishlist">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<button class="bg-[#003fb1] text-white px-6 py-2 rounded-lg font-label-bold hover:bg-primary transition-all active:scale-95">Enroll Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-24 py-16 border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50 flex flex-col items-center text-center">
+<div class="w-24 h-24 mb-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-[#003fb1]" data-icon="explore">explore</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-2">Want more variety?</h3>
+<p class="text-body-md text-on-surface-variant max-w-md mb-8">Your wishlist is where you plan your future skills. Discover new trending courses in our curated catalog.</p>
+<button class="bg-surface-container-highest text-on-surface px-8 py-3 rounded-full font-label-bold hover:bg-slate-200 transition-all active:scale-95 border border-slate-300">Browse courses to add some!</button>
+</div>
+</section>
+<footer class="mt-section-padding-y border-t border-slate-200 bg-white px-12 py-10">
+<div class="max-w-[1536px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-xl font-extrabold tracking-tighter text-[#003fb1]">CourseHub</span>
+<span class="text-xs text-slate-400 font-label-bold ml-2">© 2024 EDU PLATFORM</span>
+</div>
+<div class="flex space-x-8 text-sm text-slate-500 font-medium">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Cookie Settings</a>
+</div>
+</div>
+</footer>
+</main>
+<div class="fixed bottom-8 right-8 z-50">
+<button class="flex items-center gap-3 bg-primary-container text-white px-6 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all active:scale-95 group">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-bold">Find New Courses</span>
+</button>
+</div>
+</body></html>

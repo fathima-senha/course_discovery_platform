@@ -47,19 +47,46 @@ class RegisterView(View):
             'active_tab': 'register'
         })
 
+    
     def post(self, request):
+        print("POST DATA:", request.POST)
+
         register_form = RegisterForm(request.POST)
         login_form = LoginForm()
-        if register_form.is_valid():
+
+        print("FORM DATA:", register_form.data)
+
+        valid = register_form.is_valid()
+
+        print("FORM VALID:", valid)
+
+        if not valid:
+            print("ERRORS:", register_form.errors)
+
+        if valid:
             user = register_form.save()
             login(request, user)
-            messages.success(request, 'Account created successfully!')
             return redirect('dashboard_redirect')
+
         return render(request, 'accounts/login.html', {
             'register_form': register_form,
             'login_form': login_form,
             'active_tab': 'register'
         })
+    
+    # def post(self, request):
+    #     register_form = RegisterForm(request.POST)
+    #     login_form = LoginForm()
+    #     if register_form.is_valid():
+    #         user = register_form.save()
+    #         login(request, user)
+    #         messages.success(request, 'Account created successfully!')
+    #         return redirect('dashboard_redirect')
+    #     return render(request, 'accounts/login.html', {
+    #         'register_form': register_form,
+    #         'login_form': login_form,
+    #         'active_tab': 'register'
+    #     })
 
 
 class LoginView(View):
@@ -146,7 +173,7 @@ class DashboardRedirectView(View):
             return redirect('provider_profile')
 
         elif role == 'admin':
-            return redirect('/admin/')
+            return redirect('admin_dashboard')
 
         return redirect('landing')
 
@@ -157,6 +184,10 @@ class StudentProfileView(View):
     POST /student/profile/  — saves profile changes
     """
     def get(self, request):
+        
+        print("LOGGED IN USER:", request.user.email)
+        print("ROLE:", request.user.role)
+
         if request.user.role != 'student':
             messages.error(request, 'Access denied.')
             return redirect('landing')
@@ -165,6 +196,17 @@ class StudentProfileView(View):
         return render(request, 'accounts/student_profile.html', {
             'form': form, 'profile': profile,
         })
+        
+        
+    # def get(self, request):
+    #     if request.user.role != 'student':
+    #         messages.error(request, 'Access denied.')
+    #         return redirect('landing')
+    #     profile = request.user.student_profile
+    #     form    = StudentProfileForm(instance=profile)
+    #     return render(request, 'accounts/student_profile.html', {
+    #         'form': form, 'profile': profile,
+    #     })
 
     def post(self, request):
         if request.user.role != 'student':

@@ -1,0 +1,134 @@
+<aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 shadow-sm flex flex-col z-50">
+
+    <!-- Logo -->
+    <div class="px-6 py-6 border-b border-slate-100">
+        <h1 class="text-lg font-bold text-blue-800">
+            EduPro Provider
+        </h1>
+        <p class="text-[11px] uppercase tracking-widest text-slate-400 font-semibold">
+            Instructor Management
+        </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 py-4 space-y-1">
+
+        <a href="{% url 'provider_dashboard' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+
+        {% comment %} <a href="{% url 'provider_courses' %}" {% endcomment %}
+        {% comment %} <a href="{% url 'my_courses' %}"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined">school</span>
+            <span>My Courses</span>
+        </a> {% endcomment %}
+
+        <!-- Course Builder -->
+    <div>
+        <button
+        id="course-builder-btn"
+        class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined">school</span>
+            <span>Course Builder</span>
+        </div>
+
+        <span
+            id="course-builder-arrow"
+            class="material-symbols-outlined transition-transform duration-200">
+            expand_more
+        </span>
+        </button>
+
+        <div id="course-builder-menu" class="hidden mt-1 ml-6 space-y-1">
+
+            <a href="{% url 'my_courses' %}"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined text-[18px]">menu_book</span>
+            <span>My Courses</span>
+            </a>
+
+            <a href="{% url 'course_create' %}"
+            class="flex items-center gap-3 px-4 py-2 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined text-[18px]">add_circle</span>
+            <span>Create Course</span>
+            </a>
+
+        </div>
+    </div>
+
+        {% comment %} <a href="{% url 'create_course' %}" {% endcomment %}
+        {% comment %} <a href="#"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined">add_circle</span>
+            <span>Create Course</span>
+        </a> {% endcomment %}
+
+        <a href="{% url 'provider_profile' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span>Profile</span>
+        </a>
+
+        <a href="#"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined" data-icon="group">group</span>
+            <span>Students</span>
+        </a>
+
+        <a href="#"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+            <span>Analytics</span>
+        </a>
+
+        {% comment %} <a href="{% url 'provider_support' %}" {% endcomment %}
+        <a href="#"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition">
+            <span class="material-symbols-outlined">help</span>
+            <span>Support</span>
+        </a>
+
+    </nav>
+
+    <!-- Footer -->
+    {% comment %} <div class="p-4 border-t border-slate-100">
+
+        <a href="{% url 'logout' %}"
+           class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+        </a>
+
+    </div> {% endcomment %}
+    <div class="p-4 border-t border-slate-100">
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-50 transition">
+
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+
+        </button>
+    </form>
+    </div>
+
+</aside>
+
+<script>
+const btn = document.getElementById("course-builder-btn");
+const menu = document.getElementById("course-builder-menu");
+const arrow = document.getElementById("course-builder-arrow");
+
+btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+});
+</script>

@@ -1,3 +1,8 @@
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+from django.utils import timezone
+from datetime import timedelta
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -39,36 +44,165 @@ class AdminDashboardView(AdminRequiredMixin, View):
     Shows platform-wide stats.
     """
     def get(self, request):
+
         total_revenue = Payment.objects.filter(
-            status='completed'
-        ).aggregate(total=Sum('amount'))['total'] or 0
+            status="completed"
+        ).aggregate(total=Sum("amount"))["total"] or 0
 
         stats = {
-            'total_users':           User.objects.count(),
-            'total_students':        User.objects.filter(role='student').count(),
-            'total_providers':       User.objects.filter(role='provider').count(),
-            'total_courses':         Course.objects.count(),
-            'published_courses':     Course.objects.filter(is_published=True).count(),
-            'draft_courses':         Course.objects.filter(is_published=False).count(),
-            'total_enrollments':     Enrollment.objects.count(),
-            'total_reviews':         Review.objects.count(),
-            'pending_reviews':       Review.objects.filter(is_approved=False).count(),
-            'total_payments':        Payment.objects.filter(status='completed').count(),
-            'total_revenue':         total_revenue,
-            'unverified_providers':  ProviderProfile.objects.filter(is_verified=False).count(),
+            "total_users": User.objects.count(),
+            "total_students": User.objects.filter(role="student").count(),
+            "total_providers": User.objects.filter(role="provider").count(),
+            "total_courses": Course.objects.count(),
+            "published_courses": Course.objects.filter(is_published=True).count(),
+            "draft_courses": Course.objects.filter(is_published=False).count(),
+            "total_enrollments": Enrollment.objects.count(),
+            "total_reviews": Review.objects.count(),
+            "pending_reviews": Review.objects.filter(is_approved=False).count(),
+            "total_payments": Payment.objects.filter(status="completed").count(),
+            "total_revenue": total_revenue,
+            "unverified_providers": ProviderProfile.objects.filter(
+                is_verified=False
+            ).count(),
         }
 
-        # Recent activity
-        recent_users       = User.objects.order_by('-created_at')[:5]
-        recent_enrollments = Enrollment.objects.select_related(
-            'student__user', 'course'
-        ).order_by('-enrolled_at')[:5]
+        recent_users = User.objects.order_by("-created_at")[:5]
 
-        return render(request, 'adminpanel/dashboard.html', {
-            'stats':              stats,
-            'recent_users':       recent_users,
-            'recent_enrollments': recent_enrollments,
-        })
+        recent_enrollments = (
+            Enrollment.objects.select_related(
+                "student__user",
+                "course",
+            )
+            .order_by("-enrolled_at")[:5]
+        )
+
+        recent_courses = (
+            Course.objects.select_related(
+                "provider__user"
+            )
+            .order_by("-created_at")[:5]
+        )
+
+        completed_enrollments = (
+            Enrollment.objects.filter(
+                status=Enrollment.Status.COMPLETED
+            )
+            .select_related(
+                "student__user",
+                "course",
+            )
+            .order_by("-completed_at")[:5]
+        )
+
+        flagged_reviews = (
+            Review.objects.filter(
+                is_flagged=True
+            )
+            .select_related(
+                "student__user",
+                "course",
+            )
+            .order_by("-created_at")[:5]
+        )
+
+        activities = []
+
+        for enrollment in recent_enrollments:
+            activities.append({
+                "type": "enrollment",
+                "time": enrollment.enrolled_at,
+                "object": enrollment,
+            })
+
+        for user in recent_users:
+            activities.append({
+                "type": "user",
+                "time": user.created_at,
+                "object": user,
+            })
+
+        for course in recent_courses:
+            activities.append({
+                "type": "course",
+                "time": course.created_at,
+                "object": course,
+            })
+
+        for enrollment in completed_enrollments:
+            if enrollment.completed_at:
+                activities.append({
+                    "type": "completion",
+                    "time": enrollment.completed_at,
+                    "object": enrollment,
+                })
+
+        for review in flagged_reviews:
+            activities.append({
+                "type": "review",
+                "time": review.created_at,
+                "object": review,
+            })
+
+        activities.sort(
+            key=lambda activity: activity["time"],
+            reverse=True,
+        )
+        activities = activities[:5]
+
+        # -------------------------
+        # Monthly Enrollments
+        # -------------------------
+
+        today = timezone.now()
+        start_date = today - timedelta(days=180)
+
+        monthly_data = (
+            Enrollment.objects.filter(
+                enrolled_at__gte=start_date
+            )
+            .annotate(month=TruncMonth("enrolled_at"))
+            .values("month")
+            .annotate(total=Count("id"))
+            .order_by("month")
+        )
+
+        months = []
+
+        counts = {
+            item["month"].strftime("%b"): item["total"]
+            for item in monthly_data
+        }
+
+        current = start_date.replace(day=1)
+
+        for _ in range(6):
+
+            month = current.strftime("%b")
+
+            months.append({
+                "month": month,
+                "count": counts.get(month, 0),
+            })
+
+            if current.month == 12:
+                current = current.replace(
+                    year=current.year + 1,
+                    month=1,
+                )
+            else:
+                current = current.replace(
+                    month=current.month + 1,
+                )
+
+        return render(
+            request,
+            "adminpanel/admin_dashboard.html",
+            {
+                "stats": stats,
+                "activities": activities,
+                "monthly_enrollments": months,
+            },
+        )
 
 
 # ─── User Management ─────────────────────────────────────────────────────────

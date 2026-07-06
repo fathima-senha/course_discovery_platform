@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Courses | EduProvider Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#01174b",
+                        "on-primary-fixed": "#00174c",
+                        "surface-dim": "#d9d9e3",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c4c6d6",
+                        "secondary": "#4b5c92",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#003fb1",
+                        "surface-tint": "#2a56c7",
+                        "outline": "#747685",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "on-surface-variant": "#434653",
+                        "on-primary-container": "#a1b6ff",
+                        "secondary-fixed": "#dbe1ff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e2e1eb",
+                        "surface-bright": "#faf8ff",
+                        "on-background": "#1a1b22",
+                        "on-primary-fixed-variant": "#003dab",
+                        "surface-container-highest": "#e2e1eb",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#334479",
+                        "primary": "#002b80",
+                        "on-tertiary-fixed-variant": "#812900",
+                        "surface-container-low": "#f3f3fd",
+                        "tertiary-container": "#852b00",
+                        "surface-container-high": "#e8e7f1",
+                        "background": "#faf8ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-container": "#ededf7",
+                        "on-secondary-container": "#3d4e83",
+                        "inverse-on-surface": "#f0f0fa",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#5f1c00",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface": "#1a1b22",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-gutter": "2.5rem",
+                        "section-padding-y": "6rem",
+                        "inline-gap": "0.75rem",
+                        "container-max": "1536px",
+                        "card-padding": "2rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "caption": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #1a1b22;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary-fixed selection:text-primary">
+<!-- SideNavBar Shell -->
+{% comment %} <aside class="fixed left-0 top-0 h-screen w-72 border-r border-slate-200 bg-slate-50/80 backdrop-blur-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] z-50 flex flex-col gap-2 p-6 font-['Plus_Jakarta_Sans'] antialiased">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-[#003fb1]">EduProvider</h1>
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Management Console</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 font-medium hover:bg-slate-100 transition-all duration-200 active:scale-95 transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active State Logic: My Courses -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#003fb1] font-bold border-r-4 border-[#003fb1] bg-blue-50/50 transition-all duration-200 active:scale-95 transform" href="#">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span>My Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 font-medium hover:bg-slate-100 transition-all duration-200 active:scale-95 transform" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Create Course</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 font-medium hover:bg-slate-100 transition-all duration-200 active:scale-95 transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-slate-200">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 font-medium hover:bg-slate-100 transition-all duration-200 active:scale-95 transform" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/provider_sidebar.html' %}
+
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 right-0 left-72 h-16 border-b border-slate-100 bg-white/70 backdrop-blur-md z-40 flex justify-between items-center px-8 w-auto font-['Plus_Jakarta_Sans'] shadow-sm">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="w-full bg-slate-100/50 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search your courses..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
+</button>
+<button class="p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-sm font-bold text-on-background leading-none">Alex Rivera</p>
+<p class="text-[10px] font-medium text-slate-500">Course Provider</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="professional headshot of a smiling man with short dark hair and a neat beard in a minimalist bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv1Jz_7u3fhbvmXHcLW5bDGYnUOkUaMpW5aN1fVgzlK7FPm3hPxMFGnBytMdxrWbg0fUIdQNB4K7k-yAEcvC-7z9RMCIeDSCpBgveWcS_zhKgVeuXNVIYIAv0FHJrObVR6tkqU2o6pcscPV6VXFI3oLwwkd6dW5P4UkW1nKptBauX8qME91314TInkXeI9WPNw6uvBV6Mu9EGl9FZLNd0nkyfDZkgTg4I6zZntzPpiDRS-HwMMkEFGeq0FE1ev2cqhgQLkk30eGYRV"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-72 pt-16 min-h-screen">
+<div class="max-w-[1536px] mx-auto p-10">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-[32px] text-on-background mb-2">My Courses</h2>
+<p class="font-body-md text-slate-500">Manage and track your educational content performance</p>
+</div>
+<a href="{% url 'course_create' %}"
+   class="inline-flex items-center gap-2 bg-primary-container text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all">
+    <span class="material-symbols-outlined">add</span>
+    Create New Course
+</a>
+</div>
+<!-- Stats Overview - Bento Style -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="bg-white p-6 rounded-2xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-50 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold flex items-center">+12% <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Total Views</p>
+<h3 class="text-2xl font-bold mt-1">48.2k</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-50 rounded-lg text-purple-600">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold flex items-center">+5.4% <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Active Students</p>
+<h3 class="text-2xl font-bold mt-1">1,204</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-amber-50 rounded-lg text-amber-600">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+</div>
+<span class="text-slate-400 text-xs font-bold">Stable</span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Avg. Rating</p>
+<h3 class="text-2xl font-bold mt-1">4.8</h3>
+</div>
+<div class="bg-white p-6 rounded-2xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-emerald-50 rounded-lg text-emerald-600">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="text-emerald-600 text-xs font-bold flex items-center">+8% <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span></span>
+</div>
+<p class="text-slate-500 text-sm font-medium">Revenue (MTD)</p>
+<h3 class="text-2xl font-bold mt-1">$12,450</h3>
+</div>
+</div>
+<!-- Filters & Content -->
+<div class="bg-white rounded-3xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 overflow-hidden">
+<div class="p-6 border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-1 bg-slate-100/50 p-1 rounded-xl">
+<button class="px-6 py-2 rounded-lg bg-white shadow-sm text-primary font-bold text-sm">All</button>
+<button class="px-6 py-2 rounded-lg text-slate-500 font-medium text-sm hover:text-primary">Published</button>
+<button class="px-6 py-2 rounded-lg text-slate-500 font-medium text-sm hover:text-primary">Draft</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 border border-slate-200 rounded-lg text-slate-500 hover:bg-slate-50">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 border border-slate-200 rounded-lg text-slate-500 hover:bg-slate-50">
+<span class="material-symbols-outlined" data-icon="sort">sort</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-slate-50/50 border-b border-slate-100">
+<th class="px-8 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Course</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Category</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Level</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Price</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Students</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Rating</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400">Status</th>
+<th class="px-8 py-4 text-[11px] font-bold uppercase tracking-wider text-slate-400 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-200 shrink-0">
+<img alt="Full-stack development" class="w-full h-full object-cover" data-alt="modern laptop on desk with vibrant source code on screen, professional photography style with clean lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbq8iamEINszXsjJ3scLuYfXc-xrFvzZhv2US4EtW843U2QllICGQpxnf622oXKWIUqohzpXE9AXavoU6h1cBtd-uylSsnAg06RLaRyz27yjX3iOvtCAbkz6uFF1JVHvBzMBlgXqZxYzLE6DgLVFpYsGqrMPoT_ebgAVHnOR8T7UFHC30AXrlnaBiCmXJRjNnYF7RZE8TdkKS-fWsavjt8Fa7aXCTSYLYaXJ757NpUgv9me594RmOlH4PbnOfiomfrXdHXfX2mPkch"/>
+</div>
+<div>
+<p class="font-bold text-on-background text-sm">Mastering React &amp; Next.js 14</p>
+<p class="text-[10px] text-slate-400">Updated 2 days ago</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium text-slate-600 bg-slate-100 px-2 py-1 rounded">Web Development</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase bg-primary-fixed text-primary px-2 py-1 rounded-full">Advanced</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$199.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-slate-400" data-icon="group">group</span>
+<span class="text-sm text-slate-600">842</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.9</span>
+<span class="text-[10px] text-slate-400">(128)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-emerald-600 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                                        Published
+                                    </div>
+</td>
+<td class="px-8 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<div class="w-8 h-4 bg-primary rounded-full relative cursor-pointer mx-2">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-200 shrink-0">
+<img alt="Digital Marketing" class="w-full h-full object-cover" data-alt="abstract digital marketing analytics dashboard on tablet screen, colorful charts and graphs in soft focus background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4yCMfmyF242vFcNTzkkm3ayQX7wI2FIN5MCU_Z75fd-itAKoahzTxyVwvk1_4vRwoHzMn3TV_sIhCepQ6MNnd7FyGkmJXu3QQUalDmOas5a52PjysNzBOkrB8u0sQV7hC8FzByBPHJOsFzOBmckpIY2mU5lIbR20zsySBA7_awPsTwqCP6cnUSaYSHKaBldaMHWc0i8RWbuc8ojRFFpa7EnO16gKk1Abb2Swqx1zi-zo3pMVRX5P5l8CWrXgtWmHM9V-0Mr7pg04r"/>
+</div>
+<div>
+<p class="font-bold text-on-background text-sm">Advanced SEO Strategies 2024</p>
+<p class="text-[10px] text-slate-400">Created 1 week ago</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium text-slate-600 bg-slate-100 px-2 py-1 rounded">Marketing</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed px-2 py-1 rounded-full">Intermediate</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$149.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-slate-400" data-icon="group">group</span>
+<span class="text-sm text-slate-600">321</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.7</span>
+<span class="text-[10px] text-slate-400">(45)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-slate-500 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 bg-slate-300 rounded-full"></span>
+                                        Draft
+                                    </div>
+</td>
+<td class="px-8 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<div class="w-8 h-4 bg-slate-200 rounded-full relative cursor-pointer mx-2">
+<div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow-sm"></div>
+</div>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-8 py-4">
+<div class="flex items-center gap-4">
+<div class="w-16 h-10 rounded-lg overflow-hidden bg-slate-200 shrink-0">
+<img alt="UI/UX Design" class="w-full h-full object-cover" data-alt="designer hand using professional tablet with stylus, high-tech interface design work in progress, minimal studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxWigFMLXMCWuCy6KZLAyE2T425wL6Y7QuogM-AAQ5vCJeqqlHG9ngA1O3rzPRt6p2-3iSmXSK_3TWTD7HNp-ySMzK351H0iU14mV0w0k2L5HEz4VUgYU9WZr8Lsc18iSBzk0GQ3YdvDyhHAGaarXyWpWzO0KyrzRIvYAFy2b2cRTjykK7yZEjL0MN6K6NwAPv0G3xyDayTXu-xhyfHrEOzmiVj32BaOb53vnGXBtzlDavzkc8RLEAFv3NnxZusBwTQUmTjkv1kGjb"/>
+</div>
+<div>
+<p class="font-bold text-on-background text-sm">UI/UX Fundamentals</p>
+<p class="text-[10px] text-slate-400">Updated 5 days ago</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-xs font-medium text-slate-600 bg-slate-100 px-2 py-1 rounded">Design</span>
+</td>
+<td class="px-6 py-4">
+<span class="text-[10px] font-bold uppercase bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded-full">Beginner</span>
+</td>
+<td class="px-6 py-4 font-bold text-sm">$99.00</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-slate-400" data-icon="group">group</span>
+<span class="text-sm text-slate-600">1,540</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-amber-400 text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-bold">4.8</span>
+<span class="text-[10px] text-slate-400">(215)</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-emerald-600 font-bold text-[10px] uppercase">
+<span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                                        Published
+                                    </div>
+</td>
+<td class="px-8 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span></button>
+<div class="w-8 h-4 bg-primary rounded-full relative cursor-pointer mx-2">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+<button class="p-2 text-slate-400 hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-6 border-t border-slate-100 flex items-center justify-between">
+<p class="text-sm text-slate-500 font-medium">Showing 1 to 3 of 24 courses</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-600 font-medium text-sm hover:bg-slate-50">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-slate-600 font-medium text-sm hover:bg-slate-50">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only on Management Dashboards) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary-container text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>
