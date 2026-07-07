@@ -41,11 +41,19 @@
 <span class="material-symbols-outlined" data-icon="sell">sell</span>
 <span class="font-headline-md text-[14px]">Tags</span>
 </a>
-<div class="pt-8 mt-auto">
-<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error/10 transition-colors active:scale-95" href="#">
-<span class="material-symbols-outlined" data-icon="logout">logout</span>
-<span class="font-headline-md text-[14px]">Logout</span>
-</a>
+<div class="p-4 border-t border-slate-800">
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button
+            type="submit"
+            class="w-full flex items-center text-slate-400 hover:text-error py-3 px-6 transition-all hover:bg-error/10 rounded-lg active:scale-95 duration-200 ease-out group"
+        >
+            <span class="material-symbols-outlined mr-3 text-error">
+                logout
+            </span>
+            Logout
+        </button>
+    </form>
 </div>
 </nav>
 </aside>
