@@ -220,7 +220,7 @@ class AdminUserListView(AdminRequiredMixin, View):
         search = request.GET.get('q')
         if search:
             users = users.filter(email__icontains=search)
-        return render(request, 'adminpanel/users.html', {
+        return render(request, 'adminpanel/users/user_list.html', {
             'users':  users,
             'role':   role,
             'search': search,
