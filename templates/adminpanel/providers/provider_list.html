@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#b5c4ff",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#2f3038",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#4b5c92",
+                    "on-primary-container": "#a1b6ff",
+                    "primary": "#002b80",
+                    "on-background": "#1a1b22",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#ffa17e",
+                    "inverse-on-surface": "#f0f0fa",
+                    "on-secondary-fixed-variant": "#334479",
+                    "surface-tint": "#2a56c7",
+                    "surface-container-high": "#e8e7f1",
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#e2e1eb",
+                    "on-tertiary-fixed": "#380d00",
+                    "secondary-container": "#b1c2ff",
+                    "surface": "#faf8ff",
+                    "on-secondary-container": "#3d4e83",
+                    "surface-bright": "#faf8ff",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "outline": "#747685",
+                    "tertiary-container": "#852b00",
+                    "on-surface-variant": "#434653",
+                    "on-primary": "#ffffff",
+                    "background": "#faf8ff",
+                    "primary-container": "#003fb1",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e2e1eb",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#01174b",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b5c4ff",
+                    "on-primary-fixed": "#00174c",
+                    "secondary-fixed": "#dbe1ff",
+                    "on-surface": "#1a1b22",
+                    "surface-container": "#ededf7",
+                    "on-primary-fixed-variant": "#003dab",
+                    "surface-container-low": "#f3f3fd",
+                    "tertiary": "#5f1c00",
+                    "surface-dim": "#d9d9e3",
+                    "outline-variant": "#c4c6d6",
+                    "tertiary-fixed": "#ffdbcf",
+                    "on-tertiary-fixed-variant": "#812900",
+                    "primary-fixed": "#dbe1ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "card-padding": "2rem",
+                    "section-padding-y": "6rem",
+                    "grid-gutter": "2.5rem",
+                    "container-max": "1536px",
+                    "inline-gap": "0.75rem"
+            },
+            "fontFamily": {
+                    "label-bold": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-xl": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Inter"],
+                    "caption": ["Inter"]
+            },
+            "fontSize": {
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.05em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "body-lg": ["20px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "caption": ["10px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #faf8ff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar -->
+{% comment %} <aside class="flex flex-col py-6 h-full w-64 fixed left-0 top-0 z-50 bg-slate-900 border-r border-slate-800 shadow-xl font-['Plus_Jakarta_Sans'] text-sm">
+<div class="px-6 mb-10">
+<h1 class="text-lg font-black text-white">EduAuthority</h1>
+<p class="text-slate-400 text-xs">Management Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Users</span>
+</a>
+<a class="bg-[#003fb1] text-white rounded-lg mx-2 px-4 py-3 flex items-center gap-3 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span>Providers</span>
+</a>
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>Courses</span>
+</a>
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span>Reviews</span>
+</a>
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Payments</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-800 space-y-1">
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="text-slate-400 hover:text-white mx-2 px-4 py-3 flex items-center gap-3 hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/admin_sidebar' %}
+
+<!-- Main Content Wrapper -->
+<div class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-8 h-16 w-full sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200 shadow-sm shadow-slate-900/5 font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-slate-50 border-none rounded-full text-sm focus:ring-2 focus:ring-[#003fb1] w-64 transition-all outline-none" placeholder="Search providers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3">
+<span class="text-sm font-medium text-slate-700">Admin User</span>
+<img alt="Administrator profile photo" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" data-alt="Professional headshot of a middle-aged male administrator in a sharp navy suit, clean studio lighting, corporate portrait style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmxlS8wo8tyQbH9e1Si_mLM3lS0OCE72TMu9zDIDFeepFvirNxwd2TKntOlfF_DO8vDWLRn5G-WpW37BjiwbykqjRAwgjwqHSfKJuwuETE_RDya6V9vydb2zFI5Ks5b878VhjN-u9CPUo7vwk-RKSBF3e0rUmXTbrqvEVBrEbffWdzVMetyF5ljUEarB1e4cpvxlHkW9zXHF7PiBd91aqAY55A6QD8H8lOKWbaHQ8EL7O3PoSMryqLsa033AfFNyL0rOVAjt148_5C"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="p-10 max-w-[1536px]">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Provider Verification</h2>
+<p class="text-body-lg text-on-surface-variant mt-2">Manage and review institution credentials for the EduAdmin ecosystem.</p>
+</div>
+<div class="flex bg-surface-container-low p-1.5 rounded-xl border border-outline-variant/30">
+<button class="px-6 py-2.5 rounded-lg bg-primary-container text-white font-label-bold text-label-bold shadow-sm transition-all">Pending Verification</button>
+<button class="px-6 py-2.5 rounded-lg text-on-surface-variant font-label-bold text-label-bold hover:bg-white transition-all">Verified</button>
+<button class="px-6 py-2.5 rounded-lg text-on-surface-variant font-label-bold text-label-bold hover:bg-white transition-all">All</button>
+</div>
+</div>
+<!-- Provider Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-grid-gutter">
+<!-- Card 1: Pending -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<img alt="Tech Academy Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Modern minimalist vector logo for a technology academy, blue and white colors, sleek professional branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoWSSlvfR8J5hBQcXfLP995CXsmJVfKgcluMjLM-tLYdbTDriJFh7K3_pVW0lOHi-DkLIfrebROE-BkoOaEhKD6HhTJhueUnYfvu_zUSfnnpWtpHloAez8QvplNESAL6URmsCqBnoQM9wIouz_GysIljGmkRQwaY2AfRCuABCePH_O4pahaluehS1vubl_9_whv9UmavGERNx3a-Jp1Hv-RawRIj5CJU8tItCo3DJzvOFm2EL1Gd_BkcJYV2RCbGgGTmzcsRL9ovYS"/>
+<span class="bg-amber-50 text-amber-700 text-caption font-label-bold px-3 py-1 rounded-full border border-amber-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                            PENDING
+                        </span>
+</div>
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Tech Academy Global</h3>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
+                            verify@techacademy.edu
+                        </p>
+<a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+                            www.techacademy.edu
+                        </a>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
+<div>
+<p class="text-caption text-outline uppercase">Active Courses</p>
+<p class="font-headline-md text-primary-container">24</p>
+</div>
+<div>
+<p class="text-caption text-outline uppercase">Registered On</p>
+<p class="text-on-surface font-medium">Oct 12, 2023</p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-green-600 text-white py-3 rounded-lg font-label-bold text-label-bold hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+                            Verify
+                        </button>
+<button class="flex-1 border border-error text-error py-3 rounded-lg font-label-bold text-label-bold hover:bg-error/5 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+</div>
+</div>
+<!-- Card 2: Verified -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<img alt="Stellar Design School Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Circular geometric logo for a design school with navy and gold accents, high-end professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhvMToh8R3HeOn4vtF1sWiWtmYshhtTPqhkagg0vPwsDH7pCnIYPzJSEKPsimJvVezTNnKJnWrBTJN6e-_hjdK4afcmOkLMFu6Ch1eKFqPSXtLMSA1x7nS8PZOzk3vI7CoCzUlB0RvWQF9LscCACO39tNDkmYDBdhgtvoZKQ8jYAE_ws_G5k7QGYd_LaOVrkbwqtHZm3yhz5i7ngHLqo4xWluz2DPfPzdsqGwvi9cQhU0H9ihYVLiwt-KQgcOS0jRlMqLJPEAGrf_"/>
+<span class="bg-green-50 text-green-700 text-caption font-label-bold px-3 py-1 rounded-full border border-green-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </span>
+</div>
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Stellar Design Institute</h3>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
+                            admin@stellardesign.com
+                        </p>
+<a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+                            www.stellardesign.com
+                        </a>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
+<div>
+<p class="text-caption text-outline uppercase">Active Courses</p>
+<p class="font-headline-md text-primary-container">112</p>
+</div>
+<div>
+<p class="text-caption text-outline uppercase">Registered On</p>
+<p class="text-on-surface font-medium">May 05, 2022</p>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full border border-outline-variant text-on-surface-variant py-3 rounded-lg font-label-bold text-label-bold hover:bg-slate-50 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+                            Unverify Provider
+                        </button>
+</div>
+</div>
+<!-- Card 3: Pending -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-16 h-16 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xl">BL</div>
+<span class="bg-amber-50 text-amber-700 text-caption font-label-bold px-3 py-1 rounded-full border border-amber-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                            PENDING
+                        </span>
+</div>
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Business Leaders Co.</h3>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
+                            contact@bizleaders.net
+                        </p>
+<a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+                            www.bizleaders.net
+                        </a>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
+<div>
+<p class="text-caption text-outline uppercase">Active Courses</p>
+<p class="font-headline-md text-primary-container">08</p>
+</div>
+<div>
+<p class="text-caption text-outline uppercase">Registered On</p>
+<p class="text-on-surface font-medium">Nov 28, 2023</p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-green-600 text-white py-3 rounded-lg font-label-bold text-label-bold hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+                            Verify
+                        </button>
+<button class="flex-1 border border-error text-error py-3 rounded-lg font-label-bold text-label-bold hover:bg-error/5 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+</div>
+</div>
+<!-- Card 4: Verified -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<img alt="Creative Arts Hub Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Elegant logo for an arts institution featuring abstract flowing lines in purple and teal, high-end creative agency feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy_Uko7-tHeWXyj_QISjAprDyR7kE9pSkkc_H5C5QBlehCPGWyaccnguCEADy9K5yIT28U2g2DusuI3DlBGmix_WBLCUvZ1yJpyy_FoqjBnu7LPCq1tiNS76HgG4PGWlROD7knwmnAUWziPgFh4HbW3YWWOqSakeN8r01OtbioQgNX_v2-eJueY_DMCn2KKlrd9EZf0jwqhWlpEk2dK6RwxloPbytcZoM_WTQQeRy0BO_GDCZuhvlQu8arSQMq8ALqcBylVREodZaY"/>
+<span class="bg-green-50 text-green-700 text-caption font-label-bold px-3 py-1 rounded-full border border-green-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            VERIFIED
+                        </span>
+</div>
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Creative Arts Hub</h3>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
+                            info@creativehub.io
+                        </p>
+<a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+                            www.creativehub.io
+                        </a>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
+<div>
+<p class="text-caption text-outline uppercase">Active Courses</p>
+<p class="font-headline-md text-primary-container">45</p>
+</div>
+<div>
+<p class="text-caption text-outline uppercase">Registered On</p>
+<p class="text-on-surface font-medium">Jan 15, 2023</p>
+</div>
+</div>
+<div class="mt-auto">
+<button class="w-full border border-outline-variant text-on-surface-variant py-3 rounded-lg font-label-bold text-label-bold hover:bg-slate-50 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+                            Unverify Provider
+                        </button>
+</div>
+</div>
+<!-- Card 5: Pending -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
+<div class="flex justify-between items-start mb-6">
+<img alt="Health First Med Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Professional health and medical education logo, clean cross symbol integrated with book, blue and green color scheme" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2NPmefR6ZTPdjzQDubRXr4oARx6lvypMKS10uLjUbiePp-ocBYPtj9X2HzqdZQy76BS9iA_x4nkxPtr3cgVG1o0O4EhdSLYUIKj0OFB7Js7OJ5qULwqsn2qWZnZr6qPWmCt5Mxso0v7fYiYz0mfrgoYWg3eOxpxNSksvvancUj6VUPoJ7T5W5LpS1sG3tV1losHAEjoZxd4BkxfyCuRSiBNIIwV2wc4lkxoR-_TKaPgKrMImyUyybr8KekP9wg4eFtOPwq01PjSgr"/>
+<span class="bg-amber-50 text-amber-700 text-caption font-label-bold px-3 py-1 rounded-full border border-amber-100 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                            PENDING
+                        </span>
+</div>
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Health First Med</h3>
+<p class="text-on-surface-variant flex items-center gap-2 text-sm">
+<span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
+                            registrar@healthfirst.med
+                        </p>
+<a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
+<span class="material-symbols-outlined text-base" data-icon="language">language</span>
+                            www.healthfirst.med
+                        </a>
+</div>
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
+<div>
+<p class="text-caption text-outline uppercase">Active Courses</p>
+<p class="font-headline-md text-primary-container">12</p>
+</div>
+<div>
+<p class="text-caption text-outline uppercase">Registered On</p>
+<p class="text-on-surface font-medium">Dec 01, 2023</p>
+</div>
+</div>
+<div class="mt-auto flex gap-3">
+<button class="flex-1 bg-green-600 text-white py-3 rounded-lg font-label-bold text-label-bold hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+                            Verify
+                        </button>
+<button class="flex-1 border border-error text-error py-3 rounded-lg font-label-bold text-label-bold hover:bg-error/5 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+                            Reject
+                        </button>
+</div>
+</div>
+<!-- Empty State/New Request Slot -->
+<div class="border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center p-card-padding text-center">
+<div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-slate-300 text-4xl" data-icon="person_add">person_add</span>
+</div>
+<h3 class="font-headline-md text-on-surface-variant mb-2">Invite New Provider</h3>
+<p class="text-sm text-outline mb-6">Send an invitation link to a verified educational institution to join the platform.</p>
+<button class="px-8 py-3 bg-secondary text-white rounded-lg font-label-bold text-label-bold hover:bg-on-secondary-fixed-variant active:scale-95 transition-all">
+                        Send Invitation
+                    </button>
+</div>
+</div>
+<!-- Floating Action Button for Support -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary-container text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50">
+<span class="material-symbols-outlined text-2xl" data-icon="help_center">help_center</span>
+</button>
+</main>
+</div>
+</body></html>

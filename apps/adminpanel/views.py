@@ -278,7 +278,7 @@ class AdminProviderListView(AdminRequiredMixin, View):
             providers = providers.filter(is_verified=True)
         elif verified == 'false':
             providers = providers.filter(is_verified=False)
-        return render(request, 'adminpanel/providers.html', {
+        return render(request, 'adminpanel/providers/provider_list.html', {
             'providers': providers,
             'verified':  verified,
         })

@@ -9,35 +9,83 @@
 </div>
 </div>
 <nav class="flex-1 px-3 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold active:scale-95 transition-transform"  href="{% url 'admin_dashboard' %}">
+<a href="{% url 'admin_dashboard' %}"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == 'admin_dashboard' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="font-headline-md text-[14px]">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="{% url 'admin_users' %}">
-<span class="material-symbols-outlined" data-icon="group">group</span>
-<span class="font-headline-md text-[14px]">Users</span>
+<a href="{% url 'admin_users' %}"
+   class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == 'admin_users' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
+    <span class="material-symbols-outlined">group</span>
+    <span class="font-headline-md text-[14px]">Users</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a href="{% url 'admin_providers' %}"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="school">school</span>
 <span class="font-headline-md text-[14px]">Providers</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a href="#"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
 <span class="font-headline-md text-[14px]">Courses</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a  href="#"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
 <span class="font-headline-md text-[14px]">Reviews</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a href="#"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="payments">payments</span>
 <span class="font-headline-md text-[14px]">Payments</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a href="#"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="category">category</span>
 <span class="font-headline-md text-[14px]">Categories</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-slate-900 hover:text-slate-100 transition-colors active:scale-95" href="#">
+<a href="#"
+    class="flex items-center gap-3 px-4 py-3 transition-all active:scale-95
+   {% if request.resolver_match.url_name == '#' %}
+       bg-blue-600/10 text-blue-400 border-r-2 border-blue-600 font-semibold
+   {% else %}
+       text-slate-400 hover:bg-slate-900 hover:text-slate-100
+   {% endif %}">
 <span class="material-symbols-outlined" data-icon="sell">sell</span>
 <span class="font-headline-md text-[14px]">Tags</span>
 </a>
