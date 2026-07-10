@@ -264,17 +264,51 @@
 {% empty %}
 
 <div class="bg-white rounded-xl border border-slate-200 p-10 text-center">
-    <span class="material-symbols-outlined text-5xl text-slate-300">
-        verified
-    </span>
 
-    <h3 class="mt-4 text-lg font-semibold">
-        No pending providers
-    </h3>
+    {% if verified == "false" %}
 
-    <p class="text-slate-500">
-        All providers have been verified.
-    </p>
+        <span class="material-symbols-outlined text-5xl text-green-400">
+            verified
+        </span>
+
+        <h3 class="mt-4 text-lg font-semibold">
+            No Pending Providers
+        </h3>
+
+        <p class="text-slate-500">
+            All providers have already been verified.
+        </p>
+
+    {% elif verified == "true" %}
+
+        <span class="material-symbols-outlined text-5xl text-slate-300">
+            groups
+        </span>
+
+        <h3 class="mt-4 text-lg font-semibold">
+            No Verified Providers
+        </h3>
+
+        <p class="text-slate-500">
+            There are currently no verified providers.
+        </p>
+
+    {% else %}
+
+        <span class="material-symbols-outlined text-5xl text-slate-300">
+            business
+        </span>
+
+        <h3 class="mt-4 text-lg font-semibold">
+            No Providers Found
+        </h3>
+
+        <p class="text-slate-500">
+            There are no provider accounts available.
+        </p>
+
+    {% endif %}
+
 </div>
 
 {% endfor %}
@@ -405,7 +439,7 @@
 <div class="mb-6">
 <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Health First Med</h3>
 <p class="text-on-surface-variant flex items-center gap-2 text-sm">
-    
+
 <span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
                             registrar@healthfirst.med
                         </p>

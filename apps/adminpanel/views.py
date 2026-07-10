@@ -2,6 +2,8 @@ from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
 from datetime import timedelta
+from django.utils import timezone
+
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -272,7 +274,11 @@ class AdminProviderListView(AdminRequiredMixin, View):
     Lists all providers. Filter by ?verified=true or ?verified=false.
     """
     def get(self, request):
-        providers = ProviderProfile.objects.select_related('user').all()
+        providers = (
+            ProviderProfile.objects
+            .select_related("user")
+            .filter(is_verified=False)
+        )        
         verified  = request.GET.get('verified')
         if verified == 'true':
             providers = providers.filter(is_verified=True)
@@ -285,19 +291,26 @@ class AdminProviderListView(AdminRequiredMixin, View):
 
 
 class AdminVerifyProviderView(AdminRequiredMixin, View):
-    """
-    POST /admin-panel/providers/<int:pk>/verify/
-    Toggles provider verification status.
-    """
+
     def post(self, request, pk):
-        from django.utils import timezone
-        provider             = get_object_or_404(ProviderProfile, pk=pk)
-        provider.is_verified = not provider.is_verified
-        provider.verified_at = timezone.now() if provider.is_verified else None
-        provider.save(update_fields=['is_verified', 'verified_at'])
-        state = 'verified' if provider.is_verified else 'unverified'
-        messages.success(request, f'{provider.company_name} has been {state}.')
-        return redirect('admin_providers')
+
+        provider = get_object_or_404(
+            ProviderProfile,
+            pk=pk
+        )
+
+        if not provider.is_verified:
+
+            provider.is_verified = True
+
+            provider.save(update_fields=["is_verified"])
+
+            messages.success(
+                request,
+                f"{provider.company_name} verified successfully."
+            )
+
+        return redirect("admin_providers")
 
 
 # ─── Course Management ────────────────────────────────────────────────────────
