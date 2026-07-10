@@ -319,7 +319,7 @@ class AdminCourseListView(AdminRequiredMixin, View):
         search = request.GET.get('q')
         if search:
             courses = courses.filter(title__icontains=search)
-        return render(request, 'adminpanel/courses.html', {
+        return render(request, 'adminpanel/courses/course_list.html', {
             'courses': courses,
             'status':  status,
         })

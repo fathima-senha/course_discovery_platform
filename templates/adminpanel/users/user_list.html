@@ -168,11 +168,30 @@
 </div>
 <div class="flex items-center gap-3">
 <div class="relative">
-<select class="appearance-none bg-surface-container-lowest border border-outline-variant px-4 py-2.5 pr-10 rounded-lg text-on-surface font-label-bold text-label-bold focus:ring-2 focus:ring-primary-container outline-none cursor-pointer">
-<option>All Roles</option>
-<option>Students</option>
-<option>Providers</option>
-</select>
+<form method="GET">
+    <select
+        name="role"
+        onchange="this.form.submit()"
+        class="appearance-none bg-surface-container-lowest border border-outline-variant px-4 py-2.5 pr-10 rounded-lg text-on-surface font-label-bold text-label-bold focus:ring-2 focus:ring-primary-container outline-none cursor-pointer"
+    >
+        <option value="">All Roles</option>
+
+        <option value="student"
+            {% if role == "student" %}selected{% endif %}>
+            Students
+        </option>
+
+        <option value="provider"
+            {% if role == "provider" %}selected{% endif %}>
+            Providers
+        </option>
+
+        <option value="admin"
+            {% if role == "admin" %}selected{% endif %}>
+            Admins
+        </option>
+    </select>
+</form>
 <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
 </div>
 <button class="flex items-center gap-2 bg-primary-container text-on-primary font-label-bold text-label-bold px-6 py-2.5 rounded-lg active:scale-95 transition-transform shadow-sm">
@@ -197,37 +216,164 @@
 </tr>
 </thead>
 <tbody class="divide-y divide-outline-variant">
+{% for user in users %}
 <!-- Row 1 -->
 <tr class="hover:bg-surface-container transition-colors">
-<td class="px-6 py-4 font-caption text-caption text-outline">#USR-001</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-3">
-<img class="h-9 w-9 rounded-full object-cover" data-alt="headshot of smiling young woman with bright eyes and natural lighting in a modern workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOnh0Kz3t-l9aaGpTkeAHzWvLKn20KBBTRoJY7a_GJt2LN24ZLP-Wn96HfLOO44GvWrSgoQsFuZA91xaOEdyyFdu1qVullWroUqik302OLkY7mmCv3hdA-GJ50v5Xv_WIjw2riNalMNGC1BvAO3Qdgkk5WauQm1-7yaeNVGRmN0PhUCoF640yqpJcjHvQyT1KBvDxPwTeWzwDQ5AjB6UqF0yu0LVDEhJJmUnJGEyU3AbNRiIXgWe22z82AZ_b_plw-kv3k8jZX69Ch"/>
-<span class="font-label-bold text-on-surface">Helena Garcia</span>
-</div>
-</td>
-<td class="px-6 py-4 text-on-surface-variant">helena.g@example.com</td>
-<td class="px-6 py-4">
-<span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Student</span>
-</td>
-<td class="px-6 py-4">
-<div class="flex items-center">
-<div class="w-10 h-5 bg-primary-container rounded-full relative cursor-pointer shadow-inner">
-<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
-</div>
-<span class="ml-2 text-xs font-semibold text-primary">Active</span>
-</div>
-</td>
-<td class="px-6 py-4 text-on-surface-variant font-caption">Oct 24, 2023</td>
-<td class="px-6 py-4 text-right space-x-1">
-<button class="p-2 hover:bg-primary/10 rounded text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
-<button class="p-2 hover:bg-secondary/10 rounded text-secondary transition-colors"><span class="material-symbols-outlined text-lg">block</span></button>
-<button class="p-2 hover:bg-error/10 rounded text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
-</td>
+
+    <!-- ID -->
+    <td class="px-6 py-5 whitespace-nowrap text-slate-500 text-sm font-medium">
+        #USR-{{ user.id|stringformat:"04d" }}
+    </td>
+
+    <!-- User -->
+    <td class="px-6 py-4">
+        <div class="flex items-center gap-3">
+
+            <div class="h-9 w-9 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                {{ user.first_name|first }}{{ user.last_name|first }}
+            </div>
+
+            <div>
+                <p class="font-label-bold text-on-surface">
+                    {{ user.get_full_name|default:user.email }}
+                </p>
+
+                <p class="text-xs text-slate-500">
+                    @{{ user.username }}
+                </p>
+            </div>
+
+        </div>
+    </td>
+
+    <!-- Email -->
+    <td class="px-6 py-5 text-slate-600 text-sm whitespace-nowrap">
+        {{ user.email }}
+    </td>
+
+    <!-- Role -->
+    <td class="px-6 py-5">
+
+        {% if user.role == "student" %}
+
+            <span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">
+                Student
+            </span>
+
+        {% elif user.role == "provider" %}
+
+            <span class="bg-secondary-fixed text-secondary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">
+                Provider
+            </span>
+
+        {% else %}
+
+            <span class="bg-error-container text-error px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">
+                Admin
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <!-- Status -->
+    <td class="px-6 py-5 whitespace-nowrap">
+        <div class="flex items-center">
+
+            {% if user.is_active %}
+
+                <div class="w-10 h-5 bg-primary-container rounded-full relative shadow-inner">
+                    <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                </div>
+
+                <span class="ml-2 text-xs font-semibold text-primary">
+                    Active
+                </span>
+
+            {% else %}
+
+                <div class="w-10 h-5 bg-outline-variant rounded-full relative shadow-inner">
+                    <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                </div>
+
+                <span class="ml-2 text-xs font-semibold text-on-surface-variant">
+                    Inactive
+                </span>
+
+            {% endif %}
+
+        </div>
+    </td>
+
+    <!-- Joined -->
+    <td class="px-6 py-5 text-slate-600 text-sm whitespace-nowrap">
+        {{ user.created_at|date:"M d, Y" }}
+    </td>
+
+    <!-- Actions -->
+    <td class="px-6 py-5 text-right whitespace-nowrap">
+
+        <a href="{% url 'admin_user_detail' user.id %}"
+           class="inline-block p-2 hover:bg-primary/10 rounded text-primary transition-colors">
+            <span class="material-symbols-outlined text-lg">
+                visibility
+            </span>
+        </a>
+
+        <form action="{% url 'admin_toggle_user' user.id %}"
+              method="post"
+              class="inline">
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="p-2 hover:bg-secondary/10 rounded text-secondary transition-colors">
+
+                {% if user.is_active %}
+
+                    <span class="material-symbols-outlined text-lg">
+                        block
+                    </span>
+
+                {% else %}
+
+                    <span class="material-symbols-outlined text-lg">
+                        check_circle
+                    </span>
+
+                {% endif %}
+
+            </button>
+
+        </form>
+
+        <form action="{% url 'admin_delete_user' user.id %}"
+              method="post"
+              class="inline">
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                onclick="return confirm('Delete this user?')"
+                class="p-2 hover:bg-error/10 rounded text-error transition-colors">
+
+                <span class="material-symbols-outlined text-lg">
+                    delete
+                </span>
+
+            </button>
+
+        </form>
+
+    </td>
+
 </tr>
+{% empty %}
 <!-- Row 2 -->
-<tr class="hover:bg-surface-container transition-colors">
-<td class="px-6 py-4 font-caption text-caption text-outline">#USR-002</td>
+{% comment %} <tr class="hover:bg-surface-container transition-colors">
+<td class="px-6 py-4 font-caption text-caption text-outline">#USR-{{ user.id|stringformat:"04d" }}</td>
 <td class="px-6 py-4">
 <div class="flex items-center gap-3">
 <img class="h-9 w-9 rounded-full object-cover" data-alt="professional male profile picture with clean background and neutral soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwwYwNznUBEOeXpT00Mt-DWmFIIyAe64t4GZFA7lNThRkvwv3AU1ZLtQbEan1cQxQeakbhVZaC1R5tm9PDLsX8WJdoMw-lbCpyZGZzqGZ5FO-XmcTR3oYqdI5IMsIMcwenaGvLGWAGoJRde_coc8yIMuqZ5872RIRi3qmA6knh2BPhXIbiKJJLud59MiU6EDClA33ckghLpbUhYV6z0amIGFewXJxwUQgmays24BdP4iSKFqQAJEg4UJOUpOjbWNPxCEooHYVapIrr"/>
@@ -255,7 +401,7 @@
 </tr>
 <!-- Row 3 -->
 <tr class="hover:bg-surface-container transition-colors">
-<td class="px-6 py-4 font-caption text-caption text-outline">#USR-003</td>
+<td class="px-6 py-4 font-caption text-caption text-outline">#USR-{{ user.id|stringformat:"04d" }}</td>
 <td class="px-6 py-4">
 <div class="flex items-center gap-3">
 <img class="h-9 w-9 rounded-full object-cover" data-alt="portrait of serious business woman in corporate setting with shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgIhwCJAJttdV2W3CUTEqVaygvk1pB8Qx_oYBrOLajqN6o9IVR2rlbkHJCDyri-vllUQ8iWCxMmdGJttdHmKumv-H2WiIqr_MipOkWQNg55Y1qCGUOBFYY6xP8bWVOXR5SV09lh7OyHSMG-ufNzWA0ZWGzZTIulAzeLvpSNtXUrDAyBz25pDgaeoN_2yvsKpUG7FQzTLBp3ya4at91TBD_B9bj7s5l-EIfJqtH0K64vvn-bCyGuuXL9OaaK3NLtXz7GGgXy1f48kVO"/>
@@ -283,7 +429,7 @@
 </tr>
 <!-- Dummy rows for layout feel -->
 <tr class="hover:bg-surface-container transition-colors">
-<td class="px-6 py-4 font-caption text-caption text-outline">#USR-004</td>
+<td class="px-6 py-4 font-caption text-caption text-outline">#USR-{{ user.id|stringformat:"04d" }}</td>
 <td class="px-6 py-4"><div class="flex items-center gap-3"><div class="h-9 w-9 rounded-full bg-surface-dim flex items-center justify-center font-bold text-on-surface-variant">RJ</div><span class="font-label-bold text-on-surface">Robert Johnson</span></div></td>
 <td class="px-6 py-4 text-on-surface-variant">rj@outlook.com</td>
 <td class="px-6 py-4"><span class="bg-primary-fixed text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Student</span></td>
@@ -292,14 +438,20 @@
 <td class="px-6 py-4 text-right space-x-1"><button class="p-2"><span class="material-symbols-outlined text-lg text-primary">visibility</span></button><button class="p-2"><span class="material-symbols-outlined text-lg text-secondary">block</span></button><button class="p-2"><span class="material-symbols-outlined text-lg text-error">delete</span></button></td>
 </tr>
 <tr class="hover:bg-surface-container transition-colors">
-<td class="px-6 py-4 font-caption text-caption text-outline">#USR-005</td>
+<td class="px-6 py-4 font-caption text-caption text-outline">#USR-{{ user.id|stringformat:"04d" }}</td>
 <td class="px-6 py-4"><div class="flex items-center gap-3"><div class="h-9 w-9 rounded-full bg-surface-dim flex items-center justify-center font-bold text-on-surface-variant">EL</div><span class="font-label-bold text-on-surface">Elena Lopez</span></div></td>
 <td class="px-6 py-4 text-on-surface-variant">e.lopez@provider.co</td>
 <td class="px-6 py-4"><span class="bg-secondary-fixed text-secondary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Provider</span></td>
 <td class="px-6 py-4"><div class="flex items-center"><div class="w-10 h-5 bg-primary-container rounded-full relative cursor-pointer"><div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div></div><span class="ml-2 text-xs font-semibold text-primary">Active</span></div></td>
 <td class="px-6 py-4 text-on-surface-variant font-caption">Feb 14, 2024</td>
 <td class="px-6 py-4 text-right space-x-1"><button class="p-2"><span class="material-symbols-outlined text-lg text-primary">visibility</span></button><button class="p-2"><span class="material-symbols-outlined text-lg text-secondary">block</span></button><button class="p-2"><span class="material-symbols-outlined text-lg text-error">delete</span></button></td>
+</tr>{% endcomment %}
+<tr>
+    <td colspan="7" class="px-6 py-8 text-center text-slate-500">
+        No users found.
+    </td> 
 </tr>
+{% endfor %}
 </tbody>
 </table>
 </div>

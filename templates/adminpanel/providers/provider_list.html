@@ -152,7 +152,7 @@
 </div>
 </aside> {% endcomment %}
 
-{% include 'includes/admin_sidebar' %}
+{% include 'includes/admin_sidebar.html' %}
 
 <!-- Main Content Wrapper -->
 <div class="ml-64 min-h-screen">
@@ -170,15 +170,15 @@
 <button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
-<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
+{% comment %} <button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
-<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+</button> {% endcomment %}
+{% comment %} <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
 <div class="flex items-center gap-3">
 <span class="text-sm font-medium text-slate-700">Admin User</span>
 <img alt="Administrator profile photo" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" data-alt="Professional headshot of a middle-aged male administrator in a sharp navy suit, clean studio lighting, corporate portrait style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmxlS8wo8tyQbH9e1Si_mLM3lS0OCE72TMu9zDIDFeepFvirNxwd2TKntOlfF_DO8vDWLRn5G-WpW37BjiwbykqjRAwgjwqHSfKJuwuETE_RDya6V9vydb2zFI5Ks5b878VhjN-u9CPUo7vwk-RKSBF3e0rUmXTbrqvEVBrEbffWdzVMetyF5ljUEarB1e4cpvxlHkW9zXHF7PiBd91aqAY55A6QD8H8lOKWbaHQ8EL7O3PoSMryqLsa033AfFNyL0rOVAjt148_5C"/>
 </div>
-</div>
+</div> {% endcomment %}
 </header>
 <!-- Page Canvas -->
 <main class="p-10 max-w-[1536px]">
@@ -197,47 +197,88 @@
 <!-- Provider Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-grid-gutter">
 <!-- Card 1: Pending -->
+{% for provider in providers %}
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
 <div class="flex justify-between items-start mb-6">
-<img alt="Tech Academy Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Modern minimalist vector logo for a technology academy, blue and white colors, sleek professional branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoWSSlvfR8J5hBQcXfLP995CXsmJVfKgcluMjLM-tLYdbTDriJFh7K3_pVW0lOHi-DkLIfrebROE-BkoOaEhKD6HhTJhueUnYfvu_zUSfnnpWtpHloAez8QvplNESAL6URmsCqBnoQM9wIouz_GysIljGmkRQwaY2AfRCuABCePH_O4pahaluehS1vubl_9_whv9UmavGERNx3a-Jp1Hv-RawRIj5CJU8tItCo3DJzvOFm2EL1Gd_BkcJYV2RCbGgGTmzcsRL9ovYS"/>
+    {% if provider.logo %}
+<img
+    src="{{ provider.logo.url }}"
+    class="w-16 h-16 rounded-xl object-cover bg-slate-50"
+>
+{% else %}
+<div class="w-16 h-16 rounded-xl bg-blue-100 flex items-center justify-center text-xl font-bold text-blue-700">
+    {{ provider.company_name|first }}
+</div>
+{% endif %}
 <span class="bg-amber-50 text-amber-700 text-caption font-label-bold px-3 py-1 rounded-full border border-amber-100 flex items-center gap-1">
 <span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
                             PENDING
                         </span>
 </div>
 <div class="mb-6">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Tech Academy Global</h3>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">{{ provider.company_name }}</h3>
 <p class="text-on-surface-variant flex items-center gap-2 text-sm">
 <span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
-                            verify@techacademy.edu
+                            {{ provider.user.email }}
                         </p>
 <a class="text-primary-container flex items-center gap-2 text-sm mt-1 hover:underline" href="#">
 <span class="material-symbols-outlined text-base" data-icon="language">language</span>
-                            www.techacademy.edu
+                            {{ provider.website }}
                         </a>
 </div>
 <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-50 mb-8">
 <div>
 <p class="text-caption text-outline uppercase">Active Courses</p>
-<p class="font-headline-md text-primary-container">24</p>
+<p class="font-headline-md text-primary-container">{{ provider.courses.count }}</p>
 </div>
 <div>
 <p class="text-caption text-outline uppercase">Registered On</p>
-<p class="text-on-surface font-medium">Oct 12, 2023</p>
+<p class="text-on-surface font-medium">{{ provider.user.created_at|date:"M d, Y" }}</p>
 </div>
 </div>
 <div class="mt-auto flex gap-3">
-<button class="flex-1 bg-green-600 text-white py-3 rounded-lg font-label-bold text-label-bold hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
-                            Verify
-                        </button>
+
+<form
+    action="{% url 'admin_verify_provider' provider.pk %}"
+    method="post"
+    class="flex-1"
+>
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="w-full bg-green-600 text-white py-3 rounded-lg font-label-bold text-label-bold hover:bg-green-700 active:scale-95 transition-all flex items-center justify-center gap-2"
+    >
+        <span class="material-symbols-outlined text-lg">
+            check_circle
+        </span>
+        Verify
+    </button>
+</form>
 <button class="flex-1 border border-error text-error py-3 rounded-lg font-label-bold text-label-bold hover:bg-error/5 active:scale-95 transition-all flex items-center justify-center gap-2">
 <span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
                             Reject
                         </button>
 </div>
 </div>
-<!-- Card 2: Verified -->
+{% empty %}
+
+<div class="bg-white rounded-xl border border-slate-200 p-10 text-center">
+    <span class="material-symbols-outlined text-5xl text-slate-300">
+        verified
+    </span>
+
+    <h3 class="mt-4 text-lg font-semibold">
+        No pending providers
+    </h3>
+
+    <p class="text-slate-500">
+        All providers have been verified.
+    </p>
+</div>
+
+{% endfor %}
+{% comment %} <!-- Card 2: Verified -->
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
 <div class="flex justify-between items-start mb-6">
 <img alt="Stellar Design School Logo" class="w-16 h-16 rounded-xl object-contain bg-slate-50 p-2" data-alt="Circular geometric logo for a design school with navy and gold accents, high-end professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhvMToh8R3HeOn4vtF1sWiWtmYshhtTPqhkagg0vPwsDH7pCnIYPzJSEKPsimJvVezTNnKJnWrBTJN6e-_hjdK4afcmOkLMFu6Ch1eKFqPSXtLMSA1x7nS8PZOzk3vI7CoCzUlB0RvWQF9LscCACO39tNDkmYDBdhgtvoZKQ8jYAE_ws_G5k7QGYd_LaOVrkbwqtHZm3yhz5i7ngHLqo4xWluz2DPfPzdsqGwvi9cQhU0H9ihYVLiwt-KQgcOS0jRlMqLJPEAGrf_"/>
@@ -364,6 +405,7 @@
 <div class="mb-6">
 <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Health First Med</h3>
 <p class="text-on-surface-variant flex items-center gap-2 text-sm">
+    
 <span class="material-symbols-outlined text-base" data-icon="mail">mail</span>
                             registrar@healthfirst.med
                         </p>
@@ -392,7 +434,7 @@
                             Reject
                         </button>
 </div>
-</div>
+</div> {% endcomment %}
 <!-- Empty State/New Request Slot -->
 <div class="border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center p-card-padding text-center">
 <div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4">

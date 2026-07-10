@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Management | CourseHub Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#434653",
+                        "on-secondary-fixed-variant": "#334479",
+                        "surface-container": "#ededf7",
+                        "surface-container-highest": "#e2e1eb",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#812900",
+                        "on-tertiary-container": "#ffa17e",
+                        "inverse-primary": "#b5c4ff",
+                        "secondary-fixed": "#dbe1ff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-variant": "#e2e1eb",
+                        "on-secondary-fixed": "#01174b",
+                        "inverse-surface": "#2f3038",
+                        "on-error": "#ffffff",
+                        "primary": "#002b80",
+                        "outline": "#747685",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "secondary": "#4b5c92",
+                        "on-secondary-container": "#3d4e83",
+                        "on-primary-fixed": "#00174c",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#2a56c7",
+                        "on-primary-container": "#a1b6ff",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#003fb1",
+                        "on-tertiary-fixed": "#380d00",
+                        "tertiary": "#5f1c00",
+                        "on-primary-fixed-variant": "#003dab",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#b1c2ff",
+                        "surface-dim": "#d9d9e3",
+                        "secondary-fixed-dim": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "primary-fixed-dim": "#b5c4ff",
+                        "surface-container-low": "#f3f3fd",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f0f0fa",
+                        "primary-fixed": "#dbe1ff",
+                        "on-background": "#1a1b22",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "tertiary-container": "#852b00",
+                        "outline-variant": "#c4c6d6",
+                        "on-tertiary": "#ffffff",
+                        "background": "#faf8ff",
+                        "surface-container-high": "#e8e7f1",
+                        "on-surface": "#1a1b22"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-xl": ["Plus Jakarta Sans"],
+                        "caption": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-bold": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar Shell -->
+{% comment %} <aside class="flex flex-col h-screen fixed left-0 top-0 z-50 overflow-y-auto bg-slate-900 w-64 shadow-xl border-r border-slate-800 font-['Plus_Jakarta_Sans'] text-sm">
+<div class="px-6 py-8 flex flex-col gap-1">
+<h1 class="text-white font-black tracking-tight text-xl">CourseHub</h1>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Admin Console</p>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Users</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>Providers</span>
+</a>
+<a class="bg-blue-600/10 text-blue-400 border-r-4 border-blue-600 font-semibold px-4 py-3 flex items-center gap-3 active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Courses</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span>Reviews</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Payments</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span>Categories</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+<span>Tags</span>
+</a>
+</nav>
+<div class="p-3 border-t border-slate-800 space-y-1">
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="text-slate-400 hover:text-white hover:bg-slate-800 px-4 py-3 flex items-center gap-3 transition-all duration-200 active:translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside> {% endcomment %}
+
+{% include 'includes/admin_sidebar.html' %}
+
+<!-- Main Content Area -->
+<main class="pl-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="bg-white/70 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 shadow-[0_2px_15px_-3px_rgba(25,27,35,0.04)] px-6 py-3 flex justify-between items-center w-full font-['Plus_Jakarta_Sans'] antialiased">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg" data-icon="search">search</span>
+<input class="w-full bg-slate-50 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none" placeholder="Search courses, IDs, or instructors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+{% comment %} <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-slate-200 mx-1"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface">Admin User</p>
+<p class="text-[10px] text-slate-500">Super Administrator</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+<img alt="Administrator profile" class="w-full h-full object-cover" data-alt="Close up professional portrait of a business administrator with a friendly expression and modern attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAISVTD4piPvglirYrdM0acr7hOg00fi6rd0VFcNfQhGWRkb7fVF525fbh9Xt60St7hgOaM-HFkacSMpNnd_Ca-FqRZqIY_IeF7ES8SqX14oD7qjoxkV_Ky_RL9k1fwHouLIfghygo0OWk9kv6MSf3Kk2VZTKcxurSfw6YO16_n1BUCCbwSBKq1t9nuSw1p546elMeeK7PYH0DDLJog4yu_RSsXfHbgRH_AXQrx_JZjMrCs2crIJg2F_fiXcmxaw5FybCpFahy3F2a0"/>
+</div>
+</div> {% endcomment %}
+</div>
+</header>
+<div class="p-8 max-w-[1536px] mx-auto space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Course Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Audit, modify, and publish professional educational content.</p>
+</div>
+{% comment %} <button class="bg-primary-container text-on-primary hover:shadow-lg active:scale-95 transition-all px-6 py-3 rounded-lg flex items-center gap-2 font-label-bold text-label-bold">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Create New Course
+                </button> {% endcomment %}
+</div> 
+<!-- Filters Bar -->
+<div class="bg-white p-4 rounded-xl shadow-[0_2px_15px_-3px_rgba(25,27,35,0.04)] border border-slate-100 flex flex-wrap items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2">Status:</span>
+<div class="flex p-1 bg-slate-100 rounded-lg">
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md bg-white shadow-sm text-primary">All</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-primary transition-colors">Published</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-primary transition-colors">Draft</button>
+</div>
+</div>
+<div class="h-8 w-px bg-slate-200 hidden md:block"></div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-widest px-2">Level:</span>
+<select class="bg-slate-50 border-slate-200 text-xs font-semibold rounded-lg py-1.5 px-3 focus:ring-primary focus:border-primary">
+<option>All Levels</option>
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+</div>
+<div class="flex-1"></div>
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                    More Filters
+                </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                    Export CSV
+                </button>
+</div>
+<!-- Data Table -->
+<div class="bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(25,27,35,0.04)] border border-slate-100 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 border-b border-slate-100">
+<tr>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider">Course</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider">Provider &amp; Category</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider">Level</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider">Price</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider">Enrollments</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider text-center">Status</th>
+<th class="px-6 py-4 font-label-bold text-caption text-slate-500 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-20 aspect-video rounded overflow-hidden bg-slate-200 border border-slate-100 shadow-sm flex-shrink-0">
+<img alt="Advanced Data Science course thumbnail" class="w-full h-full object-cover" data-alt="Close up of a computer screen showing complex data visualizations and code with soft blue office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy2eFX6Ugln6MDcImCSVSVKrc_Nl1FwZDkdii9VkDRdSTgmfjHeQ9sbrX-fyAhJpKT2U_IOSsGAuiK0Nd0hjXbisnS7_gehcz3CXUx6oNxdkfv2Sy2KSPJEXAZzvfYc1cxNm0eynJ0ms3kYuE3h4KuyHyztBgghmYsTrKB2mIwONCqNntxaO3MpX3nENCR15ucYSzeZt8Vk7t88-dFQCQ-ZczA9Hb1ehwyAuaZGbYDLyWJLZPg-1njUzl6f-voM5gT0RT7Zrkm-lFp"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface group-hover:text-primary transition-colors">Advanced Data Analytics with Python</p>
+<p class="text-xs text-slate-500">ID: CH-2024-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="text-sm font-semibold text-on-surface">Scholar Stream Institute</p>
+<p class="text-xs text-slate-500">Data Science</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-tertiary-fixed text-on-tertiary-fixed-variant">Advanced</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm text-on-surface">
+                                $199.99
+                            </td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">
+                                1,240
+                            </td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-green-100 text-green-700">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        Published
+                                    </span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all" title="Toggle Visibility">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all" title="Delete Course">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-20 aspect-video rounded overflow-hidden bg-slate-200 border border-slate-100 shadow-sm flex-shrink-0">
+<img alt="UI/UX Principles course thumbnail" class="w-full h-full object-cover" data-alt="High quality overhead view of design sketches, a smartphone, and a laptop on a clean white desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIGtj1i5SkdyiJribPifYm73zgW95efc1Z9lzhgV5PwMP13_kXHuldYFKXzu13rM8_Xr9BoDWhtAgcI6wv1m3Ys5Ttk7RplnK2W_iM99rNx0Zhsfq188vxhOFi7fRWsJizWtZwxlrOBybPYqth7ncLpZLBLBQ75oPXeI3nQNlv7noQHFyE0dVYqTdsOeuE5N2DGwxXiasvo696zOOnWZ9FdwJUQBWcefdRDtaTRgsKLfTeKdrT8agWBSmXDnBc9uG0QiQYD8O1fKrq"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface group-hover:text-primary transition-colors">Mastering UI/UX Design Systems</p>
+<p class="text-xs text-slate-500">ID: CH-2024-002</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="text-sm font-semibold text-on-surface">Creative Mind Academy</p>
+<p class="text-xs text-slate-500">Design</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-secondary-fixed text-on-secondary-fixed-variant">Intermediate</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm text-on-surface">
+                                $149.00
+                            </td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">
+                                856
+                            </td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-slate-100 text-slate-500">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        Draft
+                                    </span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all" title="Publish Course">
+<span class="material-symbols-outlined" data-icon="publish">publish</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all" title="Delete Course">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-20 aspect-video rounded overflow-hidden bg-slate-200 border border-slate-100 shadow-sm flex-shrink-0">
+<img alt="Business Fundamentals course thumbnail" class="w-full h-full object-cover" data-alt="Team of young professionals collaborating in a bright modern office with warm natural sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbToyaresChLEKvD7ddVJtdnNHBVk6PvFpmvaHuIIZjnPmyrlgz523NfDSuqmsxHUkyXzr8xZSOmA2DL0YtT7zlluCyRwMLWmB3a73vfnTOvguUl-mFPAP4ow36-AauvQO9dBrVb4pSKNwByYHLM2TexdR7GQ3U72rbrnqtDVT1D4Uo3DTEelpP1Zxw87gjJkRo1xzZ_HFLShAKxYu_nno3d5k6AUN74uOEWt0VWo2RZFq_33UjUsCxeUkQ9HtFkX5AXjr2yRVhmGO"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface group-hover:text-primary transition-colors">Business Strategy Fundamentals</p>
+<p class="text-xs text-slate-500">ID: CH-2024-003</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="text-sm font-semibold text-on-surface">Global Edge Business School</p>
+<p class="text-xs text-slate-500">Business</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary-fixed text-on-primary-fixed-variant">Beginner</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm text-on-surface">
+                                $89.50
+                            </td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">
+                                2,102
+                            </td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-green-100 text-green-700">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        Published
+                                    </span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all" title="Toggle Visibility">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all" title="Delete Course">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-20 aspect-video rounded overflow-hidden bg-slate-200 border border-slate-100 shadow-sm flex-shrink-0">
+<img alt="Web Development course thumbnail" class="w-full h-full object-cover" data-alt="MacBook Pro on a desk showing clean source code in a dark mode editor with vibrant syntax highlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO_I1neiLB5rIEpvSS0zcwNsZZ09mY_TAgUQbFFIG8OqfaONMA6Ase0WNTom5-TYw74HsjNG1wfk6NDb1OhjYWgO04t_x8oswFKAhRaNpMQGYH1X0ozReC4iZZcdIMvlhNQvyT5XqGALviDg4hNH3GtDjzmhzt0GggSc4avviqRBn7FoR1fsxDzVOPNufSuJHWav4xUvjQshlwsCX_1YSQya3atMkqFYBaKZ4UuTbif0Y9wUatQsC6xXBUOzKTmFLJrs6iHN7qvTcV"/>
+</div>
+<div>
+<p class="font-label-bold text-on-surface group-hover:text-primary transition-colors">Modern Web Development Bootcamp</p>
+<p class="text-xs text-slate-500">ID: CH-2024-004</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div>
+<p class="text-sm font-semibold text-on-surface">CodeCraft Academy</p>
+<p class="text-xs text-slate-500">Technology</p>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-secondary-fixed text-on-secondary-fixed-variant">Intermediate</span>
+</td>
+<td class="px-6 py-4 font-semibold text-sm text-on-surface">
+                                $120.00
+                            </td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">
+                                3,450
+                            </td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<span class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-green-100 text-green-700">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        Published
+                                    </span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary hover:bg-primary-container/10 rounded-lg transition-all" title="Toggle Visibility">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-error hover:bg-error-container/10 rounded-lg transition-all" title="Delete Course">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+<p class="text-xs font-semibold text-slate-500">Showing 1 to 4 of 124 courses</p>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg hover:bg-white hover:shadow-sm text-slate-400 transition-all disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-white font-bold text-xs flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-lg hover:bg-white hover:shadow-sm text-slate-600 font-semibold text-xs flex items-center justify-center transition-all">2</button>
+<button class="w-8 h-8 rounded-lg hover:bg-white hover:shadow-sm text-slate-600 font-semibold text-xs flex items-center justify-center transition-all">3</button>
+<span class="px-1 text-slate-400">...</span>
+<button class="w-8 h-8 rounded-lg hover:bg-white hover:shadow-sm text-slate-600 font-semibold text-xs flex items-center justify-center transition-all">32</button>
+<button class="p-2 rounded-lg hover:bg-white hover:shadow-sm text-slate-600 transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
