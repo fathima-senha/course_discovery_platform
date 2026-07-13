@@ -189,14 +189,49 @@
 <p class="text-body-lg text-on-surface-variant mt-2">Manage and review institution credentials for the EduAdmin ecosystem.</p>
 </div>
 <div class="flex bg-surface-container-low p-1.5 rounded-xl border border-outline-variant/30">
-<button class="px-6 py-2.5 rounded-lg bg-primary-container text-white font-label-bold text-label-bold shadow-sm transition-all">Pending Verification</button>
-<button class="px-6 py-2.5 rounded-lg text-on-surface-variant font-label-bold text-label-bold hover:bg-white transition-all">Verified</button>
-<button class="px-6 py-2.5 rounded-lg text-on-surface-variant font-label-bold text-label-bold hover:bg-white transition-all">All</button>
+
+    <a
+        href="{% url 'admin_providers' %}?verified=false"
+        class="px-6 py-2.5 rounded-lg font-label-bold text-label-bold transition-all
+        {% if verified == 'false' %}
+            bg-primary-container text-white shadow-sm
+        {% else %}
+            text-on-surface-variant hover:bg-white
+        {% endif %}">
+        Pending Verification
+    </a>
+
+    <a
+        href="{% url 'admin_providers' %}?verified=true"
+        class="px-6 py-2.5 rounded-lg font-label-bold text-label-bold transition-all
+        {% if verified == 'true' %}
+            bg-primary-container text-white shadow-sm
+        {% else %}
+            text-on-surface-variant hover:bg-white
+        {% endif %}">
+        Verified
+    </a>
+
+    <a
+        href="{% url 'admin_providers' %}"
+        class="px-6 py-2.5 rounded-lg font-label-bold text-label-bold transition-all
+        {% if not verified %}
+            bg-primary-container text-white shadow-sm
+        {% else %}
+            text-on-surface-variant hover:bg-white
+        {% endif %}">
+        All
+    </a>
+
 </div>
 </div>
 <!-- Provider Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-grid-gutter">
 <!-- Card 1: Pending -->
+<!--temporary start-->
+{% comment %} <p>Verified = {{ verified }}</p>
+<p>Providers = {{ providers|length }}</p> {% endcomment %}
+<!--temporary end-->
 {% for provider in providers %}
 <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-card-padding flex flex-col hover:shadow-md transition-shadow duration-300">
 <div class="flex justify-between items-start mb-6">

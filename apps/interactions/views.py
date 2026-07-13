@@ -27,32 +27,56 @@ class StudentDashboardView(View):
     GET /student/dashboard/
     Shows the student dashboard with enrollments and wishlist summary.
     """
+
     def get(self, request):
-        if request.user.role != 'student':
-            messages.error(request, 'Access denied.')
-            return redirect('landing')
-        student     = get_student(request.user)
-        enrollments = Enrollment.objects.filter(
-            student=student
-        ).select_related('course').order_by('-enrolled_at')[:5]
-        wishlist    = Wishlist.objects.filter(
-            student=student
-        ).select_related('course').order_by('-added_at')[:3]
+        if request.user.role != "student":
+            messages.error(request, "Access denied.")
+            return redirect("landing")
 
-        total_enrolled   = Enrollment.objects.filter(student=student).count()
-        total_completed  = Enrollment.objects.filter(student=student, status='completed').count()
-        total_inprogress = Enrollment.objects.filter(student=student, status='active').count()
-        total_wishlist   = Wishlist.objects.filter(student=student).count()
+        student = get_student(request.user)
 
-        return render(request, 'interactions/student_dashboard.html', {
-            'student':          student,
-            'enrollments':      enrollments,
-            'wishlist':         wishlist,
-            'total_enrolled':   total_enrolled,
-            'total_completed':  total_completed,
-            'total_inprogress': total_inprogress,
-            'total_wishlist':   total_wishlist,
-        })
+        enrollment_qs = Enrollment.objects.filter(student=student)
+        wishlist_qs = Wishlist.objects.filter(student=student)
+
+        enrollments = (
+            enrollment_qs
+            .select_related("course")
+            .order_by("-enrolled_at")[:5]
+        )
+
+        wishlist = (
+            wishlist_qs
+            .select_related("course")
+            .order_by("-added_at")[:3]
+        )
+
+        total_enrolled = enrollment_qs.count()
+
+        total_completed = enrollment_qs.filter(
+            status=Enrollment.Status.COMPLETED
+        ).count()
+
+        total_inprogress = enrollment_qs.filter(
+            status=Enrollment.Status.ACTIVE
+        ).count()
+
+        total_wishlist = wishlist_qs.count()
+
+        context = {
+            "student": student,
+            "enrollments": enrollments,
+            "wishlist": wishlist,
+            "total_enrolled": total_enrolled,
+            "total_completed": total_completed,
+            "total_inprogress": total_inprogress,
+            "total_wishlist": total_wishlist,
+        }
+
+        return render(
+            request,
+            "interactions/student_dashboard.html",
+            context,
+        )
 
 
 # ─── Enrollment Views ─────────────────────────────────────────────────────────

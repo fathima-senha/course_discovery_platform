@@ -277,13 +277,15 @@ class AdminProviderListView(AdminRequiredMixin, View):
         providers = (
             ProviderProfile.objects
             .select_related("user")
-            .filter(is_verified=False)
-        )        
+            .all()
+        )   
         verified  = request.GET.get('verified')
         if verified == 'true':
             providers = providers.filter(is_verified=True)
         elif verified == 'false':
             providers = providers.filter(is_verified=False)
+        # print("Verified filter:", verified)
+        # print("Providers:", providers.count())
         return render(request, 'adminpanel/providers/provider_list.html', {
             'providers': providers,
             'verified':  verified,
