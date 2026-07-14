@@ -153,7 +153,7 @@ class ProviderDashboardView(View):
         )["total"] or 0
 
         total_revenue = Payment.objects.filter(
-            enrollment__course__provider=provider,
+            course__provider=provider,
             status="completed"
         ).aggregate(
             total=Sum("amount")

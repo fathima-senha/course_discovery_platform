@@ -156,21 +156,28 @@
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 <span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full ring-2 ring-white"></span>
 </button>
-<button class="p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
+{% comment %} <button class="p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
 <span class="material-symbols-outlined" data-icon="help">help</span>
 </button>
 <button class="p-2 text-slate-500 hover:text-[#003fb1] transition-colors active:scale-95">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
+</button> {% endcomment %}
 </div>
 <div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
 <div class="flex items-center gap-3">
 <div class="text-right">
-<p class="text-sm font-bold text-on-background leading-none">Alex Rivera</p>
+<p class="text-sm font-bold text-on-background leading-none">{{ request.user.get_full_name|default:request.user.email }}</p>
 <p class="text-[10px] font-medium text-slate-500">Course Provider</p>
 </div>
-<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="professional headshot of a smiling man with short dark hair and a neat beard in a minimalist bright office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv1Jz_7u3fhbvmXHcLW5bDGYnUOkUaMpW5aN1fVgzlK7FPm3hPxMFGnBytMdxrWbg0fUIdQNB4K7k-yAEcvC-7z9RMCIeDSCpBgveWcS_zhKgVeuXNVIYIAv0FHJrObVR6tkqU2o6pcscPV6VXFI3oLwwkd6dW5P4UkW1nKptBauX8qME91314TInkXeI9WPNw6uvBV6Mu9EGl9FZLNd0nkyfDZkgTg4I6zZntzPpiDRS-HwMMkEFGeq0FE1ev2cqhgQLkk30eGYRV"/>
 </div>
+{% if provider.profile_image %}
+<img src="{{ provider.profile_image.url }}"
+     class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover">
+{% else %}
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+    {{ request.user.first_name|first|upper }}
+</div>
+{% endif %}</div></div>
 </div>
 </header>
 <!-- Main Canvas -->
@@ -189,7 +196,7 @@
 </a>
 </div>
 <!-- Stats Overview - Bento Style -->
-<div class="grid grid-cols-4 gap-6 mb-10">
+{% comment %} <div class="grid grid-cols-4 gap-6 mb-10">
 <div class="bg-white p-6 rounded-2xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100">
 <div class="flex justify-between items-start mb-4">
 <div class="p-2 bg-blue-50 rounded-lg text-primary">
@@ -230,7 +237,7 @@
 <p class="text-slate-500 text-sm font-medium">Revenue (MTD)</p>
 <h3 class="text-2xl font-bold mt-1">$12,450</h3>
 </div>
-</div>
+</div> {% endcomment %}
 <!-- Filters & Content -->
 <div class="bg-white rounded-3xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 overflow-hidden">
 <div class="p-6 border-b border-slate-100 flex items-center justify-between">

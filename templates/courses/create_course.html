@@ -186,18 +186,18 @@
 </div>
 <div class="flex items-center gap-6">
 <div class="hidden lg:flex items-center gap-6">
-<a class="text-slate-600 font-medium hover:text-blue-800 transition-all duration-200" href="#">Dashboard</a>
+{% comment %} <a class="text-slate-600 font-medium hover:text-blue-800 transition-all duration-200" href="#">Dashboard</a>
 <a class="text-slate-600 font-medium hover:text-blue-800 transition-all duration-200" href="#">Resources</a>
-<a class="text-slate-600 font-medium hover:text-blue-800 transition-all duration-200" href="#">Support</a>
+<a class="text-slate-600 font-medium hover:text-blue-800 transition-all duration-200" href="#">Support</a> {% endcomment %}
 </div>
-<div class="h-6 w-[1px] bg-slate-200 mx-2"></div>
-<div class="flex items-center gap-4">
 <button class="text-slate-600 hover:text-blue-700 transition-colors">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
-<button class="text-slate-600 hover:text-blue-700 transition-colors">
+<div class="h-6 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-4">
+{% comment %} <button class="text-slate-600 hover:text-blue-700 transition-colors">
 <span class="material-symbols-outlined" data-icon="help">help</span>
-</button>
+</button> {% endcomment %}
 <div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-slate-200">
 <img alt="Provider Profile Image" class="w-full h-full object-cover" data-alt="professional headshot of a smiling male educator in business casual attire with soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG8txJXnHZHEK3PdGIH1AAtMCGBLJiNKWo_CFqxPOOjcgVqvmDvkqv1j_DxPRQpMkGq03EHpIQDZDcjxJAfopT8OZMTQBc_7rx602NzXXLTl97B3LSwKKcJ860Y6L3-ZE6ETuVBrfJNbCECoyp1mZcsU6CDfZKZ6nYtqJqQKltoQMslXNxBXILfASs4BkMlCxU1urWjlvEpdLdwOUIjEkmMfPpiFMXAvnvvzOezl6V-5B5drbsTdX8NOJLkIY4Cb7oZLlM2MbzpnkQ"/>
 </div>
@@ -272,14 +272,14 @@
 <option>German</option>
 </select>
 </div>
-<div class="space-y-2">
+{% comment %} <div class="space-y-2">
 <label class="text-label-bold font-label-bold text-slate-700">Duration (Hours)</label>
 <input class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary outline-none" placeholder="40" type="number"/>
 </div>
 <div class="space-y-2">
 <label class="text-label-bold font-label-bold text-slate-700">Estimated Weeks</label>
 <input class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-primary outline-none" placeholder="8" type="number"/>
-</div>
+</div> {% endcomment %}
 </div>
 </section>
 <!-- Pricing -->
@@ -315,14 +315,14 @@
 <!-- Sidebar Sections: Thumbnail & Categories -->
 <div class="lg:col-span-1 space-y-8">
 <!-- Thumbnail -->
-<section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
+{% comment %} <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
 <h3 class="text-label-bold font-label-bold text-slate-900 mb-4 uppercase tracking-widest">Thumbnail</h3>
 <div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-xl aspect-video p-6 hover:border-primary transition-colors cursor-pointer bg-slate-50">
 <span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary transition-colors mb-2" data-icon="upload_file">upload_file</span>
 <p class="text-xs text-center text-slate-500 font-medium">Drag and drop or <span class="text-primary font-bold">browse</span></p>
 <p class="text-[10px] text-slate-400 mt-2">16:9 ratio recommended</p>
 </div>
-</section>
+</section> {% endcomment %}
 <!-- Categories & Tags -->
 <section class="bg-white rounded-xl p-8 shadow-sm border border-slate-100">
 <h3 class="text-label-bold font-label-bold text-slate-900 mb-4 uppercase tracking-widest">Classification</h3>

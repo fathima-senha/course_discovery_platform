@@ -165,7 +165,7 @@
 <div class="flex-1 max-w-xl">
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
-<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-slate-400" placeholder="Search courses, students, or analytics..." type="text"/>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-slate-400" placeholder=Search your {{ total_courses }} courses... type="text"/>
 </div>
 </div>
 <div class="flex items-center gap-6">
@@ -174,18 +174,25 @@
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 <span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
 </button>
-<button class="hover:text-primary transition-colors">
+{% comment %} <button class="hover:text-primary transition-colors">
 <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-</button>
+</button> {% endcomment %}
 </div>
 <div class="h-8 w-px bg-slate-200"></div>
 <div class="flex items-center gap-3">
 <div class="text-right hidden sm:block">
-<p class="text-xs font-bold text-on-background">Dr. Julian Vance</p>
-<p class="text-[10px] text-slate-500">Course Provider</p>
+<p class="text-xs font-bold text-on-background">{{ request.user.get_full_name|default:request.user.email }}
+</p>
+<p class="text-[10px] text-slate-500">{{ request.user.role|title }}</p>
 </div>
-<img alt="Provider" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" data-alt="Professional portrait of a male educator in a modern office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9DPb5ROl6ZZKZ-JCeRp0l7dE_6fl2Red-JYOv9OenZT20Zq11Vjjklnf8GYMtymGkhaErpcs1eNt5_-kgNbxRlGNkTZgAZnlE-2YVZb0rs6pYRHi7RUI8EXDs7g7kDgfcEsV8GnHoRMg-zEbM86b4vX16bj02j4hiqkdDRvpmVODTvL1iLXZqnLfJVwMj-eL6l7a0RwhAaII9_ePRc0Yx69p6bwq_jjYnF6NYqx4wywl692_KE_sTZBcqgLnSrBoQvENshneAlihL"/>
+{% if provider.profile_image %}
+<img src="{{ provider.profile_image.url }}"
+     class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover">
+{% else %}
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold">
+    {{ request.user.first_name|first|upper }}
 </div>
+{% endif %}</div>
 </div>
 </header>
 <section class="p-8 space-y-grid-gutter max-w-[1536px] mx-auto">
@@ -209,10 +216,10 @@
 <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
 <span class="material-symbols-outlined" data-icon="library_books">library_books</span>
 </div>
-<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+12%</span>
+{% comment %} <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+12%</span> {% endcomment %}
 </div>
 <p class="text-slate-500 text-sm font-medium">Total Courses</p>
-<h3 class="text-2xl font-extrabold text-on-background mt-1">24</h3>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">{{ total_courses }}</h3>
 </div>
 <div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
 <div class="flex justify-between items-start mb-4">
@@ -222,27 +229,27 @@
 <span class="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded">Stable</span>
 </div>
 <p class="text-slate-500 text-sm font-medium">Published</p>
-<h3 class="text-2xl font-extrabold text-on-background mt-1">18</h3>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">{{ published_courses }}</h3>
 </div>
 <div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
 <div class="flex justify-between items-start mb-4">
 <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center">
 <span class="material-symbols-outlined" data-icon="group">group</span>
 </div>
-<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+8.4%</span>
+{% comment %} <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+8.4%</span> {% endcomment %}
 </div>
 <p class="text-slate-500 text-sm font-medium">Total Enrollments</p>
-<h3 class="text-2xl font-extrabold text-on-background mt-1">1,284</h3>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">{{ total_enrollments }}</h3>
 </div>
 <div class="bg-white p-6 rounded-xl shadow-[4px_0_24px_rgba(25,27,35,0.04)] border border-slate-100 group hover:translate-y-[-4px] transition-all duration-300">
 <div class="flex justify-between items-start mb-4">
 <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center">
 <span class="material-symbols-outlined" data-icon="payments">payments</span>
 </div>
-<span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+22%</span>
+{% comment %} <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">+22%</span> {% endcomment %}
 </div>
 <p class="text-slate-500 text-sm font-medium">Total Revenue</p>
-<h3 class="text-2xl font-extrabold text-on-background mt-1">$42,950</h3>
+<h3 class="text-2xl font-extrabold text-on-background mt-1">₹{{ total_revenue }}</h3>
 </div>
 </div>
 <!-- Main Grid: Courses Table & Recent Activity -->
@@ -265,7 +272,7 @@
 <th class="px-6 py-4 text-right">Actions</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-slate-100">
+{% comment %} <tbody class="divide-y divide-slate-100">
 <tr class="hover:bg-slate-50/50 transition-colors group">
 <td class="px-6 py-4">
 <div class="flex items-center gap-3">
@@ -359,7 +366,157 @@
 </div>
 </td>
 </tr>
+</tbody> {% endcomment %}
+
+<tbody class="divide-y divide-slate-100">
+
+{% for course in courses|slice:":5" %}
+<tr class="hover:bg-slate-50/50 transition-colors group">
+
+    <!-- Course -->
+    <td class="px-6 py-4">
+        <div class="flex items-center gap-3">
+
+            <div class="w-12 h-8 rounded bg-slate-200 overflow-hidden shrink-0">
+                {% if course.thumbnail %}
+                    <img src="{{ course.thumbnail.url }}"
+                         class="w-full h-full object-cover"
+                         alt="{{ course.title }}">
+                {% else %}
+                    <div class="w-full h-full flex items-center justify-center bg-slate-200">
+                        <span class="material-symbols-outlined text-slate-400 text-sm">
+                            image
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <span class="font-bold text-sm text-on-background line-clamp-1">
+                {{ course.title }}
+            </span>
+
+        </div>
+    </td>
+
+    <!-- Level -->
+    <td class="px-6 py-4">
+
+        {% if course.level == "beginner" %}
+        <span class="text-xs px-2 py-1 rounded-full bg-green-50 text-green-700 font-bold">
+            Beginner
+        </span>
+
+        {% elif course.level == "intermediate" %}
+        <span class="text-xs px-2 py-1 rounded-full bg-yellow-50 text-yellow-700 font-bold">
+            Intermediate
+        </span>
+
+        {% elif course.level == "advanced" %}
+        <span class="text-xs px-2 py-1 rounded-full bg-orange-50 text-orange-700 font-bold">
+            Advanced
+        </span>
+
+        {% else %}
+        <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-primary font-bold">
+            {{ course.get_level_display }}
+        </span>
+        {% endif %}
+
+    </td>
+
+    <!-- Price -->
+    <td class="px-6 py-4 font-bold text-sm">
+
+        {% if course.is_free %}
+            Free
+        {% elif course.discount_price %}
+            ${{ course.discount_price }}
+        {% else %}
+            ${{ course.price }}
+        {% endif %}
+
+    </td>
+
+    <!-- Enrollments -->
+    <td class="px-6 py-4 text-sm text-slate-500">
+        {{ course.enrollment_count }} student{{ course.enrollment_count|pluralize }}
+    </td>
+
+    <!-- Status -->
+    <td class="px-6 py-4">
+
+        {% if course.is_published %}
+            <span class="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Published
+            </span>
+        {% else %}
+            <span class="flex items-center gap-1.5 text-xs font-bold text-slate-500">
+                <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                Draft
+            </span>
+        {% endif %}
+
+    </td>
+
+    <!-- Actions -->
+    <td class="px-6 py-4 text-right">
+
+        <div class="flex items-center justify-end gap-2">
+
+            <a href="{% url 'edit_course' course.id %}"
+               class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-primary transition-all">
+
+                <span class="material-symbols-outlined text-lg">
+                    edit
+                </span>
+
+            </a>
+
+            <a href="{% url 'delete_course' course.id %}"
+               class="p-1.5 hover:bg-slate-100 rounded text-slate-400 hover:text-error transition-all">
+
+                <span class="material-symbols-outlined text-lg">
+                    delete
+                </span>
+
+            </a>
+
+        </div>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="6" class="py-16 text-center">
+
+        <span class="material-symbols-outlined text-5xl text-slate-300 mb-3 block">
+            school
+        </span>
+
+        <h3 class="font-bold text-slate-700">
+            No courses yet
+        </h3>
+
+        <p class="text-slate-500 mt-2">
+            Create your first course to start teaching.
+        </p>
+
+        <a href="{% url 'course_create' %}"
+           class="inline-flex mt-5 px-5 py-2 bg-primary text-white rounded-lg font-semibold">
+            Create Course
+        </a>
+
+    </td>
+</tr>
+
+{% endfor %}
+
 </tbody>
+
 </table>
 </div>
 </div>
@@ -369,7 +526,7 @@
 <h3 class="font-headline-md text-xl">Recent Enrollments</h3>
 </div>
 <div class="flex-1 p-6 space-y-6">
-<div class="flex items-center gap-4">
+{% comment %} <div class="flex items-center gap-4">
 <img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a smiling young woman student in a brightly lit library setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNXi9ujOYL7DJRyQKO4BAAd-gqVkOuWMvUDvBpe3ltgmh3EgJ2VjH90-nYlHmA7ZyzcKBJ1ITMFMV6gnW-aRKQaBgFgp0SgSGpAp7yyxtxXNfaIm_6eWWF7ha3YQcdjvPd-lJqp-8Y-1-msxJOl29ktmwkPmyuWIJ_-Hr-sYj4UVuQ6G9LeD8agw9ze84AKFSNwhPBUb5ZLLI8v70R0SRwcbodepV9c5Tc0jEPvfQWyvk510Seui76Sen9hgPQEXfDcSIGOxjFXg7G"/>
 <div class="flex-1 min-w-0">
 <p class="text-sm font-bold text-on-background truncate">Elena Rodriguez</p>
@@ -414,11 +571,281 @@
 <p class="text-sm font-bold text-emerald-600">+$89.99</p>
 <p class="text-[10px] text-slate-400 uppercase font-bold">Yesterday</p>
 </div>
-</div>
-</div>
-<button class="w-full py-4 border-t border-slate-100 text-sm font-bold text-primary hover:bg-slate-50 transition-colors">
+</div> {% endcomment %}
+{% comment %} <button class="w-full py-4 border-t border-slate-100 text-sm font-bold text-primary hover:bg-slate-50 transition-colors">
                         View All Activity
-                    </button>
+                    </button> {% endcomment %}
+
+<div class="flex-1">
+
+{% for activity in activities %}
+
+    {% if activity.type == "enrollment" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0">
+
+                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+
+                    <span class="material-symbols-outlined text-blue-600">
+                        person
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+                        {{ activity.object.student.user.get_full_name|default:activity.object.student.user.email }}
+                    </span>
+
+                    enrolled in
+
+                    <span class="text-primary font-semibold">
+                        {{ activity.object.course.title }}
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.enrolled_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "user" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-green-700">
+                    person_add
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.get_full_name|default:activity.object.email }}
+
+                    </span>
+
+                    registered as a new
+
+                    {{ activity.object.get_role_display }}
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "course" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-purple-700">
+                    school
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.provider.company_name }}
+
+                    </span>
+
+                    submitted a new course
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "completion" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-emerald-700">
+                    task_alt
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+
+                        {{ activity.object.student.user.get_full_name|default:activity.object.student.user.email }}
+
+                    </span>
+
+                    completed
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.course.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.completed_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% elif activity.type == "review" %}
+
+    <div class="p-6 border-b border-slate-50 hover:bg-slate-50 transition-colors">
+
+        <div class="flex gap-4">
+
+            <div class="shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+
+                <span class="material-symbols-outlined text-red-700">
+                    flag
+                </span>
+
+            </div>
+
+            <div>
+
+                <p class="text-sm text-slate-900">
+
+                    <span class="font-bold">
+                        Review Flagged
+                    </span>
+
+                    in
+
+                    <span class="text-primary font-semibold">
+
+                        {{ activity.object.course.title }}
+
+                    </span>
+
+                </p>
+
+                <p class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+
+                    <span class="material-symbols-outlined text-[12px]">
+                        schedule
+                    </span>
+
+                    {{ activity.object.created_at|timesince }} ago
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+{% empty %}
+
+<div class="p-8 text-center text-slate-500">
+
+    No recent activity.
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% comment %} <button class="w-full py-4 text-sm font-bold text-primary hover:bg-slate-50 transition-all border-t border-slate-100">
+                        View All Activity
+                    </button> {% endcomment %}
+</div>
+</div>
+</div>
+
+</div>
 </div>
 </div>
 <!-- Performance Chart Area (Bento Placeholder) -->
