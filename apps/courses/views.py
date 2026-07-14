@@ -4,7 +4,10 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib import messages
 from django.db.models import Q
+from apps.payments.models import Payment
+from django.db.models import Sum
 
+from apps.interactions.models import Enrollment
 from .models import Course, Category, Tag
 from .forms import CourseForm
 from apps.accounts.models import ProviderProfile
@@ -124,23 +127,66 @@ class ProviderDashboardView(View):
     GET /provider/dashboard/
     Shows provider dashboard with their course stats.
     """
-    def get(self, request):
-        if request.user.role != 'provider':
-            messages.error(request, 'Access denied.')
-            return redirect('landing')
-        provider  = request.user.provider_profile
-        courses   = Course.objects.filter(provider=provider)
-        published = courses.filter(is_published=True).count()
-        drafts    = courses.filter(is_published=False).count()
-        total_enrollments = sum(c.enrollment_count for c in courses)
 
-        return render(request, 'courses/provider_dashboard.html', {
-            'provider':          provider,
-            'courses':           courses,
-            'published':         published,
-            'drafts':            drafts,
-            'total_enrollments': total_enrollments,
-        })
+    def get(self, request):
+
+        if request.user.role != "provider":
+            messages.error(request, "Access denied.")
+            return redirect("landing")
+
+        provider = request.user.provider_profile
+
+        courses = Course.objects.filter(provider=provider)
+
+        total_courses = courses.count()
+
+        published_courses = courses.filter(
+            is_published=True
+        ).count()
+
+        draft_courses = courses.filter(
+            is_published=False
+        ).count()
+
+        total_enrollments = courses.aggregate(
+            total=Sum("enrollment_count")
+        )["total"] or 0
+
+        total_revenue = Payment.objects.filter(
+            enrollment__course__provider=provider,
+            status="completed"
+        ).aggregate(
+            total=Sum("amount")
+        )["total"] or 0
+
+        recent_courses = courses.order_by("-created_at")[:5]
+
+        recent_enrollments = Enrollment.objects.select_related(
+            "student__user",
+            "course"
+        ).filter(
+            course__provider=provider
+        ).order_by("-enrolled_at")[:5]
+
+        context = {
+            "provider": provider,
+
+            "courses": recent_courses,
+
+            "total_courses": total_courses,
+            "published_courses": published_courses,
+            "draft_courses": draft_courses,
+            "total_enrollments": total_enrollments,
+            "total_revenue": total_revenue,
+
+            "recent_enrollments": recent_enrollments,
+        }
+
+        return render(
+            request,
+            "courses/provider_dashboard.html",
+            context,
+        )
 
 
 @method_decorator(login_required, name='dispatch')

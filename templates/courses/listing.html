@@ -373,7 +373,7 @@
 <!-- Course Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
 <!-- Course Card 1 -->
-<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+{% comment %} <div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
 <div class="aspect-video relative overflow-hidden">
 <img alt="Web Development course" class="w-full h-full object-cover" data-alt="Modern workspace with laptop showing code editor, desk plant, and coffee cup in bright natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj3P87SOQJwnLw3ad9Z6XeR3mDHht8fky-HyolR2GYcFLeGNOnLKwwFCCr652CMTIfqzBuwJ3rDCOmw732RI-RP4xZJoj4poHVPTu4TX4uCNVJhPr_8puT1tf5NtyMVuDn3Ah-sAZQyFgdroPHbo2TpwpCgoqytmOBYC44zVNu1ugEkDRLCQdh8xbVNeiGFUVkXDEe2s--KU30mPdjOL6gMdxGxu5aw2kx4IDKmHyjZ9OJPYG36QXNyyfLQUJzm3VP8X5q6hxtkAWG"/>
 <div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">Web Dev</div>
@@ -563,9 +563,9 @@
 </div>
 </div>
 </div>
-</div>
+</div> {% endcomment %}
 <!-- Pagination -->
-<div class="mt-16 flex justify-center items-center gap-2">
+{% comment %} <div class="mt-16 flex justify-center items-center gap-2">
 <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors">
 <span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
 </button>
@@ -579,6 +579,140 @@
 </button>
 </div>
 </section>
+ {% endcomment %}
+
+{% for course in courses %}
+
+<div class="bg-white rounded-xl overflow-hidden course-card-shadow transition-all duration-300 border border-outline-variant/30 flex flex-col">
+
+    <div class="aspect-video relative overflow-hidden">
+
+        {% if course.thumbnail %}
+            <img src="{{ course.thumbnail.url }}"
+                 alt="{{ course.title }}"
+                 class="w-full h-full object-cover">
+        {% else %}
+            <img src="https://placehold.co/600x400?text=Course"
+                 alt="{{ course.title }}"
+                 class="w-full h-full object-cover">
+        {% endif %}
+
+        <div class="absolute top-4 left-4 bg-primary-container/90 text-white px-3 py-1 rounded-full text-caption font-bold backdrop-blur-sm">
+            {{ course.category.name }}
+        </div>
+
+    </div>
+
+    <div class="p-6 flex flex-col flex-grow">
+
+        <div class="flex items-center justify-between mb-3">
+
+            <span class="text-xs font-bold text-outline uppercase tracking-wider">
+                {{ course.provider.company_name }}
+            </span>
+
+            <div class="flex items-center gap-1">
+
+                <span class="material-symbols-outlined text-tertiary-container text-sm"
+                      style="font-variation-settings:'FILL' 1;">
+                    star
+                </span>
+
+                <span class="text-sm font-bold text-on-surface">
+                    {{ course.avg_rating|floatformat:1 }}
+                </span>
+
+                <span class="text-xs text-outline font-medium">
+                    ({{ course.review_count }})
+                </span>
+
+            </div>
+
+        </div>
+
+        <h4 class="font-headline-md text-xl mb-4 line-clamp-2 text-on-surface">
+            {{ course.title }}
+        </h4>
+
+        <div class="flex items-center gap-4 mb-6">
+
+            <div class="flex items-center gap-1.5 text-on-surface-variant">
+
+                <span class="material-symbols-outlined text-lg">
+                    schedule
+                </span>
+
+                <span class="text-sm font-medium">
+                    {{ course.duration_hours }} Hours
+                </span>
+
+            </div>
+
+            <div class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-0.5 rounded text-xs font-bold">
+                {{ course.level }}
+            </div>
+
+        </div>
+
+        <div class="mt-auto border-t border-outline-variant/30 pt-6 flex items-center justify-between">
+
+            <div class="flex flex-col">
+
+                {% if course.discount_price %}
+
+                    <span class="text-outline text-xs line-through font-medium">
+                        ₹{{ course.price }}
+                    </span>
+
+                    <span class="text-xl font-extrabold text-on-surface">
+                        ₹{{ course.discount_price }}
+                    </span>
+
+                {% else %}
+
+                    <span class="text-xl font-extrabold text-on-surface">
+                        {% if course.is_free %}
+                            Free
+                        {% else %}
+                            ₹{{ course.price }}
+                        {% endif %}
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            <a href="{% url 'course_detail' course.pk %}"
+               class="bg-primary-container text-white px-6 py-2.5 rounded-lg font-bold text-sm active:scale-95 transition-transform">
+                View Course
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="col-span-full text-center py-16">
+
+    <span class="material-symbols-outlined text-6xl text-slate-300">
+        school
+    </span>
+
+    <h3 class="text-xl font-bold mt-4">
+        No courses found.
+    </h3>
+
+    <p class="text-slate-500 mt-2">
+        Please check back later.
+    </p>
+
+</div>
+
+{% endfor %}
+
 </main>
 <!-- Footer -->
 <footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 mt-24">
