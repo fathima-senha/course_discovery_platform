@@ -138,7 +138,7 @@
 <span class="material-symbols-outlined text-slate-600">menu</span>
 </div>
 <div class="flex flex-col">
-<h2 class="font-headline-md text-on-surface">Welcome back, Alex</h2>
+<h2 class="font-headline-md text-on-surface">Welcome back, {{ request.user.username }}</h2>
 <p class="text-sm text-on-surface-variant">Your learning progress is looking great today.</p>
 </div>
 </div>
@@ -211,7 +211,7 @@
 </div>
 <div class="flex gap-6 overflow-x-auto pb-6 custom-scrollbar snap-x">
 <!-- Course Card 1 -->
-<div class="min-w-[380px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 group">
+{% comment %} <div class="min-w-[380px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 group">
 <div class="aspect-video relative overflow-hidden">
 <img alt="React Patterns" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of clean code on a computer screen with vibrant blue and purple syntax highlighting in a dimly lit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL2mS-xFN57JwzwH02JQN4m3zjXjO-_rgZaDuDUsA9R9Z-z0My6w_XEoLkDvmTpMAFu7g7DM4PeUUbBssiaekmgS_EzB-m3B5NOd_d0rf0ARetOL3CFmWtLsydzGkNaQV4MaMeTlO8-RnLuwDbGaBrnIdyrZpbdHub926STXJlCqBL6dtPtV4Lh-QxbAck2I6LVqlQOR62SlGxea234-dEMq1nbdhapxvp3Dv78FLHhxvzHUTP5vRvx8o_gZVGmS5KdNYEPCoJZVXy"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -297,7 +297,70 @@
 </div>
 </div>
 </div>
+</div> {% endcomment %}
+
+{% for enrollment in enrollments %}
+
+<div class="min-w-[380px] snap-start bg-surface-container-lowest rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(25,27,35,0.04)] border border-slate-100 group">
+<div class="aspect-video relative overflow-hidden">
+    {% if enrollment.course.thumbnail %}
+<img
+    src="{{ enrollment.course.thumbnail.url }}"
+    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+>
+{% else %}
+<div class="w-full h-full bg-slate-200 flex items-center justify-center">
+    <span class="material-symbols-outlined text-6xl text-slate-400">
+        menu_book
+    </span>
 </div>
+{% endif %}
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded">{{ enrollment.course.level }}</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-lg mb-2 line-clamp-1">{{ enrollment.course.title }}</h4>
+<p class="text-sm text-slate-500 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">person</span>
+                                    By {{ enrollment.course.provider.company_name }}
+                                </p>
+<div class="space-y-4">
+<div class="flex items-center justify-between text-xs font-bold">
+<span class="text-slate-500">{{ enrollment.progress_pct|floatformat:0 }}% Complete</span>
+<span class="text-primary-container">{{ enrollment.progress_pct|floatformat:0 }}%</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: {{ enrollment.progress_pct }}%;"></div>
+</div>
+<a
+    href="{% url 'course_detail' enrollment.course.pk %}"
+    class="block w-full py-3 bg-primary-container text-white font-label-bold rounded-xl text-center hover:shadow-lg hover:shadow-blue-200 transition-all active:scale-[0.98]"
+>
+    Resume
+</a>
+</div>
+</div>
+</div>
+
+{% empty %}
+
+<div class="w-full text-center py-20">
+    <span class="material-symbols-outlined text-6xl text-slate-300">
+        school
+    </span>
+
+    <h3 class="mt-4 text-xl font-bold">
+        No enrolled courses
+    </h3>
+
+    <p class="text-slate-500 mt-2">
+        Start learning by enrolling in a course.
+    </p>
+</div>
+
+{% endfor %}
 </section>
 <!-- Recently Added to Wishlist -->
 <section>

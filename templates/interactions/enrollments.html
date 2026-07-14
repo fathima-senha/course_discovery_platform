@@ -169,15 +169,232 @@
 <div class="max-w-screen-container-max mx-auto">
 <!-- Category Tabs -->
 <div class="flex items-center gap-2 mb-10 overflow-x-auto pb-2">
-<button class="px-6 py-2.5 rounded-full bg-primary text-white font-label-bold text-label-bold shadow-md shadow-primary/20 transition-all">All</button>
-<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">In Progress</button>
-<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">Completed</button>
-<button class="px-6 py-2.5 rounded-full bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 font-label-bold text-label-bold hover:bg-secondary-container transition-all">Dropped</button>
+
+    <a href="{% url 'my_enrollments' %}"
+       class="px-6 py-2.5 rounded-full font-label-bold text-label-bold transition-all
+       {% if not status %}
+           bg-primary text-white shadow-md shadow-primary/20
+       {% else %}
+           bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 hover:bg-secondary-container
+       {% endif %}">
+        All
+    </a>
+
+    <a href="?status=active"
+       class="px-6 py-2.5 rounded-full font-label-bold text-label-bold transition-all
+       {% if status == 'active' %}
+           bg-primary text-white shadow-md shadow-primary/20
+       {% else %}
+           bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 hover:bg-secondary-container
+       {% endif %}">
+        In Progress
+    </a>
+
+    <a href="?status=completed"
+       class="px-6 py-2.5 rounded-full font-label-bold text-label-bold transition-all
+       {% if status == 'completed' %}
+           bg-primary text-white shadow-md shadow-primary/20
+       {% else %}
+           bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 hover:bg-secondary-container
+       {% endif %}">
+        Completed
+    </a>
+
+    <a href="?status=dropped"
+       class="px-6 py-2.5 rounded-full font-label-bold text-label-bold transition-all
+       {% if status == 'dropped' %}
+           bg-primary text-white shadow-md shadow-primary/20
+       {% else %}
+           bg-secondary-fixed text-on-secondary-container border border-outline-variant/30 hover:bg-secondary-container
+       {% endif %}">
+        Dropped
+    </a>
+
 </div>
 <!-- Course Grid (Full-width Cards) -->
 <div class="flex flex-col gap-6">
 <!-- Course Card 1 -->
+
+{% for enrollment in enrollments %}
+
 <div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
+
+    <!-- Course Image -->
+    <div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
+
+        {% if enrollment.course.thumbnail %}
+            <img
+                src="{{ enrollment.course.thumbnail.url }}"
+                class="w-full h-full object-cover"
+            >
+        {% else %}
+            <div class="w-full h-full bg-slate-200 flex items-center justify-center">
+                <span class="material-symbols-outlined text-5xl text-slate-400">
+                    menu_book
+                </span>
+            </div>
+        {% endif %}
+
+        <div class="absolute top-3 left-3">
+
+            {% if enrollment.status == "completed" %}
+                <span class="bg-emerald-600 text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
+                    Completed
+                </span>
+
+            {% elif enrollment.status == "active" %}
+                <span class="bg-primary-container text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
+                    In Progress
+                </span>
+
+            {% else %}
+                <span class="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
+                    Dropped
+                </span>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="flex-1 p-6 flex flex-col justify-between">
+
+        <div>
+
+            <div class="flex justify-between items-start mb-2">
+
+                <h3 class="font-headline-md text-headline-md text-on-surface">
+                    {{ enrollment.course.title }}
+                </h3>
+
+                <span class="text-caption text-slate-400">
+                    Enrolled:
+                    {{ enrollment.enrolled_at|date:"M d, Y" }}
+                </span>
+
+            </div>
+
+            <p class="text-sm text-slate-500 mb-6 font-medium">
+                Provider:
+                {{ enrollment.course.provider.company_name }}
+            </p>
+
+            <div class="mb-6">
+
+                <div class="flex justify-between items-center mb-2">
+
+                    <span class="text-xs font-bold text-primary">
+                        Progress:
+                        {{ enrollment.progress_pct }}%
+                    </span>
+
+                    <span class="text-xs text-slate-400">
+                        {{ enrollment.progress_pct }}% Complete
+                    </span>
+
+                </div>
+
+                <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+
+                    <div
+                        class="h-full bg-primary-container rounded-full"
+                        style="width: {{ enrollment.progress_pct }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="flex items-center justify-between pt-4 border-t border-slate-50">
+
+            <div class="flex gap-4">
+
+                {% if enrollment.status == "completed" %}
+
+                    <a
+                        href="{% url 'course_detail' enrollment.course.pk %}"
+                        class="px-6 py-2 bg-primary text-white rounded-lg"
+                    >
+                        Review
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{% url 'course_detail' enrollment.course.pk %}"
+                        class="px-6 py-2 bg-primary text-white rounded-lg"
+                    >
+                        Resume
+                    </a>
+
+                {% endif %}
+
+                {% if enrollment.status == "active" %}
+
+                <form
+                    method="post"
+                    action="{% url 'unenroll' enrollment.course.pk %}"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        class="px-6 py-2 border border-slate-300 rounded-lg"
+                    >
+                        Unenroll
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+            <span class="text-xs text-slate-400">
+
+                {{ enrollment.status|title }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="mt-16 py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center text-center px-6">
+
+    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
+
+        <span class="material-symbols-outlined text-5xl text-slate-300">
+            school
+        </span>
+
+    </div>
+
+    <h3 class="text-2xl font-bold">
+        No enrollments found
+    </h3>
+
+    <p class="text-slate-500 mt-2">
+        Start learning by enrolling in your first course.
+    </p>
+
+    <a
+        href="{% url 'course_list' %}"
+        class="mt-6 px-6 py-3 bg-primary text-white rounded-lg"
+    >
+        Explore Courses
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% comment %} <div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
 <div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
 <img alt="Advanced Data Structures" class="w-full h-full object-cover" data-alt="professional workspace with laptop and notebooks on a white desk with clean aesthetic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPjAEIrbAQNROHArdDmnm6QChPslFIdYjdtZS2K8b-QX4g5ZYRiNSYIlSlur-FClJUwVlY5-ga45anwFJZUu2XxNGH2mbLz70cQC9eL5LNNnK9lwSE8g9lp5xh6Yqz3C42WvJVWZieQ3rObi4jkbG9G7KGmapQz990AtgkACpPcd1wTfo7HFCwL5P10XFWewJpIjkIQFEubNEqqy0SvLwZ5v_xbiu47R6tj8I8V7VVfQUp9oELQGn2TjVeUHUYwSISzDIIN3uYiqkA"/>
 <div class="absolute top-3 left-3">
@@ -217,9 +434,9 @@
 </div>
 </div>
 </div>
-</div>
+</div> {% endcomment %}
 <!-- Course Card 2 -->
-<div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
+{% comment %} <div class="bg-white rounded-xl border border-slate-200/60 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col md:flex-row">
 <div class="w-full md:w-72 h-48 md:h-auto shrink-0 relative overflow-hidden">
 <img alt="UI/UX Mastery" class="w-full h-full object-cover" data-alt="clean close-up of computer code on a screen with soft bokeh of desk lights in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwBAionoir1tALo8nhKZ_FjC1Fij5UXMwfbimkdhW2tcyUBG7H4skyaP27AC-rJ9gTP9bbWR26QlBnHg0wQDPxXBc6xW7i3vnXYDPe8DksGKb4LG9i3XgBEQDbuat07dZBTNsFxmvpVkaGrU_kPYm_fxkJUAr7Jyy1VCYAHQQNJMrramsR1CgLBrV_GyVUkXfZdGw67MTKCNMm04AHELkjo3Ed8j-zAga-f26xISRAmzYDol3wd62QOcXJVfL2xN_-CivzoQYvzAXv"/>
 <div class="absolute top-3 left-3">
@@ -303,7 +520,7 @@
 </div>
 </div>
 </div>
-</div>
+</div> {% endcomment %}
 <!-- Empty State Section (Hidden by default, shown for 'Dropped' tab for demo) -->
 <div class="mt-16 py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200 flex flex-col items-center text-center px-6">
 <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">

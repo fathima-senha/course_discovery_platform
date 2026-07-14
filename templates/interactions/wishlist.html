@@ -170,7 +170,7 @@
 <p class="text-body-lg text-on-surface-variant mt-2">Manage your saved courses and prepare for your next career milestone.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-grid-gutter">
-<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+{% comment %} <div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
 <div class="aspect-video relative overflow-hidden">
 <img alt="UI Design Course" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern workstation with a large monitor displaying high-fidelity UI design layouts, soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwOZaWdkLEayEsEvnbJLstvqOS-iX6f5XmoAssezRKIalZr3eOHcuQ_lUuK6Tt25A_YSPggj_7l0paZu23UNIi018Nc6Y8UQ9msajTxQrjJYtdl7oIt98ggclMTF57lsMoP14OTOHz-G1rF9bU8Al-QNKYy0c-V1vuV365rj7-HiPDjSEIe-tq9aLhsf2l210DR1S_TI839NZgPk1fj1m8_4P-I9Sa8IrAyeztgSPclGdXop1oY2J08yZQyVMo1nxdc1pqddVZ_uGe"/>
 <div class="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-caption font-label-bold">Bestseller</div>
@@ -256,15 +256,153 @@
 </div>
 </div>
 </div>
+</div>{% endcomment %}
+
+{% for item in wishlist %}
+
+<div class="bg-white rounded-xl shadow-[0_4px_20px_rgba(25,27,35,0.04)] overflow-hidden group hover:-translate-y-1 transition-all duration-300">
+
+    <div class="aspect-video relative overflow-hidden">
+
+        {% if item.course.thumbnail %}
+            <img
+                src="{{ item.course.thumbnail.url }}"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            >
+        {% else %}
+            <div class="w-full h-full bg-slate-200 flex items-center justify-center">
+                <span class="material-symbols-outlined text-5xl text-slate-400">
+                    menu_book
+                </span>
+            </div>
+        {% endif %}
+
+        {% if item.course.is_free %}
+            <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-caption font-label-bold">
+                FREE
+            </div>
+        {% elif item.course.discount_price %}
+            <div class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-caption font-label-bold">
+                SALE
+            </div>
+        {% endif %}
+
+    </div>
+
+    <div class="p-card-padding">
+
+        <h3 class="text-headline-md font-headline-md text-on-surface mb-1">
+            {{ item.course.title }}
+        </h3>
+
+        <p class="text-body-md text-on-surface-variant mb-4">
+            {{ item.course.provider.company_name }}
+        </p>
+
+        <div class="flex items-center mb-6">
+
+            <span class="material-symbols-outlined text-amber-500 text-sm">
+                star
+            </span>
+
+            <span class="ml-2 text-sm text-on-surface-variant">
+                {{ item.course.avg_rating|floatformat:1 }}
+                ({{ item.course.review_count }} reviews)
+            </span>
+
+        </div>
+
+        <div class="flex items-center justify-between border-t border-slate-100 pt-6">
+
+            <span class="text-2xl font-bold text-on-surface">
+
+                {% if item.course.is_free %}
+                    Free
+
+                {% elif item.course.discount_price %}
+                    ₹{{ item.course.discount_price }}
+
+                {% else %}
+                    ₹{{ item.course.price }}
+
+                {% endif %}
+
+            </span>
+
+            <div class="flex items-center gap-3">
+
+                <form
+                    method="post"
+                    action="{% url 'wishlist_remove' item.course.pk %}"
+                >
+                    {% csrf_token %}
+
+                    <button
+                        class="p-2 text-error border border-error/20 rounded-lg hover:bg-error/5"
+                    >
+                        <span class="material-symbols-outlined"
+                              style="font-variation-settings:'FILL' 1;">
+                            favorite
+                        </span>
+                    </button>
+
+                </form>
+
+                <a
+                    href="{% url 'course_detail' item.course.pk %}"
+                    class="bg-[#003fb1] text-white px-6 py-2 rounded-lg font-label-bold hover:bg-primary"
+                >
+                    View Course
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<div class="mt-24 py-16 border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50 flex flex-col items-center text-center">
+
+{% empty %}
+
+<div class="col-span-full py-20 text-center">
+
+    <span class="material-symbols-outlined text-7xl text-slate-300">
+        favorite
+    </span>
+
+    <h3 class="mt-5 text-2xl font-bold">
+        Your wishlist is empty
+    </h3>
+
+    <p class="mt-2 text-slate-500">
+        Save courses you like and they'll appear here.
+    </p>
+
+    <a
+        href="{% url 'course_list' %}"
+        class="inline-block mt-6 bg-primary text-white px-6 py-3 rounded-lg"
+    >
+        Browse Courses
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% comment %} <div class="mt-24 py-16 border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/50 flex flex-col items-center text-center"> 
 <div class="w-24 h-24 mb-6 rounded-full bg-secondary-container flex items-center justify-center">
 <span class="material-symbols-outlined text-4xl text-[#003fb1]" data-icon="explore">explore</span>
 </div>
 <h3 class="text-headline-md font-headline-md text-on-surface mb-2">Want more variety?</h3>
 <p class="text-body-md text-on-surface-variant max-w-md mb-8">Your wishlist is where you plan your future skills. Discover new trending courses in our curated catalog.</p>
 <button class="bg-surface-container-highest text-on-surface px-8 py-3 rounded-full font-label-bold hover:bg-slate-200 transition-all active:scale-95 border border-slate-300">Browse courses to add some!</button>
-</div>
+</div> {% endcomment %}
+
+{% if wishlist %}
+    <!-- Want more variety section -->
+{% endif %}
+
 </section>
 <footer class="mt-section-padding-y border-t border-slate-200 bg-white px-12 py-10">
 <div class="max-w-[1536px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
@@ -281,9 +419,18 @@
 </footer>
 </main>
 <div class="fixed bottom-8 right-8 z-50">
-<button class="flex items-center gap-3 bg-primary-container text-white px-6 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all active:scale-95 group">
+{% comment %} <button class="flex items-center gap-3 bg-primary-container text-white px-6 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all active:scale-95 group">
 <span class="material-symbols-outlined" data-icon="search">search</span>
 <span class="font-label-bold">Find New Courses</span>
-</button>
+</button> {% endcomment %}
+
+<a
+    href="{% url 'course_list' %}"
+    class="flex items-center gap-3 bg-primary-container text-white px-6 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all active:scale-95 group"
+>
+    <span class="material-symbols-outlined">search</span>
+    <span class="font-label-bold">Find New Courses</span>
+</a>
+
 </div>
 </body></html>

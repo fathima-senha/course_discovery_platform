@@ -19,8 +19,12 @@ class CourseListView(View):
     Anyone can view this page.
     """
     def get(self, request):
-        courses    = Course.objects.filter(is_published=True).select_related('provider')
-        categories = Category.objects.filter(parent=None)
+        courses = (
+        Course.objects.filter(is_published=True)
+        .select_related("provider")
+        .prefetch_related("categories", "tags")
+        )
+        categories = Category.objects.all().order_by("name")
         tags       = Tag.objects.all()
 
         # Search

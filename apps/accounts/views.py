@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.contrib.auth import get_user_model, login, logout, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib import messages
@@ -177,48 +178,70 @@ class DashboardRedirectView(View):
 
         return redirect('landing')
 
-@method_decorator(login_required, name='dispatch')
-class StudentProfileView(View):
+class StudentProfileView(LoginRequiredMixin, View):
     """
-    GET  /student/profile/  — shows profile edit page
-    POST /student/profile/  — saves profile changes
-    """
-    def get(self, request):
-        
-        print("LOGGED IN USER:", request.user.email)
-        print("ROLE:", request.user.role)
+    Handles viewing and updating the student's profile.
 
-        if request.user.role != 'student':
-            messages.error(request, 'Access denied.')
-            return redirect('landing')
+    GET  : Displays the profile edit form pre-filled with the student's
+           existing information (bio, avatar, location, website, etc.).
+
+    POST : Validates and saves the submitted profile information.
+           If validation succeeds, the user is redirected back to the
+           profile page with a success message. Otherwise, the form is
+           re-rendered with validation errors.
+    """
+
+    template_name = "accounts/student_profile.html"
+
+    def get(self, request):
+        # Ensure only students can access this page
+        if request.user.role != User.Role.STUDENT:
+            messages.error(request, "Access denied.")
+            return redirect("landing")
+
+        # Fetch the logged-in student's profile
         profile = request.user.student_profile
-        form    = StudentProfileForm(instance=profile)
-        return render(request, 'accounts/student_profile.html', {
-            'form': form, 'profile': profile,
+
+        # Create a form pre-filled with existing profile data
+        form = StudentProfileForm(instance=profile)
+
+        return render(request, self.template_name, {
+            "form": form,
+            "profile": profile,
         })
-        
-        
-    # def get(self, request):
-    #     if request.user.role != 'student':
-    #         messages.error(request, 'Access denied.')
-    #         return redirect('landing')
-    #     profile = request.user.student_profile
-    #     form    = StudentProfileForm(instance=profile)
-    #     return render(request, 'accounts/student_profile.html', {
-    #         'form': form, 'profile': profile,
-    #     })
 
     def post(self, request):
-        if request.user.role != 'student':
-            return redirect('landing')
+        # Ensure only students can update their profile
+        if request.user.role != User.Role.STUDENT:
+            messages.error(request, "Access denied.")
+            return redirect("landing")
+
+        # Fetch the student's profile
         profile = request.user.student_profile
-        form    = StudentProfileForm(request.POST, request.FILES, instance=profile)
+
+        # Bind submitted data and uploaded files to the form
+        form = StudentProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile
+        )
+
+        # Validate and save the profile
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profile updated successfully!')
-            return redirect('student_profile')
-        return render(request, 'accounts/student_profile.html', {
-            'form': form, 'profile': profile,
+
+            request.user.username = request.POST.get("username")
+            request.user.save()
+
+            messages.success(request, "Profile updated successfully!")
+            return redirect("student_profile")
+
+        # If validation fails, show the form again with errors
+        messages.error(request, "Please correct the highlighted errors.")
+
+        return render(request, self.template_name, {
+            "form": form,
+            "profile": profile,
         })
 
 
@@ -255,24 +278,38 @@ class ProviderProfileView(View):
 @method_decorator(login_required, name='dispatch')
 class ChangePasswordView(View):
     """
-    GET  /change-password/  — shows change password form
-    POST /change-password/  — saves new password
+    GET  /change-password/  — Show change password form
+    POST /change-password/ — Change user's password
     """
+
     def get(self, request):
         form = ChangePasswordForm()
-        return render(request, 'accounts/change_password.html', {'form': form})
+        return render(request, 'accounts/change_password.html', {
+            'form': form
+        })
 
     def post(self, request):
         form = ChangePasswordForm(request.POST)
-        if form.is_valid():
-            old_password = form.cleaned_data['old_password']
-            new_password = form.cleaned_data['new_password']
-            if not request.user.check_password(old_password):
-                messages.error(request, 'Old password is incorrect.')
-                return render(request, 'accounts/change_password.html', {'form': form})
-            request.user.set_password(new_password)
-            request.user.save()
-            login(request, request.user)  # keep user logged in
-            messages.success(request, 'Password changed successfully!')
-            return redirect('dashboard_redirect')
-        return render(request, 'accounts/change_password.html', {'form': form})
+
+        if not form.is_valid():
+            return render(request, 'accounts/change_password.html', {
+                'form': form
+            })
+
+        old_password = form.cleaned_data['old_password']
+        new_password = form.cleaned_data['new_password']
+
+        if not request.user.check_password(old_password):
+            messages.error(request, 'Old password is incorrect.')
+            return render(request, 'accounts/change_password.html', {
+                'form': form
+            })
+
+        request.user.set_password(new_password)
+        request.user.save()
+
+        # Keep the user logged in after changing the password
+        update_session_auth_hash(request, request.user)
+
+        messages.success(request, 'Password changed successfully!')
+        return redirect('dashboard_redirect')
