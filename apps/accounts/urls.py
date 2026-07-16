@@ -8,6 +8,7 @@ from .views import (
     StudentProfileView,
     ProviderProfileView,
     ChangePasswordView,
+    TestEmailView,
 )
 
 urlpatterns = [
@@ -20,7 +21,8 @@ urlpatterns = [
     path('logout/',             LogoutView.as_view(),           name='logout'),
     path('dashboard/',          DashboardRedirectView.as_view(),name='dashboard_redirect'),
     path('change-password/',    ChangePasswordView.as_view(),   name='change_password'),
-
+    path('test-email/',         TestEmailView.as_view(),        name="test_email",
+),
     # Profiles
     path('student/profile/',    StudentProfileView.as_view(),   name='student_profile'),
     path('provider/profile/',   ProviderProfileView.as_view(),  name='provider_profile'),

@@ -6,6 +6,9 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib import messages
 from .models import StudentProfile, ProviderProfile
+
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from .forms import (
     RegisterForm,
     LoginForm,
@@ -15,6 +18,19 @@ from .forms import (
 )
 
 User = get_user_model()
+
+class TestEmailView(View):
+        def get(self, request):
+            send_mail(
+                subject="Test Email",
+                message="Hello! Your email configuration is working.",
+                from_email=None,  # Uses DEFAULT_FROM_EMAIL
+                recipient_list=["fsenha2004@gmail.com"],  
+                fail_silently=False,
+            )
+
+            return HttpResponse("Email sent successfully!")
+           
 
 
 class LandingPageView(View):
@@ -313,3 +329,6 @@ class ChangePasswordView(View):
 
         messages.success(request, 'Password changed successfully!')
         return redirect('dashboard_redirect')
+    
+    
+           
